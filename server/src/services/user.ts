@@ -1,5 +1,5 @@
 import { prisma } from "../utils/prisma";
-import { User } from "../interfaces/user";
+import { User, CreateUser } from "../interfaces/user";
 
 async function getAllUsers() {
 
@@ -53,27 +53,29 @@ async function getUserByName(userName: string) {
   
   //CREATE function
 
-async function createUser(user: User) {
+async function createUser(user: CreateUser) {
     console.log(user);
     const newProfile = await prisma.user_profiles.create({
         data: {
             profile_message: "New User"
         }
     })
-
+    //TODO password hash
     const newUser = await prisma.users.create({
       data: {
         user_name: user.userName,
         email_address: user.emailAddress,
         user_password: user.userPassword,
-        trusted_user: user.trustedUser,
-        user_level_id: user.userLevelId,
+        trusted_user: false,
+        user_level_id: 2,
         user_profile_id: newProfile.id
     },
   })
   }
 
   //DELETE function
+
+  //TODO fix delete function
 
   async function deleteUserById(userId: number) {
 

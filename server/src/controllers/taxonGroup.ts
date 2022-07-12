@@ -10,13 +10,13 @@ async function getAllTaxonGroups(req: Request, res: Response) {
 }
 
 async function getTaxonGroupByName(req: Request, res: Response) {
-  const { taxon_group_name: taxonGroupName } = req.body;
+  const { taxonGroupName: taxonGroupName } = req.body;
   const taxonGroup = await TaxonGroupService.getTaxonGroupByName(taxonGroupName);
   return res.status(200).json(taxonGroup);
 }
 
 async function getTaxonGroupById(req: Request, res: Response) {
-  const { id: taxonGroupId } = req.body;
+  const { taxonId: taxonGroupId } = req.body;
   const taxonGroup = await TaxonGroupService.getTaxonGroupById(taxonGroupId);
   return res.status(200).json(taxonGroup);
 }
@@ -34,7 +34,7 @@ async function createTaxonGroup(req: Request, res: Response) {
 //DELETE function
 
 async function deleteTaxonGroupById(req: Request, res: Response)    {
-  const { id: TaxonGroupId } = req.body;
+  const { taxonId: TaxonGroupId } = req.body;
 
   const user = await TaxonGroupService.deleteTaxonGroupById(TaxonGroupId);
 

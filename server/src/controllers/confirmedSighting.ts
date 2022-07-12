@@ -10,13 +10,13 @@ async function getAllConfirmedSightings(req: Request, res: Response) {
 }
 
 async function getSightingsByOrganismId(req: Request, res: Response) {
-  const { organism_id: organismId } = req.body;
+  const { organismId: organismId } = req.body;
   const sightings = await ConfirmedSightingService.getSightingsByOrganismId(organismId);
   return res.status(200).json(sightings);
 }
 
 async function getSightingsByUserId(req: Request, res: Response) {
-  const { user_id: userId } = req.body;
+  const { userId: userId } = req.body;
   const sightings = await ConfirmedSightingService.getSightingsByUserId(userId);
   return res.status(200).json(sightings);
 }
@@ -34,7 +34,7 @@ async function createConfirmedSighting(req: Request, res: Response) {
 //DELETE function
 
 async function deleteSightingById(req: Request, res: Response)    {
-  const { id: sightingId } = req.body;
+  const { sightingId: sightingId } = req.body;
 
   const sighting = await ConfirmedSightingService.deleteSightingById(sightingId);
 
