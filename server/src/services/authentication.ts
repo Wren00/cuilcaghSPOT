@@ -9,14 +9,17 @@ const user = await prisma.users.findUnique({
     where: { user_name : userName },
 });
 
-if( user?.user_password == userPassword)   {
-return true;
-}
-else    {
-    console.log("There was an error");
-// return false;
-throw Error ("Login failed");
-}
+if (user) {
+    // check user password with hashed password stored in the database
+    const validPassword = await bcrypt.compare(userPassword, user.user_password);
+    if (validPassword) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    console.log("Invalid credentials.");
+  }
 }
 
 const AuthenticationService = { userLogin };
