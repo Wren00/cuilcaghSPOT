@@ -1,4 +1,5 @@
 import { prisma } from "../utils/prisma";
+import bcrypt from "bcrypt";
 import { User, CreateUser } from "../interfaces/user";
 
 async function getAllUsers() {
@@ -61,11 +62,16 @@ async function createUser(user: CreateUser) {
         }
     })
     //TODO password hash
+
+    const salt = await bcrypt.genSalt();
+
+    const hashedPassword = await bcrypt.hash(user.userPassword, salt);
+
     const newUser = await prisma.users.create({
       data: {
         user_name: user.userName,
         email_address: user.emailAddress,
-        user_password: user.userPassword,
+        user_password: hashedPassword,
         trusted_user: false,
         user_level_id: 2,
         user_profile_id: newProfile.id
