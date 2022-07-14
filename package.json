@@ -1,0 +1,23 @@
+{
+  "name": "cuilcaghspotapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wren00/cuilcaghSPOT.git"
+  },
+  "author": "Loren",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wren00/cuilcaghSPOT/issues"
+  },
+  "homepage": "https://github.com/Wren00/cuilcaghSPOT#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
