@@ -24,7 +24,7 @@ app.use('/api/interestgroups/', UserGroupRouter);
 app.use('/api/unverifiedsightings/', UnverifiedSightingRouter);
 app.use('/api/confirmedsightings/', ConfirmedSightingRouter);
 app.use('/api/taxongroups/', TaxonGroupRouter);
-app.use('/users/', AuthenticationRouter);
+app.use('/auth/', AuthenticationRouter);
 
 
 export { app };

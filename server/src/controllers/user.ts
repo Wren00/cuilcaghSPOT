@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { UserService } from "../services/user";
 import { User } from "../interfaces/user";
-
+import { CreateUser } from "../interfaces/user";
 
 
 async function getAllUsers(req: Request, res: Response) {
@@ -47,7 +47,7 @@ async function updateUser(req: Request, res: Response) {
 //CREATE functions - createUser also creates a UserProfile
 
 async function createUser(req: Request, res: Response) {
-  const newUser: User = req.body;
+  const newUser: CreateUser = req.body;
 
   await UserService.createUser(newUser);
 
