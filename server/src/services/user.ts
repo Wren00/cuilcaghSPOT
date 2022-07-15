@@ -66,7 +66,7 @@ async function createUser(user: CreateUser) {
     const salt = await bcrypt.genSalt();
 
     const hashedPassword = await bcrypt.hash(user.userPassword, salt);
-
+    console.log(hashedPassword);
     const newUser = await prisma.users.create({
       data: {
         user_name: user.userName,

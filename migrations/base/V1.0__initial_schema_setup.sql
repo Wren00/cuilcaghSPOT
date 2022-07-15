@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS users	(
 id SERIAL PRIMARY KEY NOT NULL,
 user_name VARCHAR NOT NULL UNIQUE,
 email_address VARCHAR NOT NULL UNIQUE,
-user_password VARCHAR NOT NULL,
+user_password VARCHAR(255) NOT NULL,
 trusted_user BOOLEAN,
 user_level_id INT NOT NULL,
 user_profile_id INT NOT NULL,

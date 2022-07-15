@@ -5,62 +5,51 @@ import { accessTokenKey } from '../constants/authentication';
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 import { stringify } from 'querystring';
+import { triggerAsyncId } from 'async_hooks';
+import { users } from '@prisma/client';
 
-async function userLogin(userName: string, userPassword: string)    {
+async function userLogin(userName: string, userPassword: string) {
 
-const user = await prisma.users.findUnique({
-    where: { user_name : userName },
-});
+  const user = await prisma.users.findUnique({
+    where: { user_name: userName },
+  });
 
-console.log(user);
+  console.log(user);
 
-console.log(userPassword);
+  console.log(userPassword);
 
-if (user) {
+  if (user) {
     // check user password with hashed password stored in the database
     const validPassword = await bcrypt.compare(userPassword, user.user_password);
     console.log(validPassword);
-    if (validPassword) { 
+    if (validPassword) {
 
-      //generate token using user details
-      
-      const token = await generateToken(user.id);
-
-      const options =  {
-        maxAge: "1d"
-      }
-
-      jwt.verify(token, Buffer.from((accessTokenKey), 'base64'), options);
-
-      console.log(token);
-
-      //console logs indicate the program runs to here and then seems to through an error as the return on Postman states it's invalid.
-
-      return true;
-
+      return user;
 
     } else {
-      return false;
+      throw Error ("Cannot login");
     }
   } else {
-    console.log("Invalid credentials.");
+    throw Error ("Invalid credentials.");
   }
 }
 
-  async function generateToken(id : number)  {
+async function generateToken(user: users) {
 
-    //generate payload for user
+  //JWT signing and return token
 
-    const options =  {
-      expiresIn : "1d"
-    }
-    //JWT signing and return token
+  const jwtToken = jwt.sign({ userId: user.id }, accessTokenKey); //signing with payload, key and Options(expiry time)
+  console.log(jwtToken);
+  return jwtToken;
+}
 
-    const jwtToken = jwt.sign( { userId : id }, accessTokenKey, options); //signing with payload, key and Options(expiry time)
-    console.log(jwtToken);
-    return jwtToken;
-  }
-  
+async function verifyToken(token: string) {
+
+  //verify passed in token
+  return jwt.verify(token, accessTokenKey);
+
+}
+
 // export const authorize = (allowedAccessTypes: string[]) => async (req: Request, res: Response, next: NextFunction) => {
 //   try {
 //     let jwt = req.headers.authorization;
@@ -97,6 +86,6 @@ if (user) {
 //   }
 // };
 
-const AuthenticationService = { userLogin, generateToken };
+const AuthenticationService = { userLogin, generateToken, verifyToken };
 
 export { AuthenticationService };
