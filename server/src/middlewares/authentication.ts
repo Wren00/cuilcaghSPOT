@@ -13,22 +13,24 @@ const Authenticate = async (req: Request, res: Response, next: NextFunction) => 
     //authenticates all calls going through the api
 
     if (req.baseUrl === "/api/users/createUser") {
-        create(req, res);
+        return next();
     }
     else if (req.baseUrl === "/api/auth/userLogin") {
         //else if is userLogin return logged in user + token
-        login(req, res);
-
+        
+        return next();
+    }
+    else if (req.baseUrl === "/api/auth/getRefreshToken")    {
+        
+        return next();
     }
     else {
 
         const bearer = req.get("Authorization") as string;
-        const token = bearer.substring(7,bearer.length);
+        const token = bearer.substring(7, bearer.length);
 
-        console.log(token);
         try {
             if (jwt.verify(token, accessTokenKey)) {
-                
                 return next();
             }
         } catch (error) {
@@ -38,33 +40,6 @@ const Authenticate = async (req: Request, res: Response, next: NextFunction) => 
 }
 
 
-// const verify = async (req: Request, res: Response) => {
-//     //verify a users token when it calls the api
-//     console.log(req.body);
-//     const token = req.body.token;
-
-//     return jwt.verify(token, accessTokenKey);
-
-// }
-
-const login = async (req: Request, res: Response) => {
-    //login a user and generate a token
-
-    const user = await AuthenticationService.userLogin(req.body.userName, req.body.userPassword);
-    const token = await AuthenticationService.generateToken(user);
-
-    return res.status(200).json(token);
-}
-
-const create = async (req: Request, res: Response) => {
-
-    const newUser: CreateUser = req.body;
-
-    await UserService.createUser(newUser);
-
-    return res.status(200).json("Successfully created");
-
-}
 
 export { Authenticate };
 

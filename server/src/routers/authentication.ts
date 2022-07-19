@@ -6,7 +6,7 @@ import {
 const AuthenticationRouter = express.Router();
 
 AuthenticationRouter.post("/userLogin", AuthenticationController.userLogin);
-AuthenticationRouter.post("/checkUserToken", AuthenticationController.checkUserToken);
+AuthenticationRouter.post("/getRefreshToken", AuthenticationController.getRefreshToken);
 
 
 

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { prisma } from "../utils/prisma";
 import { User } from "../interfaces/user";
-import { accessTokenKey } from '../constants/authentication';
+import { accessTokenKey, refreshTokenKey } from '../constants/authentication';
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 import { stringify } from 'querystring';
@@ -32,16 +32,26 @@ async function userLogin(userName: string, userPassword: string) {
   }
 }
 
+
+
 async function generateToken(user: users) {
 
   //JWT signing and return token
-  const jwtToken = jwt.sign({ userId: user.id }, accessTokenKey); //signing with payload and key
-  //generate access and refresh tokens return both tokens make access token expiry 2min and refresh 2 hrs
+  const jwtToken = jwt.sign({ userId: user.id }, accessTokenKey, { expiresIn : "120s"}); 
+
   //create refresh endpoint like login
   //api should be unaccessible to access token and refresh token will fix it.
   //check user, prisma find by id, generate tokens
   
   return jwtToken;
+}
+
+async function generateRefreshToken(token : string)  {
+  
+  console.log(jwt.decode(token));
+  const refreshToken = jwt.sign({ token }, refreshTokenKey, { expiresIn: "2700s"});
+  console.log(refreshToken);
+  return refreshToken;
 }
 
 async function verifyToken(token: string) {
@@ -87,6 +97,6 @@ async function verifyToken(token: string) {
 //   }
 // };
 
-const AuthenticationService = { userLogin, generateToken, verifyToken };
+const AuthenticationService = { userLogin, generateToken, generateRefreshToken, verifyToken };
 
 export { AuthenticationService };
