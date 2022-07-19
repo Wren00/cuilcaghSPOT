@@ -15,9 +15,10 @@ async function userLogin(req: Request, res: Response) {
 
         try {
             console.log("Attempting token check: ");
-            const newToken = await AuthenticationService.generateToken(userCheck);
+            const newTokens: Readonly<[string,string]> = await AuthenticationService.generateToken(userCheck);
+            console.log(newTokens);
 
-            res.status(200).json(newToken);
+            res.status(200).json(newTokens);
         } catch (error) {
             res.status(401).json("Invalid token.");
         }
@@ -34,6 +35,7 @@ async function getRefreshToken(req: Request, res: Response) {
         console.log("Refreshing token: ");         
         const { token } = req.body
          const refreshToken = await AuthenticationService.generateRefreshToken(token);
+         console.log(refreshToken);
             res.status(200).json(refreshToken);
         }
         catch(error)    {

@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 import { stringify } from 'querystring';
 import { triggerAsyncId } from 'async_hooks';
 import { users } from '@prisma/client';
+import { ConfirmedSightingController } from '../controllers/confirmedSighting';
 
 async function userLogin(userName: string, userPassword: string) {
 
@@ -37,20 +38,21 @@ async function userLogin(userName: string, userPassword: string) {
 async function generateToken(user: users) {
 
   //JWT signing and return token
-  const jwtToken = jwt.sign({ userId: user.id }, accessTokenKey, { expiresIn : "120s"}); 
+  const jwtToken = jwt.sign({ userId: user.id }, accessTokenKey, { expiresIn : "120s"});
+  const refreshToken = jwt.sign({ userId: user.id }, refreshTokenKey, { expiresIn: "2h"});
+  console.log(refreshToken);
 
   //create refresh endpoint like login
   //api should be unaccessible to access token and refresh token will fix it.
   //check user, prisma find by id, generate tokens
   
-  return jwtToken;
+  return [jwtToken, refreshToken ] as const;
 }
 
 async function generateRefreshToken(token : string)  {
   
   console.log(jwt.decode(token));
-  const refreshToken = jwt.sign({ token }, refreshTokenKey, { expiresIn: "2700s"});
-  console.log(refreshToken);
+  const refreshToken = jwt.sign(token, refreshTokenKey, { expiresIn: "2700s"});
   return refreshToken;
 }
 

@@ -2,7 +2,7 @@ import { Console, error } from "console";
 import { NextFunction, Request, Response } from "express";
 import { createSecureServer } from "http2";
 import jwt from "jsonwebtoken";
-import { accessTokenKey } from "../constants/authentication";
+import { accessTokenKey, refreshTokenKey } from "../constants/authentication";
 import { AuthenticationService } from "../services/authentication";
 import { AuthenticationController } from "../controllers/authentication";
 import { User, CreateUser } from "../interfaces/user";
@@ -21,18 +21,24 @@ const Authenticate = async (req: Request, res: Response, next: NextFunction) => 
         return next();
     }
     else if (req.baseUrl === "/api/auth/getRefreshToken")    {
-        
+        //ignoring this for the time being
         return next();
     }
     else {
 
         const bearer = req.get("Authorization") as string;
         const token = bearer.substring(7, bearer.length);
+        console.log(token);
 
         try {
             if (jwt.verify(token, accessTokenKey)) {
+                console.log(jwt.verify(token, accessTokenKey));
                 return next();
             }
+        else if(jwt.verify(token, refreshTokenKey)) {
+            console.log(jwt.verify(token, refreshTokenKey));
+            return next();
+        }
         } catch (error) {
             res.status(401).json(error);
         }
