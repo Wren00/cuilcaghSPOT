@@ -1,4 +1,6 @@
 
-const accessTokenKey = "blah";
+const accessTokenKey = '836692d0339880c349829e7823bec6cf0611844b3d90d6aa5e6e02b082ece08bfd206a6ac32a717895a42f51b25f2f9bc5aeac4f27603ea341c73d038e1d62de';
 
-export { accessTokenKey };
+const refreshTokenKey = 'bb39ad0aaada0b7c5c0e43ee27debde965412c3e7bf00c7b2e9535d1eac28599ff4638e4cebba392e7cb540d0f44182975489829db402dfa38564f575d168c3e';
+
+export { accessTokenKey, refreshTokenKey };

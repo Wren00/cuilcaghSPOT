@@ -29,6 +29,7 @@ async function getSightingsByOrganismId (organismId: number) {
 //CREATE function
 
 async function createUnverifiedSighting(sighting: UnverifiedSighting) {
+
   const newSighting = await prisma.unverified_sightings.create({
     data: {
       organism_id: sighting.organismId,

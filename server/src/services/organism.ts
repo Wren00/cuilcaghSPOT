@@ -3,6 +3,8 @@ import { Organism} from "../interfaces/organism";
 
 //GET functions
 
+//all users can access these functions
+
 async function getAllOrganisms() {
 
   const organisms = prisma.organisms.findMany();
@@ -18,7 +20,12 @@ async function getOrganismByName(organismName: string) {
   return await organisms;
 }
 
+//all admin users can access these functions
+
 async function getOrganismById(organismId: number) {
+
+
+
   const organism = prisma.organisms.findUnique({
     where: { id: organismId },
   });
@@ -31,6 +38,8 @@ async function getOrganismByTaxonGroupId(taxonId: number) {
   });
   return await organisms;
 }
+
+//admin or trusted users can access these functions
 
 //UPDATE function
 

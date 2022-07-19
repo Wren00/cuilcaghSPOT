@@ -5,8 +5,13 @@ import {
 
 const OrganismRouter = express.Router();
 
+//PUBLIC endpoints
+
 OrganismRouter.get("/getAllOrganisms", OrganismController.getAllOrganisms);
 OrganismRouter.get("/getOrganismByName", OrganismController.getOrganismByName);
+
+//PRIVATE endpoints
+
 OrganismRouter.get("/getOrganismById", OrganismController.getOrganismById);
 OrganismRouter.get("/getOrganismByTaxonGroupId", OrganismController.getOrganismByTaxonGroupId);
 OrganismRouter.put("/updateOrganism", OrganismController.updateOrganism);

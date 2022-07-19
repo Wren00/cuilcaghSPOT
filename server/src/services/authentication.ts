@@ -10,13 +10,11 @@ import { users } from '@prisma/client';
 
 async function userLogin(userName: string, userPassword: string) {
 
+  console.log(userName, userPassword);
+
   const user = await prisma.users.findUnique({
     where: { user_name: userName },
   });
-
-  console.log(user);
-
-  console.log(userPassword);
 
   if (user) {
     // check user password with hashed password stored in the database
@@ -37,9 +35,12 @@ async function userLogin(userName: string, userPassword: string) {
 async function generateToken(user: users) {
 
   //JWT signing and return token
-
-  const jwtToken = jwt.sign({ userId: user.id }, accessTokenKey); //signing with payload, key and Options(expiry time)
-  console.log(jwtToken);
+  const jwtToken = jwt.sign({ userId: user.id }, accessTokenKey); //signing with payload and key
+  //generate access and refresh tokens return both tokens make access token expiry 2min and refresh 2 hrs
+  //create refresh endpoint like login
+  //api should be unaccessible to access token and refresh token will fix it.
+  //check user, prisma find by id, generate tokens
+  
   return jwtToken;
 }
 
