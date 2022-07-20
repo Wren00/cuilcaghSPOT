@@ -13,9 +13,11 @@ async function userLogin(req: Request, res: Response) {
         const { userName, userPassword } = req.body
         const userCheck = await AuthenticationService.userLogin(userName, userPassword);
 
+        //userLogin generates 2 tokens, an access and a refresh token
+
         try {
             console.log("Attempting token check: ");
-            const newTokens: Readonly<[string,string]> = await AuthenticationService.generateToken(userCheck);
+            const newTokens: Readonly<[string, string]> = await AuthenticationService.generateTokens(userCheck.id);
             console.log(newTokens);
 
             res.status(200).json(newTokens);
@@ -29,22 +31,34 @@ async function userLogin(req: Request, res: Response) {
     }
 }
 
-async function getRefreshToken(req: Request, res: Response) {
+async function refresh(req: Request, res: Response) {
 
     try {
-        console.log("Refreshing token: ");         
-        const { token } = req.body
-         const refreshToken = await AuthenticationService.generateRefreshToken(token);
-         console.log(refreshToken);
-            res.status(200).json(refreshToken);
-        }
-        catch(error)    {
-            res.status(401).json("Couldn't generate token");
-        }
+        console.log("Refreshing token: ");
+        const bearer = req.get("Refresh") as string;
+        const token = bearer.substring(7, bearer.length);
+
+        const decodedToken = jwt.decode(token);
+
+        const JSONtoken = JSON.stringify(decodedToken);
+
+        const otherToken = JSONtoken.split(",")[0] + "}";
+
+        const newToken = JSON.parse(otherToken);
+
+        const id = newToken.userId as number;
+
+        const tokens = await AuthenticationService.generateTokens(id);
+        console.log(tokens);
+        res.status(200).json(tokens);
     }
+    catch (error) {
+        res.status(401).json("Couldn't generate token");
+    }
+}
 
 
 
-const AuthenticationController = { userLogin, getRefreshToken };
+const AuthenticationController = { userLogin, refresh };
 
 export { AuthenticationController };

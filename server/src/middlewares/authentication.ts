@@ -1,5 +1,5 @@
 import { Console, error } from "console";
-import { NextFunction, Request, Response } from "express";
+import e, { NextFunction, Request, Response } from "express";
 import { createSecureServer } from "http2";
 import jwt from "jsonwebtoken";
 import { accessTokenKey, refreshTokenKey } from "../constants/authentication";
@@ -16,35 +16,42 @@ const Authenticate = async (req: Request, res: Response, next: NextFunction) => 
         return next();
     }
     else if (req.baseUrl === "/api/auth/userLogin") {
-        //else if is userLogin return logged in user + token
-        
-        return next();
-    }
-    else if (req.baseUrl === "/api/auth/getRefreshToken")    {
-        //ignoring this for the time being
-        return next();
-    }
-    else {
+        //return logged in user + token
 
-        const bearer = req.get("Authorization") as string;
-        const token = bearer.substring(7, bearer.length);
-        console.log(token);
+        return next();
+    }
+    else if (req.baseUrl === "/api/auth/getRefreshToken") {
+
+        const bearer = req.get("Refresh") as string;
+        console.log(bearer);
+        const refreshtoken = bearer.substring(7, bearer.length);
 
         try {
-            if (jwt.verify(token, accessTokenKey)) {
-                console.log(jwt.verify(token, accessTokenKey));
+            if (jwt.verify(refreshtoken, refreshTokenKey)) {
+                console.log(jwt.verify(refreshtoken, refreshTokenKey));
+
                 return next();
             }
-        else if(jwt.verify(token, refreshTokenKey)) {
-            console.log(jwt.verify(token, refreshTokenKey));
-            return next();
-        }
         } catch (error) {
             res.status(401).json(error);
         }
     }
-}
+        else {
+            try {
 
+                const bearer = req.get("Authorization") as string;
+                const token = bearer.substring(7, bearer.length);
+
+                if (jwt.verify(token, accessTokenKey)) {
+                    console.log(jwt.verify(token, accessTokenKey));
+    
+                    return next();
+                }
+            } catch (error) {
+                res.status(401).json(error);
+            }
+        }
+    }
 
 
 export { Authenticate };
