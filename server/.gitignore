@@ -1,9 +1,10 @@
 node_modules
 # Keep environment variables out of version control
 .env
-
 .idea
-
+dist
+tests
 private.key
 public.key
+oldtsconfig.json
 

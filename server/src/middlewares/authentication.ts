@@ -47,8 +47,19 @@ const Authenticate = async (req: Request, res: Response, next: NextFunction) => 
     
                     return next();
                 }
+                else {
+                    const bearer = req.get("Refresh") as string;
+                    const token = bearer.substring(7, bearer.length);
+                    
+                    if (jwt.verify(token, refreshTokenKey)) {
+                        console.log(jwt.verify(token, refreshTokenKey));
+                        return next();
+                    }
+                    throw new Error("Invalid middleware");
+
+                }
             } catch (error) {
-                res.status(401).json(error);
+                res.status(401).json("Access token error " +error);
             }
         }
     }

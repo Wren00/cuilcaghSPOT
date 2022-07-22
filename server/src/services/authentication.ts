@@ -1,15 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
 import { prisma } from "../utils/prisma";
-import { User } from "../interfaces/user";
 import { accessTokenKey, refreshTokenKey } from '../constants/authentication';
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
-import { stringify } from 'querystring';
-import { triggerAsyncId } from 'async_hooks';
-import { users } from '@prisma/client';
-import { ConfirmedSightingController } from '../controllers/confirmedSighting';
-import { UserController } from '../controllers/user';
-import { decode } from 'punycode';
 
 async function userLogin(userName: string, userPassword: string) {
 
@@ -25,7 +17,7 @@ async function userLogin(userName: string, userPassword: string) {
     console.log(validPassword);
     if (validPassword) {
 
-      return user;
+      return await generateTokens(user.id);
 
     } else {
       throw Error("Cannot login");
@@ -35,6 +27,26 @@ async function userLogin(userName: string, userPassword: string) {
   }
 }
 
+async function refresh(bearer : string)  {
+
+  console.log("Refreshing token: ");
+  const token = bearer.substring(7, bearer.length);
+
+  const decodedToken = jwt.decode(token);
+
+  const JSONtoken = JSON.stringify(decodedToken);
+
+  const otherToken = JSONtoken.split(",")[0] + "}";
+
+  const newToken = JSON.parse(otherToken);
+
+  const id = newToken.userId as number;
+
+  const tokens = await generateTokens(id);
+  console.log(tokens);
+  return tokens;
+}
+
 
 
 async function generateTokens(userId: number) {
@@ -42,7 +54,7 @@ async function generateTokens(userId: number) {
   //JWT signing and return token
 
   //check prisma for the user id
-  var checkId = prisma.users.findFirst({
+  var checkId = await prisma.users.findFirst({
     where: { id: userId },
   });
 
@@ -58,6 +70,6 @@ async function generateTokens(userId: number) {
   }
 }
 
-const AuthenticationService = { userLogin, generateTokens };
+const AuthenticationService = { userLogin, generateTokens, refresh };
 
 export { AuthenticationService };
