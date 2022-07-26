@@ -33,6 +33,12 @@ async function getuserByLevel(req: Request, res: Response) {
   return res.status(200).json(users);
 }
 
+async function getTrustedUsers(req: Request, res: Response) {
+  const { trustedUser: trustedUser } = req.body;
+  const users = await UserService.getTrustedUsers(trustedUser);
+  return res.status(200).json(users);
+}
+
 //UPDATE functions
 
 async function updateUser(req: Request, res: Response) {
@@ -67,8 +73,7 @@ async function deleteUserById(req: Request, res: Response) {
 //DELETE user from group
 
 const UserController = {
-  getAllUsers, getUserByName, getuserById, getuserByEmail,
-  getuserByLevel,
+  getAllUsers, getUserByName, getuserById, getuserByEmail, getuserByLevel, getTrustedUsers,
   createUser,
   updateUser,
   deleteUserById

@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node server.ts",
+    "test": "jest",
+    "start": "nodemon server.ts",
     "build": "tsc --build"
   },
   "author": "loren",

@@ -5,24 +5,56 @@ import { ConfirmedSighting } from "../interfaces/confirmedSighting";
 
 async function getAllConfirmedSightings() {
 
-  const confirmedSighting = prisma.confirmed_sightings.findMany();
+  const manyObjects =  await prisma.confirmed_sightings.findMany();
+  const sightings: ConfirmedSighting[] = manyObjects.map((x: 
+    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; }) => ({
+    sightingId: x.id,
+    organismId: x.organism_id,
+    userId: x.user_id,
+    pictureURL: x.picture_url,
+    date: x.date,
+    lat: x.lat,
+    long: x.long,
 
-  return await confirmedSighting;
+  }));
+  return sightings;
 
 }
 
 async function getSightingsByOrganismId (organismId: number) {
-  const sighting = prisma.confirmed_sightings.findMany({
+  const manyObjects = await prisma.confirmed_sightings.findMany({
     where: { organism_id: organismId },
   });
-  return await sighting;
+  const sightings: ConfirmedSighting[] = manyObjects.map((x: 
+    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; }) => ({
+    sightingId: x.id,
+    organismId: x.organism_id,
+    userId: x.user_id,
+    pictureURL: x.picture_url,
+    date: x.date,
+    lat: x.lat,
+    long: x.long,
+
+  }));
+  return sightings;
 }
 
 async function getSightingsByUserId(userId: number) {
-  const sightings = prisma.confirmed_sightings.findMany({
+  const manyObjects = await prisma.confirmed_sightings.findMany({
     where: { user_id: userId },
   });
-  return await sightings;
+  const sightings: ConfirmedSighting[] = manyObjects.map((x: 
+    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; }) => ({
+    sightingId: x.id,
+    organismId: x.organism_id,
+    userId: x.user_id,
+    pictureURL: x.picture_url,
+    date: x.date,
+    lat: x.lat,
+    long: x.long,
+
+  }));
+  return sightings;
 }
 
 //CREATE functions

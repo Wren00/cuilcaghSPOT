@@ -1,28 +1,69 @@
 import { prisma } from "../utils/prisma";
+import { Prisma, unverified_sightings } from "@prisma/client";
 import { UnverifiedSighting } from "../interfaces/unverifiedSighting";
+import { parse } from "path";
 
 //GET functions
 
 async function getAllUnverifiedSightings() {
+  const manyObjects =  await prisma.unverified_sightings.findMany();
+  const sightings: UnverifiedSighting[] = manyObjects.map((x: 
+    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_vote_id: any; reaction_id: any; }) => ({
+    sightingId: x.id,
+    organismId: x.organism_id,
+    userId: x.user_id,
+    pictureURL: x.picture_url,
+    date: x.date.toString(),
+    lat: Number(x.lat),
+    long: Number(x.long),
+    userVotes: x.user_vote_id,
+    userReactions: x.reaction_id
 
-  const unverifiedSighting = prisma.unverified_sightings.findMany();
+  }));
 
-  return await unverifiedSighting;
+  return sightings;
 
 }
 
 async function getSightingsByOrganismId (organismId: number) {
-    const sighting = prisma.unverified_sightings.findMany({
+
+    const manyObjects = await prisma.unverified_sightings.findMany({
       where: { organism_id: organismId },
     });
-    return await sighting;
+    const sightings: UnverifiedSighting[] = manyObjects.map((x: 
+      { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_vote_id: any; reaction_id: any; }) => ({
+      sightingId: x.id,
+      organismId: x.organism_id,
+      userId: x.user_id,
+      pictureURL: x.picture_url,
+      date: x.date,
+      lat: x.lat,
+      long: x.long,
+      userVotes: x.user_vote_id,
+      userReactions: x.reaction_id
+  
+    }));
+    return sightings;
   }
   
   async function getSightingsByUserId(userId: number) {
-    const sightings = prisma.unverified_sightings.findMany({
+    const manyObjects = await prisma.unverified_sightings.findMany({
       where: { user_id: userId },
     });
-    return await sightings;
+    const sightings: UnverifiedSighting[] = manyObjects.map((x: 
+      { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_vote_id: any; reaction_id: any; }) => ({
+      sightingId: x.id,
+      organismId: x.organism_id,
+      userId: x.user_id,
+      pictureURL: x.picture_url,
+      date: x.date,
+      lat: x.lat,
+      long: x.long,
+      userVotes: x.user_vote_id,
+      userReactions: x.reaction_id
+  
+    }));
+    return sightings;
   }
 
 

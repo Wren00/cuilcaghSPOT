@@ -1,12 +1,20 @@
 interface Organism {
 
-organismId: number;
-taxonName: string;
-latinName: string;
-taxonGroupId: number;
-pictureURL: string;
-description: string;
+    organismId: number;
+    taxonName: string;
+    latinName: string;
+    taxonGroupId: number;
+    pictureURL: string;
+    description: string;
 
 }
 
-export { Organism};
+interface CreateOrganism {
+
+    taxonName: string,
+    latinName: string,
+    taxonGroupId: number,
+    pictureURL: string,
+    description: string
+}
+export { Organism, CreateOrganism };

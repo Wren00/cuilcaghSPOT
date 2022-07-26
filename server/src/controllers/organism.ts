@@ -10,21 +10,29 @@ async function getAllOrganisms(req: Request, res: Response) {
 }
 
 async function getOrganismByName(req: Request, res: Response) {
-  const { organismName: organismName } = req.body;
+  const { taxonName: organismName } = req.body;
   const organism = await OrganismService.getOrganismByName(organismName);
   return res.status(200).json(organism);
 }
 
 async function getOrganismById(req: Request, res: Response) {
+  try {
   const { organismId: organismId } = req.body;
   const organism = await OrganismService.getOrganismById(organismId);
   return res.status(200).json(organism);
+  }catch(error) {
+    res.status(401).json("Cannot find id");
+  }
 }
 
 async function getOrganismByTaxonGroupId(req: Request, res: Response) {
-  const { taxonGroupId: organismId } = req.body;
-  const organism = await OrganismService.getOrganismByTaxonGroupId(organismId);
-  return res.status(200).json(organism);
+  try{
+  const { taxonGroupId: taxonGroupId } = req.body;
+  const organisms = await OrganismService.getOrganismByTaxonGroupId(taxonGroupId);
+  return res.status(200).json(organisms);
+  }catch(error) {
+    res.status(401).json("Cannot find taxon group id");
+  }
 }
 
 //UPDATE function

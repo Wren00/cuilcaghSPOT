@@ -3,20 +3,29 @@ import { UnverifiedSightingService } from "../services/unverifiedSighting";
 import { UnverifiedSighting } from "../interfaces/unverifiedSighting";
 
 
+//GET functions
+
+//all users can access these functions
 
 async function getAllUnverifiedSightings(req: Request, res: Response) {
   const sightings = await UnverifiedSightingService.getAllUnverifiedSightings();
   return res.status(200).json(sightings);
 }
 
+//admin users can access these functions
+
 async function getSightingsByOrganismId(req: Request, res: Response) {
-  const { organism_id: organismId } = req.body;
+  try {
+  const { organismId: organismId } = req.body;
   const sightings = await UnverifiedSightingService.getSightingsByOrganismId(organismId);
   return res.status(200).json(sightings);
+  } catch(error)  {
+    res.status(401).json("Cannot find organism Id");
+  }
 }
 
 async function getSightingsByUserId(req: Request, res: Response) {
-  const { user_id: userId } = req.body;
+  const { userId: userId } = req.body;
   const sightings = await UnverifiedSightingService.getSightingsByUserId(userId);
   return res.status(200).json(sightings);
 }

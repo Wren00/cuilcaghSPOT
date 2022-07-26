@@ -1,3 +1,6 @@
+import { Prisma } from "@prisma/client";
+import { StringLiteral } from "typescript";
+
 interface UnverifiedSighting {
 
     organismId: number;
@@ -6,6 +9,8 @@ interface UnverifiedSighting {
     date: string;
     lat: number;
     long: number;
+    userVotes: number;
+    userReactions: number;
     
     }
     

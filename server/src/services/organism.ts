@@ -1,5 +1,5 @@
 import { prisma } from "../utils/prisma";
-import { Organism} from "../interfaces/organism";
+import { Organism, CreateOrganism} from "../interfaces/organism";
 
 //GET functions
 
@@ -7,36 +7,69 @@ import { Organism} from "../interfaces/organism";
 
 async function getAllOrganisms() {
 
-  const organisms = prisma.organisms.findMany();
-
-  return await organisms;
+  const manyObjects =  await prisma.organisms.findMany();
+  const organisms: Organism[] = manyObjects.map((x: 
+    { id: any; taxon_name: any; latin_name: any; taxon_group_id: any; picture_url: any; description: any; }) => ({
+    organismId: x.id,
+    taxonName: x.taxon_name,
+    latinName: x.latin_name,
+    taxonGroupId: x.taxon_group_id,
+    pictureURL: x.picture_url,
+    description: x.description
+  }));
+  return organisms;
 
 }
 
-async function getOrganismByName(organismName: string) {
-  const organisms = prisma.organisms.findMany({
-    where: { taxon_name: { contains: organismName, mode: "insensitive" } },
+async function getOrganismByName(taxonName: string) {
+  const manyObjects =  await prisma.organisms.findMany({
+    where: { taxon_name: { contains: taxonName, mode: "insensitive" } },
   });
-  return await organisms;
+  const organisms: Organism[] = manyObjects.map((x: 
+    { id: any; taxon_name: any; latin_name: any; taxon_group_id: any; picture_url: any; description: any; }) => ({
+    organismId: x.id,
+    taxonName: x.taxon_name,
+    latinName: x.latin_name,
+    taxonGroupId: x.taxon_group_id,
+    pictureURL: x.picture_url,
+    description: x.description
+  }));
+  return organisms;
 }
 
 //all admin users can access these functions
 
 async function getOrganismById(organismId: number) {
-
-
-
-  const organism = prisma.organisms.findUnique({
+  const organismObject =  await prisma.organisms.findUnique({
     where: { id: organismId },
   });
-  return await organism;
+
+  let returnedValue = {
+    organismId: organismObject.id,
+    taxonName: organismObject.taxon_name,
+    latinName: organismObject.latin_name,
+    taxonGroupId: organismObject.taxon_group_id,
+    pictureUrl: organismObject.picture_url,
+    description: organismObject.description
+  }
+
+  return returnedValue;
 }
 
 async function getOrganismByTaxonGroupId(taxonId: number) {
-  const organisms = prisma.organisms.findMany({
+  const manyObjects =  await prisma.organisms.findMany({
     where: { taxon_group_id: taxonId },
   });
-  return await organisms;
+  const organisms: Organism[] = manyObjects.map((x: 
+    { id: any; taxon_name: any; latin_name: any; taxon_group_id: any; picture_url: any; description: any; }) => ({
+    organismId: x.id,
+    taxonName: x.taxon_name,
+    latinName: x.latin_name,
+    taxonGroupId: x.taxon_group_id,
+    pictureURL: x.picture_url,
+    description: x.description
+  }));
+  return organisms;
 }
 
 //admin or trusted users can access these functions
@@ -60,7 +93,7 @@ async function updateOrganism(organism: Organism)   {
 
 //CREATE function
 
-async function createOrganism(organism: Organism) {
+async function createOrganism(organism: CreateOrganism) {
   console.log(organism);
   const newOrganism = await prisma.organisms.create({
     data: {
