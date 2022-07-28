@@ -9,6 +9,7 @@ UnverifiedSightingRouter.get("/getAllUnverifiedSightings", UnverifiedSightingCon
 UnverifiedSightingRouter.get("/getSightingsByOrganismId", UnverifiedSightingController.getSightingsByOrganismId);
 UnverifiedSightingRouter.get("/getSightingsByUserId", UnverifiedSightingController.getSightingsByUserId);
 UnverifiedSightingRouter.post("/createUnverifiedSighting", UnverifiedSightingController.createUnverifiedSighting);
-UnverifiedSightingRouter.delete("/deleteSightingById", UnverifiedSightingController.deleteSightingById);
+UnverifiedSightingRouter.put("/updateSighting", UnverifiedSightingController.updateSighting);
+UnverifiedSightingRouter.delete("/deleteUnverifiedSightingById", UnverifiedSightingController.deleteUnverifiedSightingById);
 
 export { UnverifiedSightingRouter };

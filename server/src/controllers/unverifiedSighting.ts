@@ -3,42 +3,74 @@ import { UnverifiedSightingService } from "../services/unverifiedSighting";
 import { UnverifiedSighting } from "../interfaces/unverifiedSighting";
 
 
+//GET functions
+
+//all users can access these functions
 
 async function getAllUnverifiedSightings(req: Request, res: Response) {
-  const sightings = await UnverifiedSightingService.getAllUnverifiedSightings();
-  return res.status(200).json(sightings);
+  try {
+    const sightings = await UnverifiedSightingService.getAllUnverifiedSightings();
+    return res.status(200).json(sightings);
+  } catch (error) {
+    res.status(401).json("Cannot GET sightings");
+  }
 }
+//admin users can access these functions
 
 async function getSightingsByOrganismId(req: Request, res: Response) {
-  const { organism_id: organismId } = req.body;
-  const sightings = await UnverifiedSightingService.getSightingsByOrganismId(organismId);
-  return res.status(200).json(sightings);
+  try {
+    const { organismId: organismId } = req.body;
+    const sightings = await UnverifiedSightingService.getSightingsByOrganismId(organismId);
+    return res.status(200).json(sightings);
+  } catch (error) {
+    res.status(401).json("Cannot find organism Id");
+  }
 }
 
 async function getSightingsByUserId(req: Request, res: Response) {
-  const { user_id: userId } = req.body;
-  const sightings = await UnverifiedSightingService.getSightingsByUserId(userId);
-  return res.status(200).json(sightings);
+  try {
+    const { userId: userId } = req.body;
+    const sightings = await UnverifiedSightingService.getSightingsByUserId(userId);
+    return res.status(200).json(sightings);
+  } catch (error) {
+    res.status(401).json("Cannot find user Id");
+  }
 }
 
 //CREATE function
 
 async function createUnverifiedSighting(req: Request, res: Response) {
-  const newSighting: UnverifiedSighting = req.body;
-
-  await UnverifiedSightingService.createUnverifiedSighting(newSighting);
-
-  return res.status(200).json("Successfully created");
+  try {
+    const newSighting: UnverifiedSighting = req.body;
+    const createdSighting = await UnverifiedSightingService.createUnverifiedSighting(newSighting);
+    return res.status(200).json(createdSighting);
+  } catch (error) {
+    res.status(500).json("Could not create sighting.");
+  }
 }
+
+//UPDATE function
+
+async function updateSighting(req: Request, res: Response) {
+  try{
+    const updateDetails: UnverifiedSighting = req.body;
+    const updatedSighting = await UnverifiedSightingService.updateSighting(updateDetails);
+    return res.status(200).json(updatedSighting);
+    }catch(error) {
+      res.status(500).json("Could not update sighting.");
+    }
+  }
 
 //DELETE function
 
-async function deleteSightingById(req: Request, res: Response)    {
-  const { id: sightingId } = req.body;
+async function deleteUnverifiedSightingById(req: Request, res: Response) {
+  const { sightingId: sightingId } = req.body;
 
-  const sighting = await UnverifiedSightingService.deleteSightingById(sightingId);
-
-  return res.status(200).json("Successfully deleted");
+  const deletedSighting = await UnverifiedSightingService.deleteUnverifiedSightingById(sightingId);
+  if (!deletedSighting) {
+    return res.status(500).json("Cannot delete sighting");
+  }
+  return res.status(200).json(deletedSighting);
 }
 
 const UnverifiedSightingController = {
@@ -46,7 +78,8 @@ const UnverifiedSightingController = {
   getSightingsByOrganismId,
   getSightingsByUserId,
   createUnverifiedSighting,
-  deleteSightingById
+  updateSighting,
+  deleteUnverifiedSightingById
 };
 
 export { UnverifiedSightingController };
