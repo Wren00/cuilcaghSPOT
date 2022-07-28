@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model confirmed_sightings {
+  id          Int       @id @default(autoincrement())
+  organism_id Int
+  user_id     Int
+  picture_url String    @db.VarChar
+  date        DateTime  @db.Date
+  lat         Decimal   @db.Decimal
+  long        Decimal   @db.Decimal
+  organisms   organisms @relation(fields: [organism_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users       users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model flyway_schema_history {
+  installed_rank Int      @id(map: "flyway_schema_history_pk")
+  version        String?  @db.VarChar(50)
+  description    String   @db.VarChar(200)
+  type           String   @db.VarChar(20)
+  script         String   @db.VarChar(1000)
+  checksum       Int?
+  installed_by   String   @db.VarChar(100)
+  installed_on   DateTime @default(now()) @db.Timestamp(6)
+  execution_time Int
+  success        Boolean
+
+  @@index([success], map: "flyway_schema_history_s_idx")
+}
+
+model interest_groups {
+  id              Int               @id @default(autoincrement())
+  group_name      String            @db.VarChar
+  description     String?           @db.VarChar
+  users_to_groups users_to_groups[]
+}
+
+model organisms {
+  id                   Int                    @id @default(autoincrement())
+  taxon_name           String                 @db.VarChar
+  latin_name           String                 @db.VarChar
+  taxon_group_id       Int
+  picture_url          String?                @db.VarChar
+  description          String?                @db.VarChar
+  taxon_groups         taxon_groups           @relation(fields: [taxon_group_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  confirmed_sightings  confirmed_sightings[]
+  unverified_sightings unverified_sightings[]
+}
+
+model reactions {
+  id                   Int                    @id @default(autoincrement())
+  reaction_name        String                 @db.VarChar
+  unverified_sightings unverified_sightings[]
+  user_to_reaction     user_to_reaction[]
+}
+
+model taxon_groups {
+  id               Int         @id @default(autoincrement())
+  taxon_group_name String      @db.VarChar
+  description      String?     @db.VarChar
+  organisms        organisms[]
+}
+
+model unverified_sightings {
+  id           Int         @id @default(autoincrement())
+  organism_id  Int
+  user_id      Int
+  picture_url  String      @db.VarChar
+  date         DateTime    @db.Date
+  lat          Decimal     @db.Decimal
+  long         Decimal     @db.Decimal
+  user_vote_id Int?
+  reaction_id  Int?
+  organisms    organisms   @relation(fields: [organism_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  reactions    reactions?  @relation(fields: [reaction_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users        users       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user_votes   user_votes? @relation(fields: [user_vote_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model user_levels {
+  id          Int     @id @default(autoincrement())
+  description String  @db.VarChar
+  users       users[]
+}
+
+model user_profiles {
+  id              Int     @id @default(autoincrement())
+  profile_message String? @db.VarChar
+  profile_picture String? @db.VarChar
+  users           users[]
+}
+
+model user_to_reaction {
+  id          Int       @id @default(autoincrement())
+  user_id     Int
+  reaction_id Int
+  reactions   reactions @relation(fields: [reaction_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users       users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model user_votes {
+  id                   Int                    @id @default(autoincrement())
+  user_id              Int
+  user_vote            Int
+  users                users                  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  unverified_sightings unverified_sightings[]
+}
+
+model users {
+  id                   Int                    @id @default(autoincrement())
+  user_name            String                 @unique @db.VarChar
+  email_address        String                 @unique @db.VarChar
+  user_password        String                 @db.VarChar
+  trusted_user         Boolean?
+  user_level_id        Int
+  user_profile_id      Int
+  user_levels          user_levels            @relation(fields: [user_level_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user_profiles        user_profiles          @relation(fields: [user_profile_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  confirmed_sightings  confirmed_sightings[]
+  unverified_sightings unverified_sightings[]
+  user_to_reaction     user_to_reaction[]
+  user_votes           user_votes[]
+  users_to_groups      users_to_groups[]
+}
+
+model users_to_groups {
+  id              Int             @id @default(autoincrement())
+  group_id        Int
+  user_id         Int
+  interest_groups interest_groups @relation(fields: [group_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users           users           @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
