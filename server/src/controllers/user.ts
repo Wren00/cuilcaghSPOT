@@ -98,12 +98,14 @@ async function updateUserDetails(req: Request, res: Response) {
 //CREATE functions - createUser also creates a UserProfile
 
 async function createUser(req: Request, res: Response) {
-  const newUser: CreateUser = req.body;
-
-  const createdUser = await UserService.createUser(newUser);
-
-  return res.status(200).json(createdUser);
-}
+  try{
+    const newUser: CreateUser = req.body;
+    const createdUser = await UserService.createUser(newUser);
+    return res.status(200).json(createdUser);
+    }catch(error) {
+      res.status(500).json("Could not create user.");
+    }
+  }
 
 //USER DETAILS TO BE OBFUSCATED RATHER THAN DELETED
 

@@ -5,7 +5,12 @@ import {
 
 const UserRouter = express.Router();
 
+//PUBLIC endpoints
+
 UserRouter.get("/getAllUsers", UserController.getAllUsers);
+
+//PRIVATE endpoints
+
 UserRouter.get("/getUserByName", UserController.getUserByName);
 UserRouter.get("/getUserById", UserController.getuserById);
 UserRouter.get("/getUserByEmail", UserController.getuserByEmail);

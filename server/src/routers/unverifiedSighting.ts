@@ -5,7 +5,12 @@ import {
 
 const UnverifiedSightingRouter = express.Router();
 
+//PUBLIC endpoints
+
 UnverifiedSightingRouter.get("/getAllUnverifiedSightings", UnverifiedSightingController.getAllUnverifiedSightings);
+
+//PRIVATE endpoints
+
 UnverifiedSightingRouter.get("/getSightingsByOrganismId", UnverifiedSightingController.getSightingsByOrganismId);
 UnverifiedSightingRouter.get("/getSightingsByUserId", UnverifiedSightingController.getSightingsByUserId);
 UnverifiedSightingRouter.post("/createUnverifiedSighting", UnverifiedSightingController.createUnverifiedSighting);

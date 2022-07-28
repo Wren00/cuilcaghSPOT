@@ -206,6 +206,8 @@ async function updateUserProfile( updateProfile : UserProfile ) {
 //CREATE function
 
 async function createUser(user: CreateUser) {
+
+  
   const newProfile = await prisma.user_profiles.create({
     data: {
       profile_message: "New User"
