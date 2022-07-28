@@ -1,6 +1,8 @@
 jest.mock('@prisma/client');
 jest.mock('../../utils/prisma');
 import { Prisma, unverified_sightings } from "@prisma/client";
+import { Decimal } from "@prisma/client/runtime";
+import { UnverifiedSighting } from "../../interfaces/unverifiedSighting";
 import { prismaAsAny } from "../../testutil/prisma";
 import { UnverifiedSightingService } from "../unverifiedSighting";
 
@@ -12,7 +14,6 @@ describe("UnverifiedSightingService", () => {
                 findMany: jest.fn().mockReturnValue([unverifiedSightingsModel]),
             };
             const result = await UnverifiedSightingService.getAllUnverifiedSightings();
-            console.log(result);
             expect(result[0].userId).toEqual(unverifiedSightingsModel.user_id);
         });
     });
@@ -40,15 +41,43 @@ describe("UnverifiedSightingService", () => {
     });
 
     describe("createUnverifiedSighting", () => {
-        it ("should add an unverified sighting to the database", () => {
 
-            //test
+        it("should create a new unverified sighting", async () => {
+            const prismaObjectSighting = unverifiedSightingsModel;
 
-            //fail if 
+            const interfaceObjectSighting : UnverifiedSighting = {
+                organismId: 1,
+                userId: 1,
+                pictureURL: "apicture.jpg",
+                date: "2000-10-01",
+                lat: 54.0101,
+                long: -7.2222,
+                userVotes: 0,
+                userReactions: 0
+            }
 
+            prismaAsAny.unverified_sightings = {
+                create: jest.fn().mockResolvedValueOnce(prismaObjectSighting),
+            }
+           
+            const final = await UnverifiedSightingService.createUnverifiedSighting(interfaceObjectSighting);
+            
+            expect(final).toEqual("Success");
         })
+    });
 
- });
+ describe("deleteSightingById", () => {
+    it("should delete a sighting using the id", async () => {
+        prismaAsAny.unverified_sightings = {
+            delete: jest.fn().mockReturnValueOnce("Success"),
+        };
+
+        const mock = await UnverifiedSightingService.deleteUnverifiedSightingById(5);
+
+        expect(mock).toEqual("Success");
+    });
+
+});
 
 })
 
@@ -58,8 +87,8 @@ const unverifiedSightingsModel: unverified_sightings = {
     user_id: 1,
     picture_url: "apicture.jpg",
     date: new Date("2000-10-01"),
-    lat: new Prisma.Decimal(54.0000),
-    long: new Prisma.Decimal(-7.0000),
+    lat: new Decimal(54.0101),
+    long: new Decimal(-7.2222),
     user_vote_id: 1,
     reaction_id: 1
     

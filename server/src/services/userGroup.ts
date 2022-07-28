@@ -50,9 +50,14 @@ async function createUserGroup(group: UserGroup) {
         description: group.description
     },
   })
+  return "Success";
   }
 
-//DELETE function 
+//TODO DELETE function 
+
+
+
+
 
 
 const UserGroupService = {

@@ -4,64 +4,94 @@ import { TaxonGroup } from "../interfaces/taxonGroup";
 //GET functions
 
 async function getAllTaxonGroups() {
-
-  const manyObjects =  await prisma.taxon_groups.findMany();
-  const taxonGroups: TaxonGroup[] = manyObjects.map((x: { id: any; taxon_group_name: any; description: any; }) => ({
-    id: x.id,
-    taxonGroupName: x.taxon_group_name,
-    description: x.description
-  }));
-  return taxonGroups;
-
+  let allTaxonGroups;
+  try {
+    allTaxonGroups = await prisma.taxon_groups.findMany();
+  }
+  catch (error) {
+    console.log(error);
+  }
+  const groups: TaxonGroup[] = allTaxonGroups.map((x:
+    { id: any; taxon_group_name: any; description: any; }) => ({
+      taxonId: x.id,
+      taxonGroupName: x.taxon_group_name,
+      description: x.description
+    }));
+  return groups;
 }
 
-async function getTaxonGroupByName(taxonName: string) {
-  const manyObjects =  await prisma.taxon_groups.findMany({
-    where: { taxon_group_name: { contains: taxonName, mode: "insensitive" } },
-  });
-  const taxonGroups: TaxonGroup[] = manyObjects.map((x: { id: any; taxon_group_name: any; description: any; }) => ({
-    id: x.id,
-    taxonGroupName: x.taxon_group_name,
-    description: x.description
+async function getTaxonGroupByName(taxonGroupName: string) {
+  let taxonGroupObject;
 
-  }));
-  return taxonGroups;
-}
-
-async function getTaxonGroupById(taxonGroupId: number) {
-  const taxonGroupObject =  await prisma.taxon_groups.findUnique({
-    where: { id: taxonGroupId },
-  });
+  try {
+    taxonGroupObject = await prisma.taxon_groups.findFirst({
+      where: { taxon_group_name: { contains: taxonGroupName, mode: "insensitive" } },
+    });
+  }
+  catch (error) {
+    console.log(error);
+  }
 
   let returnedValue = {
-    taxonId: taxonGroupObject.id,
+    taxonGroupId: taxonGroupObject.id,
     taxonGroupName: taxonGroupObject.taxon_group_name,
     description: taxonGroupObject.description
   }
+  return returnedValue;
+}
 
+async function getTaxonGroupById(taxonGroupId: number) {
+  let taxonGroupObject;
+
+  try {
+    taxonGroupObject = await prisma.taxon_groups.findUnique({
+      where: { id : taxonGroupId },
+     });
+  }
+  catch (error) {
+    console.log(error);
+  }
+
+  let returnedValue = {
+    taxonGroupId: taxonGroupObject.id,
+    taxonGroupName: taxonGroupObject.taxon_group_name,
+    description: taxonGroupObject.description
+  }
   return returnedValue;
 }
 
 //CREATE function
 
 async function createTaxonGroup(taxonGroup: TaxonGroup) {
-    const newTaxonGroup = await prisma.taxon_groups.create({
+  let newTaxonGroup;
+  try {
+    newTaxonGroup = await prisma.taxon_groups.create({
       data: {
         taxon_group_name: taxonGroup.taxonGroupName,
         description: taxonGroup.description
-    },
-  })
+      },
+    });
+  } catch (error) {
+    console.log(error);
   }
+  return newTaxonGroup;
+}
   
   //DELETE function
 
 async function deleteTaxonGroupById(taxonGroupId: number) {
-    const deletedGroup = await prisma.taxon_groups.delete({
+  let deletedGroup;
+  try {
+    deletedGroup = await prisma.taxon_groups.delete({
       where: {
         id: taxonGroupId
       },
     });
+  } catch (error) {
+    console.log(error);
   }
+  return deletedGroup;
+}
 
   
   const TaxonGroupService = {

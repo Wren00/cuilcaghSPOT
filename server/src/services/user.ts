@@ -105,7 +105,7 @@ async function getUserByName(userName: string) {
   //UPDATE function
 
   async function updateUser(user: User)   {
-  const updateUserName = await prisma.users.update({
+  const updateUserDetails = await prisma.users.update({
     where: {
       id : user.userId
     },
@@ -114,6 +114,7 @@ async function getUserByName(userName: string) {
       email_address: user.emailAddress
     },
     });
+    return user;
   }
   
   //CREATE function
@@ -125,12 +126,11 @@ async function createUser(user: CreateUser) {
             profile_message: "New User"
         }
     })
-    //TODO password hash
 
     const salt = await bcrypt.genSalt();
 
     const hashedPassword = await bcrypt.hash(user.userPassword, salt);
-    console.log(hashedPassword);
+    const receivedUser = user;
     const newUser = await prisma.users.create({
       data: {
         user_name: user.userName,
@@ -141,25 +141,20 @@ async function createUser(user: CreateUser) {
         user_profile_id: newProfile.id
     },
   })
+
+  return newUser;
   }
 
   //DELETE function
 
-  //TODO fix delete function
-
   async function deleteUserById(userId: number) {
 
-    const deletedUser = await prisma.users.delete({
-      where: {
-        id: userId
-      },
+    let deletedUser;
+    deletedUser = await prisma.users.delete({
+      where: { id: userId },
     });
 
-    await prisma.user_profiles.delete({
-        where: {
-            id: userId
-        }
-    })
+    return deletedUser;
   }
 
 const UserService = {

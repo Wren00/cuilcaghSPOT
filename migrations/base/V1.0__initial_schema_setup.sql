@@ -33,8 +33,9 @@ user_password VARCHAR(255) NOT NULL,
 trusted_user BOOLEAN,
 user_level_id INT NOT NULL,
 user_profile_id INT NOT NULL,
+
 FOREIGN KEY (user_level_id) REFERENCES user_levels(id),
-FOREIGN KEY (user_profile_id) REFERENCES user_profiles(id)
+FOREIGN KEY (user_profile_id) REFERENCES user_profiles(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS reactions (

@@ -5,40 +5,56 @@ import { ConfirmedSighting } from "../interfaces/confirmedSighting";
 
 
 async function getAllConfirmedSightings(req: Request, res: Response) {
-  const sightings = await ConfirmedSightingService.getAllConfirmedSightings();
-  return res.status(200).json(sightings);
-}
+  try {
+    const sightings = await ConfirmedSightingService.getAllConfirmedSightings();
+    return res.status(200).json(sightings);
+    }catch(error) {
+      res.status(401).json("Cannot GET sightings");
+    }
+  }
 
 async function getSightingsByOrganismId(req: Request, res: Response) {
-  const { organismId: organismId } = req.body;
-  const sightings = await ConfirmedSightingService.getSightingsByOrganismId(organismId);
-  return res.status(200).json(sightings);
-}
+  try {
+    const { organismId: organismId } = req.body;
+    const sightings = await ConfirmedSightingService.getSightingsByOrganismId(organismId);
+    return res.status(200).json(sightings);
+    } catch(error)  {
+      res.status(401).json("Cannot find organism Id");
+    }
+  }
 
 async function getSightingsByUserId(req: Request, res: Response) {
-  const { userId: userId } = req.body;
-  const sightings = await ConfirmedSightingService.getSightingsByUserId(userId);
-  return res.status(200).json(sightings);
-}
+  try {
+    const { userId: userId } = req.body;
+    const sightings = await ConfirmedSightingService.getSightingsByUserId(userId);
+    return res.status(200).json(sightings);
+    } catch(error)  {
+      res.status(401).json("Cannot find user Id");
+    }
+  }
 
 //CREATE function
 
 async function createConfirmedSighting(req: Request, res: Response) {
-  const confirmedSighting: ConfirmedSighting = req.body;
-
-  await ConfirmedSightingService.createConfirmedSighting(confirmedSighting);
-
-  return res.status(200).json("Successfully created");
-}
+  try{
+    const newSighting: ConfirmedSighting = req.body;
+    const createdSighting = await ConfirmedSightingService.createConfirmedSighting(newSighting);
+    return res.status(200).json(createdSighting);
+    }catch(error) {
+      res.status(500).json("Could not create sighting.");
+    }
+  }
 
 //DELETE function
 
 async function deleteSightingById(req: Request, res: Response)    {
   const { sightingId: sightingId } = req.body;
 
-  const sighting = await ConfirmedSightingService.deleteSightingById(sightingId);
-
-  return res.status(200).json("Successfully deleted");
+  const deletedSighting = await ConfirmedSightingService.deleteConfirmedSightingById(sightingId);
+  if(!deletedSighting)  {
+    return res.status(500).json("Cannot delete sighting");
+  }
+  return res.status(200).json(deletedSighting);
 }
 
 const ConfirmedSightingController = {

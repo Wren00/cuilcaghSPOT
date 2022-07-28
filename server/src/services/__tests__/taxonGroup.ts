@@ -40,28 +40,37 @@ describe ("TaxonGroupService", () => {
         });
 
     describe("createTaxonGroup", () => {
-        it ("should insert a taxon group entry to database", () => {
 
-            //test
+        it("should create a new taxon group", async () => {
+            const prismaObjectGroup = taxonGroupModel;
 
-            //fail if taxonGroupName is not entered
-            //fail if level of editing user not admin
+            const interfaceObjectGroup : TaxonGroup = {
+                taxonGroupName: "animal",
+                description: "a group of animals"
+            }
 
-        });
-
+            prismaAsAny.taxon_groups = {
+                create: jest.fn().mockResolvedValueOnce(prismaObjectGroup),
+            }
+           
+            const final = await TaxonGroupService.createTaxonGroup(interfaceObjectGroup);
+            
+            expect(final).toEqual("Success");
+        })
     });
 
-    describe("deleteTaxonGroupById", () => {
-        it ("should remove a taxon group entry in database", () => {
+ describe("deleteTaxonGroupById", () => {
+    it("should delete a sighting using the id", async () => {
+        prismaAsAny.taxon_groups = {
+            delete: jest.fn().mockReturnValueOnce("Success"),
+        };
 
-            //test
+        const mock = await TaxonGroupService.deleteTaxonGroupById(10);
 
-            //fail if id is invalid
-            //fail if editing user not admin
-
-        });
-
+        expect(mock).toEqual("Success");
     });
+
+});
 
 });
 

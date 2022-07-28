@@ -48,29 +48,27 @@ async function updateUser(req: Request, res: Response) {
   return res.status(200).json(updateUser);
 }
 
-//UPDATE adding user to group
-
 //CREATE functions - createUser also creates a UserProfile
 
 async function createUser(req: Request, res: Response) {
   const newUser: CreateUser = req.body;
 
-  await UserService.createUser(newUser);
+  const createdUser = await UserService.createUser(newUser);
 
-  return res.status(200).json("Successfully created");
+  return res.status(200).json(createdUser);
 }
 
-//DELETE functions - deleting User also deletes profile linked to user
-
-async function deleteUserById(req: Request, res: Response) {
+async function deleteUserById(req: Request, res: Response)    {
   const { id: userId } = req.body;
 
-  const user = await UserService.deleteUserById(userId)
-
-  return res.status(200).json("Successfully deleted");
+  const deletedUser = await UserService.deleteUserById(userId);
+  if(!deletedUser)  {
+    return res.status(500).json("Cannot delete id");
+  }
+  return res.status(200).json(deletedUser);
 }
 
-//DELETE user from group
+
 
 const UserController = {
   getAllUsers, getUserByName, getuserById, getuserByEmail, getuserByLevel, getTrustedUsers,
