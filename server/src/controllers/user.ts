@@ -105,15 +105,17 @@ async function createUser(req: Request, res: Response) {
   return res.status(200).json(createdUser);
 }
 
-async function deleteUserById(req: Request, res: Response)    {
-  const { id: userId } = req.body;
+//USER DETAILS TO BE OBFUSCATED RATHER THAN DELETED
 
-  const deletedUser = await UserService.deleteUserById(userId);
-  if(!deletedUser)  {
-    return res.status(500).json("Cannot delete id");
-  }
-  return res.status(200).json(deletedUser);
-}
+// async function deleteUserById(req: Request, res: Response)    {
+//   const { id: userId } = req.body;
+
+//   const deletedUser = await UserService.deleteUserById(userId);
+//   if(!deletedUser)  {
+//     return res.status(500).json("Cannot delete id");
+//   }
+//   return res.status(200).json(deletedUser);
+// }
 
 
 
@@ -121,7 +123,7 @@ const UserController = {
   getAllUsers, getUserByName, getuserById, getuserByEmail, getuserByLevel, getTrustedUsers,
   createUser,
   updateUserDetails, updateUserPassword, updateUserProfile,
-  deleteUserById
+  
 };
 
 export { UserController };
