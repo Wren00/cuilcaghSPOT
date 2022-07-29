@@ -27,7 +27,6 @@ async function getAllOrganisms() {
 
 async function getOrganismByName(taxonName: string) {
   let organismArray;
-  console.log(taxonName);
   try {
     organismArray = await prisma.organisms.findMany({
       where: { taxon_name: { contains: taxonName, mode: "insensitive" } },

@@ -110,27 +110,11 @@ describe("UserService", () => {
             prismaAsAny.users = {
                 update: jest.fn().mockResolvedValueOnce(prismaObjectUser),
             }
-            const final = await UserService.updateUser(interfaceObjectUser);
+            const final = await UserService.updateUserDetails(interfaceObjectUser);
 
             expect(final.userName).toEqual(prismaObjectUser.user_name);
         })
     });
-
-
-    describe("deleteUserById", () => {
-        it("should delete a user using the id", async () => {
-            prismaAsAny.users = {
-                delete: jest.fn().mockReturnValueOnce("Success"),
-            };
-
-            const mock = await UserService.deleteUserById(10);
-
-            expect(mock).toEqual("Success");
-        });
-
-    });
-
-});
 
 const userModel: users = {
     id: 10,

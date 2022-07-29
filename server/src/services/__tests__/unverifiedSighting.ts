@@ -53,7 +53,8 @@ describe("UnverifiedSightingService", () => {
                 lat: 54.0101,
                 long: -7.2222,
                 userVotes: 0,
-                userReactions: 0
+                userReactions: 0,
+                sightingId: 0
             }
 
             prismaAsAny.unverified_sightings = {
