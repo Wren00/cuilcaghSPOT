@@ -49,9 +49,6 @@ async function getTaxonGroupById(taxonGroupId: number) {
       where: { id: taxonGroupId },
     });
 
-    let isValidId = taxonGroupObject?.id ?? false
-    if (!isValidId) throw new Error('Cannot find id');
-
     let returnedValue = {
       taxonGroupId: taxonGroupObject.id,
       taxonGroupName: taxonGroupObject.taxon_group_name,
@@ -63,14 +60,6 @@ async function getTaxonGroupById(taxonGroupId: number) {
   catch (error) {
     throw error;
   }
-
-  // let returnedValue = {
-  //   taxonGroupId: taxonGroupObject.id,
-  //   taxonGroupName: taxonGroupObject.taxon_group_name,
-  //   description: taxonGroupObject.description
-  // }
-
-  // return returnedValue;
 }
 
 //CREATE function

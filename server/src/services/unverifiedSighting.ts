@@ -108,11 +108,11 @@ async function createUnverifiedSighting(sighting: UnverifiedSighting) {
 
 //UPDATE function
 
-async function updateSighting(sighting : UnverifiedSighting) {
+async function updateSighting(sighting: UnverifiedSighting) {
 
   let updatedSighting;
   try {
-    updatedSighting= await prisma.unverified_sightings.update({
+    updatedSighting = await prisma.unverified_sightings.update({
       where: {
         id: sighting.sightingId
       },

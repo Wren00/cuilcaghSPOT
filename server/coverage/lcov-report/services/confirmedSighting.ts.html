@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">79.31% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>23/29</span>
+                <span class='fraction'>25/30</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">82.14% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>23/28</span>
+                <span class='fraction'>25/30</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -181,10 +181,7 @@
 <a name='L116'></a><a href='#L116'>116</a>
 <a name='L117'></a><a href='#L117'>117</a>
 <a name='L118'></a><a href='#L118'>118</a>
-<a name='L119'></a><a href='#L119'>119</a>
-<a name='L120'></a><a href='#L120'>120</a>
-<a name='L121'></a><a href='#L121'>121</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L119'></a><a href='#L119'>119</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -192,23 +189,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -276,6 +271,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -307,28 +303,25 @@
 import { ConfirmedSighting } from "../interfaces/confirmedSighting";
 &nbsp;
 //GET functions
-&nbsp;
 async function getAllConfirmedSightings() {
   let allSightings;
   try {
-    allSightings = await prisma.unverified_sightings.findMany();
+    allSightings = await prisma.confirmed_sightings.findMany();
   }
   catch (error) {
-    console.log(error);
+<span class="cstat-no" title="statement not covered" >    console.log(error);</span>
   }
-  const getAllSightings: ConfirmedSighting[] = allSightings.map((<span class="fstat-no" title="function not covered" >x </span>=&gt; (<span class="cstat-no" title="statement not covered" >{</span>
-    sightingId: x.id,
-    organismId: x.organism_id,
-    userId: x.user_id,
-    pictureURL: x.picture_url,
-    date: x.date.toString(),
-    lat: (x.lat).toNumber(),
-    long: (x.long).toNumber(),
-&nbsp;
-  })));
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  return getAllSightings;</span>
-&nbsp;
+  const sightings: ConfirmedSighting[] = allSightings.map((x:
+    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_vote_id: any; reaction_id: any; }) =&gt; ({
+      sightingId: x.id,
+      organismId: x.organism_id,
+      userId: x.user_id,
+      pictureURL: x.picture_url,
+      date: x.date,
+      lat: x.lat,
+      long: x.long,
+    }));
+  return sightings;
 }
 &nbsp;
 async function getSightingsByOrganismId(organismId: number) {
@@ -396,6 +389,7 @@ async function createConfirmedSighting(sighting: ConfirmedSighting) {
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    console.log(error);</span>
   }
+  console.log(newSighting);
   return newSighting;
 }
 &nbsp;
@@ -430,7 +424,7 @@ export { ConfirmedSightingService };</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-28T21:49:50.335Z
+                at 2022-07-29T10:24:38.287Z
             </div>
         <script src="../prettify.js"></script>
         <script>

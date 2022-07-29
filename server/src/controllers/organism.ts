@@ -36,7 +36,7 @@ async function getOrganismById(req: Request, res: Response) {
 async function getOrganismByTaxonGroupId(req: Request, res: Response) {
   try {
   const { taxonGroupId: taxonGroupId } = req.body;
-  const organisms = await OrganismService.getOrganismById(taxonGroupId);
+  const organisms = await OrganismService.getOrganismByTaxonGroupId(taxonGroupId);
   return res.status(200).json(organisms);
   }catch(error) {
     res.status(401).json("Cannot find taxon group id");

@@ -23,6 +23,27 @@ describe("OrganismController", () => {
             expect(responsedata.latinName).toEqual(interfaceObjectOrganism.latinName);
         })
     });
+
+    describe("OrganismController", () => {
+        describe("getOrganismById", () => {
+            it("should return an organism by the id", async () => {
+                const request = httpMocks.createRequest({
+                    method: "GET",
+                    url: "/getOrganismById"
+                })
+                const response: MockResponse<Response> = createResponse();
+    
+                when(OrganismService.getOrganismById).calledWith(15).mockResolvedValueOnce([interfaceObjectOrganism]);
+    
+                await OrganismController.getOrganismById(request, response);
+                const responsedata : Organism = response._getJSONData()[0];
+                expect(response._getStatusCode()).toEqual(200);
+                expect(responsedata.organismId).toEqual(interfaceObjectOrganism.organismId);
+            })
+        });
+
+});
+
 })
 
 const interfaceObjectOrganism: Organism = {

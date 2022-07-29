@@ -97,8 +97,8 @@ describe("OrganismService", () => {
                 taxon_name: "newentry",
                 latin_name: "newentry",
                 taxon_group_id: 2,
-                picture_url: "anewpicture",
-                description: "an organism"
+                picture_url: "apicture.jpg",
+                description: "an organism in the database"
             }
 
             const interfaceObjectOrganism : Organism  = {
@@ -128,24 +128,6 @@ describe("OrganismService", () => {
             const result = await OrganismService.deleteOrganismById(10);
 
             expect(result.id).toEqual(organismModel.id);
-        });
-        it("should return null when delete unsuccessful", async () => {
-            prismaAsAny.organisms = {
-                delete: jest.fn().mockReturnValueOnce(null),
-            };
-            const result = await OrganismService.deleteOrganismById(10);
-
-            expect(result).toEqual(null);
-        });
-        it("should return null when exception thrown", async () => {
-            prismaAsAny.organisms = {
-                delete: jest.fn().mockImplementationOnce( () => {
-                    throw new Error("error");
-                })
-            };
-            const result = await OrganismService.deleteOrganismById(10);
-
-            expect(result).toEqual(null);
         });
     })
 

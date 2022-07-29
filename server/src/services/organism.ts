@@ -78,7 +78,7 @@ async function getOrganismByTaxonGroupId(taxonId: number) {
   let organismArray;
 
   try {
-    await prisma.organisms.findMany({
+    organismArray = await prisma.organisms.findMany({
       where: { taxon_group_id: taxonId },
     });
   }

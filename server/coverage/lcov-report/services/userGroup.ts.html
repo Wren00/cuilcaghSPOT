@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.12% </span>
+                <span class="strong">81.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/32</span>
+                <span class='fraction'>26/32</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">53.12% </span>
+                <span class="strong">81.25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/32</span>
+                <span class='fraction'>26/32</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -255,8 +255,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -269,7 +269,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -277,24 +285,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -302,7 +302,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -379,10 +379,10 @@ async function getUserGroupByName(groupName: string) {
 &nbsp;
 //UPDATE function
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >updateUserGroup(</span>group : UserGroup) {
+async function updateUserGroup(group : UserGroup) {
   let updatedGroup;
-<span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    updatedGroup = await prisma.interest_groups.update({</span>
+  try {
+    updatedGroup = await prisma.interest_groups.update({
       where: {
         id: group.groupId
       },
@@ -395,15 +395,15 @@ async function <span class="fstat-no" title="function not covered" >updateUserGr
   catch (error) {
 <span class="cstat-no" title="statement not covered" >    console.log(error);</span>
   }
-<span class="cstat-no" title="statement not covered" >  return updatedGroup;</span>
+  return updatedGroup;
 }
 &nbsp;
 //CREATE function 
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >createUserGroup(</span>group: UserGroup) {
+async function createUserGroup(group: UserGroup) {
   let newGroup;
-<span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    newGroup = await prisma.interest_groups.create({</span>
+  try {
+    newGroup = await prisma.interest_groups.create({
       data: {
         group_name: group.groupName,
         description: group.description
@@ -412,15 +412,15 @@ async function <span class="fstat-no" title="function not covered" >createUserGr
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    console.log(error);</span>
   }
-<span class="cstat-no" title="statement not covered" >  return newGroup;</span>
+  return newGroup;
 }
 &nbsp;
 //DELETE function
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >deleteUserGroupById(</span>groupId: number) {
+async function deleteUserGroupById(groupId: number) {
   let deletedGroup;
-<span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    deletedGroup = await prisma.interest_groups.delete({</span>
+  try {
+    deletedGroup = await prisma.interest_groups.delete({
       where: {
         id: groupId
       },
@@ -428,7 +428,7 @@ async function <span class="fstat-no" title="function not covered" >deleteUserGr
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    console.log(error);</span>
   }
-<span class="cstat-no" title="statement not covered" >  return deletedGroup;</span>
+  return deletedGroup;
 }
 &nbsp;
 &nbsp;
@@ -448,7 +448,7 @@ const UserGroupService = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-28T21:49:50.335Z
+                at 2022-07-29T13:13:42.885Z
             </div>
         <script src="../prettify.js"></script>
         <script>

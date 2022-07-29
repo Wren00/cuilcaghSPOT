@@ -20,7 +20,7 @@ describe("UnverifiedSightingService", () => {
 
 
     describe("getSightingsByOrganismId", () => {
-        it ("should return all sightings of an organism by id", async () => {
+        it("should return all sightings of an organism by id", async () => {
             prismaAsAny.unverified_sightings = {
                 findMany: jest.fn().mockReturnValueOnce([unverifiedSightingsModel]),
             };
@@ -31,7 +31,7 @@ describe("UnverifiedSightingService", () => {
     });
 
     describe("getSightingsByUserId", () => {
-        it ("should return all sightings of by a user by id", async () => {
+        it("should return all sightings of by a user by id", async () => {
             prismaAsAny.unverified_sightings = {
                 findMany: jest.fn().mockReturnValueOnce([unverifiedSightingsModel]),
             };
@@ -45,7 +45,7 @@ describe("UnverifiedSightingService", () => {
         it("should create a new unverified sighting", async () => {
             const prismaObjectSighting = unverifiedSightingsModel;
 
-            const interfaceObjectSighting : UnverifiedSighting = {
+            const interfaceObjectSighting: UnverifiedSighting = {
                 organismId: 1,
                 userId: 1,
                 pictureURL: "apicture.jpg",
@@ -60,25 +60,66 @@ describe("UnverifiedSightingService", () => {
             prismaAsAny.unverified_sightings = {
                 create: jest.fn().mockResolvedValueOnce(prismaObjectSighting),
             }
-           
+
             const final = await UnverifiedSightingService.createUnverifiedSighting(interfaceObjectSighting);
-            
-            expect(final).toEqual("Success");
+
+            expect(final.organism_id).toEqual(interfaceObjectSighting.organismId);
         })
     });
 
- describe("deleteSightingById", () => {
-    it("should delete a sighting using the id", async () => {
-        prismaAsAny.unverified_sightings = {
-            delete: jest.fn().mockReturnValueOnce("Success"),
-        };
+    describe("updateUnverifiedSighting", () => {
 
-        const mock = await UnverifiedSightingService.deleteUnverifiedSightingById(5);
+        it("should update an unverified sighting", async () => {
+            const prismaObjectSighting = {
+                id: 15,
+                organism_id: 1,
+                user_id: 0,
+                picture_url: "test.jpg",
+                date: "2000-01-01",
+                lat: 54.0002,
+                long: -7.0101,
+                user_vote_id: 1,
+                reaction_id: 1
+            }
 
-        expect(mock).toEqual("Success");
+            console.log(prismaObjectSighting);
+
+            const interfaceObjectSighting: UnverifiedSighting = {
+                sightingId: 15,
+                organismId: 2,
+                userId: 0,
+                pictureURL: "test.jpg",
+                date: "2000-01-01",
+                lat: 54.0002,
+                long: -7.0101,
+                userVotes: 1,
+                userReactions: 1
+            }
+
+            console.log(interfaceObjectSighting);
+
+            prismaAsAny.unverified_sightings = {
+                update: jest.fn().mockResolvedValueOnce(prismaObjectSighting),
+            }
+
+            const final = await UnverifiedSightingService.updateSighting(interfaceObjectSighting);
+            console.log(final);
+            expect(final.organism_id).toEqual(prismaObjectSighting.organism_id);
+        })
     });
 
-});
+    describe("deleteSightingById", () => {
+        it("should delete a sighting using the id", async () => {
+            prismaAsAny.unverified_sightings = {
+                delete: jest.fn().mockReturnValueOnce("Success"),
+            };
+
+            const mock = await UnverifiedSightingService.deleteUnverifiedSightingById(5);
+
+            expect(mock).toEqual("Success");
+        });
+
+    });
 
 })
 
@@ -92,5 +133,5 @@ const unverifiedSightingsModel: unverified_sightings = {
     long: new Decimal(-7.2222),
     user_vote_id: 1,
     reaction_id: 1
-    
+
 }
