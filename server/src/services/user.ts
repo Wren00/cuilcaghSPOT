@@ -229,7 +229,14 @@ async function createUser(user: CreateUser) {
     },
   })
 
-  return newUser;
+  const createdUser = {
+    userId: newUser.id,
+    userName: newUser.user_name,
+    emailAddress: newUser.email_address,
+    trustedUser: newUser.trusted_user,
+    userLevelId: newUser.user_level_id
+  } 
+  return createdUser;
 }
 
 //DELETE function -- USER DETAILS TO BE OBFUSCATED RATHER THAN DELETED

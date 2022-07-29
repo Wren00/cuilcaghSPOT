@@ -24,7 +24,7 @@ async function getUserByName(req: Request, res: Response) {
     }
   }
 
-async function getuserById(req: Request, res: Response) {
+async function getUserById(req: Request, res: Response) {
   try {
     const { userId: userId} = req.body;
     const user = await UserService.getUserById(userId);
@@ -33,7 +33,7 @@ async function getuserById(req: Request, res: Response) {
       res.status(401).json("Cannot find user id");
     }
   }
-async function getuserByEmail(req: Request, res: Response) {
+async function getUserByEmail(req: Request, res: Response) {
   try {
     const { emailAddress : emailAddress} = req.body;
     const user = await UserService.getUserByEmail(emailAddress);
@@ -43,7 +43,7 @@ async function getuserByEmail(req: Request, res: Response) {
     }
   }
 
-async function getuserByLevel(req: Request, res: Response) {
+async function getUserByLevel(req: Request, res: Response) {
   try {
     const { userLevelId : userLevelId} = req.body;
     const users = await UserService.getUserByLevel(userLevelId);
@@ -122,7 +122,7 @@ async function createUser(req: Request, res: Response) {
 
 
 const UserController = {
-  getAllUsers, getUserByName, getuserById, getuserByEmail, getuserByLevel, getTrustedUsers,
+  getAllUsers, getUserByName, getUserById, getUserByEmail, getUserByLevel, getTrustedUsers,
   createUser,
   updateUserDetails, updateUserPassword, updateUserProfile,
   

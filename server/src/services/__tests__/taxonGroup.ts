@@ -26,17 +26,6 @@ describe("TaxonGroupService", () => {
             const result = await TaxonGroupService.getTaxonGroupById(10);
             expect(result.taxonGroupId).toEqual(taxonGroupModel.id);
         });
-        //     it("should throw an error if an id is not valid", async () => {
-        //         prismaAsAny.taxon_groups = {
-        //             findUnique: jest.fn().mockImplementation(() => 
-        //             {
-        //                 throw new Error("Cannot find id");
-        //             }),
-        //         };
-        //         const result = await TaxonGroupService.getTaxonGroupById(50);
-        //         expect(result.toString()).toEqual("fail");
-
-        //     });
     });
 
 
@@ -49,16 +38,6 @@ describe("TaxonGroupService", () => {
             console.log(result);
             expect(result[0].taxonGroupName).toEqual(taxonGroupModel.taxon_group_name);
         });
-        // it("should return an error message if a name is not valid", async () => {
-        //     prismaAsAny.taxon_groups = {
-        //         delete: jest.fn().mockReturnValueOnce(taxonGroupModel),
-        //     };
-        //     const result = await TaxonGroupService.getTaxonGroupByName("fail");
-
-        //     expect(result).toEqual("Cannot find name");
-        // });
-
-
     });
 
     describe("createTaxonGroup", () => {

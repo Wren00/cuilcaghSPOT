@@ -98,7 +98,7 @@ describe("UserService", () => {
            
             const result = await UserService.createUser(interfaceObjectUser);
             console.log(result);
-            expect(result.user_name).toEqual(prismaObjectUser.user_name);
+            expect(result.userName).toEqual(prismaObjectUser.user_name);
         })
     });
 
