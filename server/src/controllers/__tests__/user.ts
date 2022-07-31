@@ -4,6 +4,8 @@ import httpMocks, { createResponse, MockResponse } from "node-mocks-http";
 import { when } from "jest-when";
 import { UserService } from "../../services/user";
 import { User, CreateUser } from "../../interfaces/user";
+import { UserProfile } from "../../interfaces/userProfile";
+import bcrypt from "bcrypt";
 import { users } from "@prisma/client";
 
 jest.mock("../../services/user.ts");
@@ -123,6 +125,75 @@ describe("UserController", () => {
 
     });
 
+    describe("updateUserDetails", () => {
+        it("should return an updated user", async () => {
+            const updateUserJsonBody = {
+                userId: 1,
+                userName: "updated",
+                emailAddress: "update@gmail.com",
+            }
+            const request = httpMocks.createRequest({
+                method: "PUT",
+                url: "/updateUserDetails",
+                body: updateUserJsonBody
+            })
+            const response: MockResponse<Response> = createResponse();
+
+            when(UserService.updateUserDetails).calledWith(updateUserJsonBody).mockResolvedValueOnce(interfaceObjectUser);
+
+            await UserController.updateUserDetails(request, response);
+            const responsedata: User = response._getJSONData();
+            expect(response._getStatusCode()).toEqual(200);
+            expect(responsedata.userName).toEqual(interfaceObjectUser.userName);
+        })
+    });
+
+    describe("updateUserPassword", () => {
+        it("should return an updated password", async () => {
+            const salt = await bcrypt.genSalt();
+            const updateUserPasswordBody = {
+                userId: 1,
+                userPassword: "updatedpass"
+            }
+            const request = httpMocks.createRequest({
+                method: "PUT",
+                url: "/updateUserPassword",
+                body: updateUserPasswordBody
+            })
+            const response: MockResponse<Response> = createResponse();
+
+            when(UserService.updateUserPassword).calledWith(updateUserPasswordBody).mockResolvedValueOnce(interfaceObjectUser);
+
+            await UserController.updateUserPassword(request, response);
+            const responsedata: User = response._getJSONData();
+            expect(response._getStatusCode()).toEqual(200);
+            expect(responsedata.userPassword).toEqual(interfaceObjectUser.userPassword);
+        })
+    });
+
+    describe("updateUserProfile", () => {
+        it("should return an updated user profile", async () => {
+            const updateProfileJsonBody = {
+                profileId: 1,
+                profileMessage: "updated profile",
+                profilePicture: "newpic.jpg"
+            }
+            const request = httpMocks.createRequest({
+                method: "PUT",
+                url: "/updateUserProfile",
+                body: updateProfileJsonBody
+            })
+            const response: MockResponse<Response> = createResponse();
+
+            when(UserService.updateUserProfile).calledWith(updateProfileJsonBody).mockResolvedValueOnce(interfaceObjectProfile);
+
+            await UserController.updateUserProfile(request, response);
+            const responsedata: UserProfile = response._getJSONData();
+            expect(response._getStatusCode()).toEqual(200);
+            expect(responsedata.profileMessage).toEqual(interfaceObjectProfile.profileMessage);
+        })
+    });
+
 
 })
 
@@ -139,4 +210,10 @@ const interfaceObjectUser: User = {
     userPassword: "newpass",
     trustedUser: false,
     userLevelId: 2
+}
+
+const interfaceObjectProfile: UserProfile = {
+    profileId: 1,
+    profileMessage: "NEW PROFILE",
+    profilePicture: "NA.JPG"
 }

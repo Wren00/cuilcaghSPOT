@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.75% </span>
+                <span class="strong">81.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/32</span>
+                <span class='fraction'>26/32</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.75% </span>
+                <span class="strong">81.25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/32</span>
+                <span class='fraction'>26/32</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -173,10 +173,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -185,10 +185,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -197,13 +197,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -245,11 +245,11 @@ async function getUserGroupById(req: Request, res: Response) {
 &nbsp;
 //UPDATE function
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >updateUserGroup(</span>req: Request, res: Response) {
-<span class="cstat-no" title="statement not covered" >    try {</span>
-        const updateDetails: UserGroup = <span class="cstat-no" title="statement not covered" >req.body;</span>
-        const updatedGroup = <span class="cstat-no" title="statement not covered" >await UserGroupService.updateUserGroup(updateDetails);</span>
-<span class="cstat-no" title="statement not covered" >        return res.status(200).json(updatedGroup);</span>
+async function updateUserGroup(req: Request, res: Response) {
+    try {
+        const updateDetails: UserGroup = req.body;
+        const updatedGroup = await UserGroupService.updateUserGroup(updateDetails);
+        return res.status(200).json(updatedGroup);
     } catch (error) {
 <span class="cstat-no" title="statement not covered" >        res.status(500).json("Could not update group.");</span>
     }
@@ -257,11 +257,11 @@ async function <span class="fstat-no" title="function not covered" >updateUserGr
 &nbsp;
 //CREATE function 
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >createUserGroup(</span>req: Request, res: Response) {
-<span class="cstat-no" title="statement not covered" >    try{</span>
-    const newGroup: UserGroup = <span class="cstat-no" title="statement not covered" >req.body;</span>
-    const createdGroup = <span class="cstat-no" title="statement not covered" >await UserGroupService.createUserGroup(newGroup);</span>
-<span class="cstat-no" title="statement not covered" >    return res.status(200).json(createdGroup);</span>
+async function createUserGroup(req: Request, res: Response) {
+    try{
+    const newGroup: UserGroup = req.body;
+    const createdGroup = await UserGroupService.createUserGroup(newGroup);
+    return res.status(200).json(createdGroup);
     }catch(error) {
 <span class="cstat-no" title="statement not covered" >      res.status(500).json("Could not create group.");</span>
     }
@@ -269,14 +269,14 @@ async function <span class="fstat-no" title="function not covered" >createUserGr
 &nbsp;
 //DELETE function
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >deleteUserGroupById(</span>req: Request, res: Response) {
-    const { groupId: groupId } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+async function deleteUserGroupById(req: Request, res: Response) {
+    const { groupId: groupId } = req.body;
 &nbsp;
-    const deletedGroup = <span class="cstat-no" title="statement not covered" >await UserGroupService.deleteUserGroupById(groupId);</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!deletedGroup) {</span>
+    const deletedGroup = await UserGroupService.deleteUserGroupById(groupId);
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!deletedGroup) {
 <span class="cstat-no" title="statement not covered" >        return res.status(500).json("Cannot delete group");</span>
     }
-<span class="cstat-no" title="statement not covered" >    return res.status(200).json(deletedGroup);</span>
+    return res.status(200).json(deletedGroup);
 }
 &nbsp;
 const UserGroupController = { getAllUserGroups, getUserGroupByName, getUserGroupById,
@@ -289,7 +289,7 @@ export { UserGroupController };</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-29T16:19:18.282Z
+                at 2022-07-31T20:31:28.967Z
             </div>
         <script src="../prettify.js"></script>
         <script>

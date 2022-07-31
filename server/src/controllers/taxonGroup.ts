@@ -48,9 +48,9 @@ async function createTaxonGroup(req: Request, res: Response) {
 //DELETE function
 
 async function deleteTaxonGroupById(req: Request, res: Response)    {
-  const { taxonGroupId: taxonGroupId } = req.body;
+  const { taxonId: taxonId } = req.body;
 
-  const deletedTaxonGroup= await TaxonGroupService.deleteTaxonGroupById(taxonGroupId);
+  const deletedTaxonGroup= await TaxonGroupService.deleteTaxonGroupById(taxonId);
   if(!deletedTaxonGroup)  {
     return res.status(500).json("Cannot delete taxon group");
   }

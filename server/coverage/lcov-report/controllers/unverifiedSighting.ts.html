@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.75% </span>
+                <span class="strong">81.25% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/32</span>
+                <span class='fraction'>26/32</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.75% </span>
+                <span class="strong">81.25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/32</span>
+                <span class='fraction'>26/32</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -189,10 +189,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -201,10 +201,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -213,13 +213,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -272,11 +272,11 @@ async function getSightingsByUserId(req: Request, res: Response) {
 &nbsp;
 //CREATE function
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >createUnverifiedSighting(</span>req: Request, res: Response) {
-<span class="cstat-no" title="statement not covered" >  try {</span>
-    const newSighting: UnverifiedSighting = <span class="cstat-no" title="statement not covered" >req.body;</span>
-    const createdSighting = <span class="cstat-no" title="statement not covered" >await UnverifiedSightingService.createUnverifiedSighting(newSighting);</span>
-<span class="cstat-no" title="statement not covered" >    return res.status(200).json(createdSighting);</span>
+async function createUnverifiedSighting(req: Request, res: Response) {
+  try {
+    const newSighting: UnverifiedSighting = req.body;
+    const createdSighting = await UnverifiedSightingService.createUnverifiedSighting(newSighting);
+    return res.status(200).json(createdSighting);
   } catch (error) {
 <span class="cstat-no" title="statement not covered" >    res.status(500).json("Could not create sighting.");</span>
   }
@@ -284,11 +284,11 @@ async function <span class="fstat-no" title="function not covered" >createUnveri
 &nbsp;
 //UPDATE function
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >updateSighting(</span>req: Request, res: Response) {
-<span class="cstat-no" title="statement not covered" >  try{</span>
-    const updateDetails: UnverifiedSighting = <span class="cstat-no" title="statement not covered" >req.body;</span>
-    const updatedSighting = <span class="cstat-no" title="statement not covered" >await UnverifiedSightingService.updateSighting(updateDetails);</span>
-<span class="cstat-no" title="statement not covered" >    return res.status(200).json(updatedSighting);</span>
+async function updateSighting(req: Request, res: Response) {
+  try{
+    const updateDetails: UnverifiedSighting = req.body;
+    const updatedSighting = await UnverifiedSightingService.updateSighting(updateDetails);
+    return res.status(200).json(updatedSighting);
     }catch(error) {
 <span class="cstat-no" title="statement not covered" >      res.status(500).json("Could not update sighting.");</span>
     }
@@ -296,14 +296,14 @@ async function <span class="fstat-no" title="function not covered" >updateSighti
 &nbsp;
 //DELETE function
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >deleteUnverifiedSightingById(</span>req: Request, res: Response) {
-  const { sightingId: sightingId } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+async function deleteUnverifiedSightingById(req: Request, res: Response) {
+  const { sightingId: sightingId } = req.body;
 &nbsp;
-  const deletedSighting = <span class="cstat-no" title="statement not covered" >await UnverifiedSightingService.deleteUnverifiedSightingById(sightingId);</span>
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!deletedSighting) {</span>
+  const deletedSighting = await UnverifiedSightingService.deleteUnverifiedSightingById(sightingId);
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (!deletedSighting) {
 <span class="cstat-no" title="statement not covered" >    return res.status(500).json("Cannot delete sighting");</span>
   }
-<span class="cstat-no" title="statement not covered" >  return res.status(200).json(deletedSighting);</span>
+  return res.status(200).json(deletedSighting);
 }
 &nbsp;
 const UnverifiedSightingController = {
@@ -322,7 +322,7 @@ export { UnverifiedSightingController };</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-29T16:19:18.282Z
+                at 2022-07-31T20:31:28.967Z
             </div>
         <script src="../prettify.js"></script>
         <script>

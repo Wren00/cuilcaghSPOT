@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.64% </span>
+                <span class="strong">81.08% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/37</span>
+                <span class='fraction'>30/37</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">48.64% </span>
+                <span class="strong">81.08% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/37</span>
+                <span class='fraction'>30/37</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -198,10 +198,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -210,10 +210,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -222,13 +222,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -284,11 +284,11 @@ async function getOrganismByTaxonGroupId(req: Request, res: Response) {
 &nbsp;
 //UPDATE function
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >updateOrganism(</span>req: Request, res: Response) {
-<span class="cstat-no" title="statement not covered" >  try{</span>
-    const updateDetails: Organism = <span class="cstat-no" title="statement not covered" >req.body;</span>
-    const updatedOrganism = <span class="cstat-no" title="statement not covered" >await OrganismService.updateOrganism(updateDetails);</span>
-<span class="cstat-no" title="statement not covered" >    return res.status(200).json(updatedOrganism);</span>
+async function updateOrganism(req: Request, res: Response) {
+  try{
+    const updateDetails: Organism = req.body;
+    const updatedOrganism = await OrganismService.updateOrganism(updateDetails);
+    return res.status(200).json(updatedOrganism);
     }catch(error) {
 <span class="cstat-no" title="statement not covered" >      res.status(500).json("Could not update organism.");</span>
     }
@@ -296,11 +296,11 @@ async function <span class="fstat-no" title="function not covered" >updateOrgani
 &nbsp;
 //CREATE function
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >createOrganism(</span>req: Request, res: Response) {
-<span class="cstat-no" title="statement not covered" >  try{</span>
-  const newOrganism: CreateOrganism = <span class="cstat-no" title="statement not covered" >req.body;</span>
-  const createdOrganism = <span class="cstat-no" title="statement not covered" >await OrganismService.createOrganism(newOrganism);</span>
-<span class="cstat-no" title="statement not covered" >  return res.status(200).json(createdOrganism);</span>
+async function createOrganism(req: Request, res: Response) {
+  try{
+  const newOrganism: CreateOrganism = req.body;
+  const createdOrganism = await OrganismService.createOrganism(newOrganism);
+  return res.status(200).json(createdOrganism);
   }catch(error) {
 <span class="cstat-no" title="statement not covered" >    res.status(500).json("Could not create organism.");</span>
   }
@@ -308,14 +308,14 @@ async function <span class="fstat-no" title="function not covered" >createOrgani
 &nbsp;
 //DELETE function
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >deleteOrganismById(</span>req: Request, res: Response)    {
-  const { id: organismId } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+async function deleteOrganismById(req: Request, res: Response)    {
+  const { organismId: organismId } = req.body;
 &nbsp;
-  const deletedOrganism = <span class="cstat-no" title="statement not covered" >await OrganismService.deleteOrganismById(organismId);</span>
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if(!deletedOrganism)  {</span>
+  const deletedOrganism = await OrganismService.deleteOrganismById(organismId);
+  <span class="missing-if-branch" title="if path not taken" >I</span>if(!deletedOrganism)  {
 <span class="cstat-no" title="statement not covered" >    return res.status(500).json("Cannot delete organism");</span>
   }
-<span class="cstat-no" title="statement not covered" >  return res.status(200).json(deletedOrganism);</span>
+  return res.status(200).json(deletedOrganism);
 }
 &nbsp;
 const OrganismController = {
@@ -331,7 +331,7 @@ export { OrganismController };</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-29T16:19:18.282Z
+                at 2022-07-31T20:31:28.967Z
             </div>
         <script src="../prettify.js"></script>
         <script>

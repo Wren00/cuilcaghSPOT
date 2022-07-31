@@ -65,6 +65,48 @@ describe("TaxonGroupController", () => {
         })
     });
  
+    describe("createTaxonGroup", () => {
+        it("should return a created taxon group", async () => {
+            const createTaxonGroupJsonBody = {
+                taxonId: 2,
+                taxonGroupName: "test taxon group",
+                description: "a test taxon group"
+            }
+            
+            const request = httpMocks.createRequest({
+                method: "POST",
+                url: "/createTaxonGroup",
+                body: createTaxonGroupJsonBody
+            })
+            const response: MockResponse<Response> = createResponse();
+
+            when(TaxonGroupService.createTaxonGroup).calledWith(createTaxonGroupJsonBody).mockResolvedValueOnce(interfaceObjectGroup);
+
+            await TaxonGroupController.createTaxonGroup(request, response);
+            const responsedata: TaxonGroup = response._getJSONData();
+            expect(response._getStatusCode()).toEqual(200);
+            expect(responsedata.taxonGroupName).toEqual(interfaceObjectGroup.taxonGroupName);
+        })
+    });
+
+    describe("deleteByTaxonGroupId", () => {
+        it("should delete a taxon group using the id", async () => {
+            const deleteTaxonGroupJsonBody = { taxonId: 2 }
+            const request = httpMocks.createRequest({
+                method: "DELETE",
+                url: "/deleteTaxonGroupById",
+                body: deleteTaxonGroupJsonBody
+            })
+            const response: MockResponse<Response> = createResponse();
+
+            when(TaxonGroupService.deleteTaxonGroupById).calledWith(2).mockResolvedValueOnce(interfaceObjectGroup);
+
+            await TaxonGroupController.deleteTaxonGroupById(request, response);
+            const responsedata : TaxonGroup = response._getJSONData();
+            expect(response._getStatusCode()).toEqual(200);
+            expect(responsedata.taxonId).toEqual(interfaceObjectGroup.taxonId);
+        })
+    });
 
 })
 

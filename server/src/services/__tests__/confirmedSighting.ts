@@ -52,6 +52,7 @@ describe("ConfirmedSightingService", () => {
             }
 
             const interfaceObjectSighting : ConfirmedSighting = {
+                sightingId: 6,
                 organismId: 1,
                 userId: 1,
                 pictureURL: "2000-01-01",

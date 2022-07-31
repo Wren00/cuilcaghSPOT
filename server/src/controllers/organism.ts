@@ -70,7 +70,7 @@ async function createOrganism(req: Request, res: Response) {
 //DELETE function
 
 async function deleteOrganismById(req: Request, res: Response)    {
-  const { id: organismId } = req.body;
+  const { organismId: organismId } = req.body;
 
   const deletedOrganism = await OrganismService.deleteOrganismById(organismId);
   if(!deletedOrganism)  {

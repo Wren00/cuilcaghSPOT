@@ -62,10 +62,81 @@ describe("UserGroupController", () => {
         })
     });
 
+    describe("createUserGroup", () => {
+        it("should return a created user group", async () => {
+            const createGroupJsonBody = {
+                groupId: 2,
+                groupName: "test2",
+                description: "test2"
+            }
+            const request = httpMocks.createRequest({
+                method: "POST",
+                url: "/createUserGroup",
+                body: createGroupJsonBody
+            })
+            const response: MockResponse<Response> = createResponse();
+
+            when(UserGroupService.createUserGroup).calledWith(createGroupJsonBody).mockResolvedValueOnce(interfaceCreateGroup);
+
+            await UserGroupController.createUserGroup(request, response);
+            const responsedata: UserGroup = response._getJSONData();
+            expect(response._getStatusCode()).toEqual(200);
+            expect(responsedata.groupName).toEqual(interfaceCreateGroup.groupName);
+        })
+    });
+
+    describe("updateUserGroup", () => {
+        it("should return an updated user group", async () => {
+            const updateGroupJsonBody = {
+                groupId: 1,
+                groupName: "update test",
+                description: "update test"
+            }
+            const request = httpMocks.createRequest({
+                method: "PUT",
+                url: "/updateUserGroup",
+                body: updateGroupJsonBody
+            })
+            const response: MockResponse<Response> = createResponse();
+
+            when(UserGroupService.updateUserGroup).calledWith(updateGroupJsonBody).mockResolvedValueOnce(interfaceObjectGroup);
+
+            await UserGroupController.updateUserGroup(request, response);
+            const responsedata: UserGroup = response._getJSONData();
+            expect(response._getStatusCode()).toEqual(200);
+            expect(responsedata.groupName).toEqual(interfaceObjectGroup.groupName);
+        })
+    });
+
+    describe("deleteUserGroupById", () => {
+        it("should delete a user group using the id", async () => {
+            const deleteGroupByIdJsonBody = { groupId: 1 }
+            const request = httpMocks.createRequest({
+                method: "DELETE",
+                url: "/deleteUserGroupById",
+                body: deleteGroupByIdJsonBody
+            })
+            const response: MockResponse<Response> = createResponse();
+
+            when(UserGroupService.deleteUserGroupById).calledWith(1).mockResolvedValueOnce(interfaceObjectGroup);
+
+            await UserGroupController.deleteUserGroupById(request, response);
+            const responsedata : UserGroup = response._getJSONData();
+            expect(response._getStatusCode()).toEqual(200);
+            expect(responsedata.groupId).toEqual(interfaceObjectGroup.groupId);
+        })
+    });
+
 })
 
 const interfaceObjectGroup: UserGroup = {
     groupId: 1,
     groupName: "test",
     description: "test"
+}
+
+const interfaceCreateGroup: UserGroup = {
+    groupId: 2,
+    groupName: "test2",
+    description: "test2"
 }
