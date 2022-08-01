@@ -1,10 +1,10 @@
-jest.mock('@prisma/client');
-jest.mock('../../utils/prisma');
-import { organisms, prisma } from "@prisma/client";
 import { CreateOrganism, Organism } from "../../interfaces/organism"
 import { prismaAsAny } from "../../testutil/prisma";
+import { organisms } from "@prisma/client";
 import { OrganismService } from "../organism";
 
+jest.mock('@prisma/client');
+jest.mock('../../utils/prisma');
 
 describe("OrganismService", () => {
     describe("getAllOrganisms", () => {

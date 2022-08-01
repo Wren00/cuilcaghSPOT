@@ -1,6 +1,5 @@
-import { prisma } from "../utils/prisma";
+import { prisma } from "../utils";
 import { TaxonGroup } from "../interfaces/taxonGroup";
-import { P } from "pino";
 
 //GET functions
 

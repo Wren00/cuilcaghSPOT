@@ -1,4 +1,4 @@
-import { prisma } from "../utils/prisma";
+import { prisma } from "../utils";
 import bcrypt from "bcrypt";
 import { User, CreateUser } from "../interfaces/user";
 import { UserProfile } from "../interfaces/userProfile";
