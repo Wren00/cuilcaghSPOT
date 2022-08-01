@@ -2,6 +2,7 @@
 .env
 node_modules
 /node_modules/
+./server/node_modules
 .idea
 dist
 coverage
