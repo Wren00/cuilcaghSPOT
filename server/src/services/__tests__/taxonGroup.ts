@@ -1,10 +1,11 @@
-jest.mock('@prisma/client');
-jest.mock('../../utils/prisma');
 import { interest_groups, taxon_groups } from "@prisma/client";
 import { TaxonGroupController } from "../../controllers/taxonGroup";
 import { TaxonGroup } from "../../interfaces/taxonGroup";
 import { prismaAsAny } from "../../testutil/prisma";
 import { TaxonGroupService } from "../taxonGroup";
+
+jest.mock('@prisma/client');
+jest.mock('../../utils/prisma');
 
 describe("TaxonGroupService", () => {
 

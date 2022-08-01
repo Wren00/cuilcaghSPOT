@@ -1,7 +1,5 @@
-import { prisma } from "../utils/prisma";
-import { Prisma, unverified_sightings } from "@prisma/client";
+import { prisma } from "../utils";
 import { UnverifiedSighting } from "../interfaces/unverifiedSighting";
-import { parse } from "path";
 
 //GET functions
 

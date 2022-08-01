@@ -1,4 +1,4 @@
-import { prisma } from "../utils/prisma";
+import { prisma } from "../utils";
 import { accessTokenKey, refreshTokenKey } from '../constants/authentication';
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';

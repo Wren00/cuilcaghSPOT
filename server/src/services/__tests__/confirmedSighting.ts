@@ -1,10 +1,10 @@
-jest.mock('@prisma/client');
-jest.mock('../../utils/prisma');
-import { Prisma, confirmed_sightings } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime";
 import { ConfirmedSighting } from "../../interfaces/confirmedSighting";
 import { prismaAsAny } from "../../testutil/prisma";
 import { ConfirmedSightingService } from "../confirmedSighting";
+
+jest.mock('@prisma/client');
+jest.mock('../../utils/prisma');
 
 describe("ConfirmedSightingService", () => {
     describe("getAllConfirmedSightings", () => {
