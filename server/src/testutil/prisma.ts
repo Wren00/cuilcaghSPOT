@@ -1,4 +1,4 @@
-import { prisma } from "../utils/prisma/prisma";
+import { prisma } from "../utils/prisma";
 
 const prismaAsAny = prisma as any;
 

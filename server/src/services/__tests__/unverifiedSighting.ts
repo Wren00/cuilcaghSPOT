@@ -1,10 +1,12 @@
-jest.mock('@prisma/client');
-jest.mock('../../utils/prisma');
-import { Prisma, unverified_sightings } from "@prisma/client";
+
+import { unverified_sightings } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime";
 import { UnverifiedSighting } from "../../interfaces/unverifiedSighting";
 import { prismaAsAny } from "../../testutil/prisma";
 import { UnverifiedSightingService } from "../unverifiedSighting";
+
+jest.mock('@prisma/client');
+jest.mock('../../utils/prisma');
 
 
 describe("UnverifiedSightingService", () => {

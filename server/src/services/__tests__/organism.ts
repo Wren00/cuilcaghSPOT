@@ -1,5 +1,6 @@
 import { CreateOrganism, Organism } from "../../interfaces/organism"
 import { prismaAsAny } from "../../testutil/prisma";
+import { organisms } from "@prisma/client";
 import { OrganismService } from "../organism";
 
 jest.mock('@prisma/client');
