@@ -5,15 +5,21 @@ import {
 
 const UserRouter = express.Router();
 
+//PUBLIC endpoints
+
 UserRouter.get("/getAllUsers", UserController.getAllUsers);
+
+//PRIVATE endpoints
+
 UserRouter.get("/getUserByName", UserController.getUserByName);
-UserRouter.get("/getUserById", UserController.getuserById);
-UserRouter.get("/getUserByEmail", UserController.getuserByEmail);
-UserRouter.get("/getUserByLevel", UserController.getuserByLevel);
+UserRouter.get("/getUserById", UserController.getUserById);
+UserRouter.get("/getUserByEmail", UserController.getUserByEmail);
+UserRouter.get("/getUserByLevel", UserController.getUserByLevel);
 UserRouter.get("/getTrustedUsers", UserController.getTrustedUsers);
-UserRouter.put("/updateUser", UserController.updateUser);
+UserRouter.put("/updateUserDetails", UserController.updateUserDetails);
+UserRouter.put("/updateUserPassword", UserController.updateUserPassword);
+UserRouter.put("/updateUserProfile", UserController.updateUserProfile);
 UserRouter.post("/createUser", UserController.createUser);
-UserRouter.delete("/deleteUserById", UserController.deleteUserById);
 
 
 export { UserRouter };

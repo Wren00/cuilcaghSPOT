@@ -1,16 +1,14 @@
 import { prisma } from "../utils/prisma";
 import { TaxonGroup } from "../interfaces/taxonGroup";
+import { P } from "pino";
 
 //GET functions
 
 async function getAllTaxonGroups() {
   let allTaxonGroups;
-  try {
-    allTaxonGroups = await prisma.taxon_groups.findMany();
-  }
-  catch (error) {
-    console.log(error);
-  }
+
+
+  allTaxonGroups = await prisma.taxon_groups.findMany();
   const groups: TaxonGroup[] = allTaxonGroups.map((x:
     { id: any; taxon_group_name: any; description: any; }) => ({
       taxonId: x.id,
@@ -21,23 +19,26 @@ async function getAllTaxonGroups() {
 }
 
 async function getTaxonGroupByName(taxonGroupName: string) {
-  let taxonGroupObject;
-
+  let taxonGroupArray;
   try {
-    taxonGroupObject = await prisma.taxon_groups.findFirst({
+    taxonGroupArray = await prisma.taxon_groups.findMany({
       where: { taxon_group_name: { contains: taxonGroupName, mode: "insensitive" } },
     });
   }
   catch (error) {
-    console.log(error);
+    return error;
   }
+  const taxonGroups: TaxonGroup[] = taxonGroupArray.map((x:
+    { id: any; taxon_group_name: any; description: any; }) => ({
+      taxonGroupId: x.id,
+      taxonGroupName: x.taxon_group_name,
+      description: x.description,
+    }));
 
-  let returnedValue = {
-    taxonGroupId: taxonGroupObject.id,
-    taxonGroupName: taxonGroupObject.taxon_group_name,
-    description: taxonGroupObject.description
+  if (taxonGroups.length === 0) {
+    return ("Cannot find name");
   }
-  return returnedValue;
+  return taxonGroups;
 }
 
 async function getTaxonGroupById(taxonGroupId: number) {
@@ -45,19 +46,20 @@ async function getTaxonGroupById(taxonGroupId: number) {
 
   try {
     taxonGroupObject = await prisma.taxon_groups.findUnique({
-      where: { id : taxonGroupId },
-     });
+      where: { id: taxonGroupId },
+    });
+
+    let returnedValue = {
+      taxonGroupId: taxonGroupObject.id,
+      taxonGroupName: taxonGroupObject.taxon_group_name,
+      description: taxonGroupObject.description
+    }
+
+    return returnedValue;
   }
   catch (error) {
-    console.log(error);
+    throw error;
   }
-
-  let returnedValue = {
-    taxonGroupId: taxonGroupObject.id,
-    taxonGroupName: taxonGroupObject.taxon_group_name,
-    description: taxonGroupObject.description
-  }
-  return returnedValue;
 }
 
 //CREATE function
@@ -73,11 +75,12 @@ async function createTaxonGroup(taxonGroup: TaxonGroup) {
     });
   } catch (error) {
     console.log(error);
+    return null;
   }
   return newTaxonGroup;
 }
-  
-  //DELETE function
+
+//DELETE function
 
 async function deleteTaxonGroupById(taxonGroupId: number) {
   let deletedGroup;
@@ -93,13 +96,12 @@ async function deleteTaxonGroupById(taxonGroupId: number) {
   return deletedGroup;
 }
 
-  
-  const TaxonGroupService = {
-    getAllTaxonGroups,
-    getTaxonGroupByName,
-    getTaxonGroupById,
-    createTaxonGroup,
-    deleteTaxonGroupById
-  };
-  
-  export { TaxonGroupService };
+const TaxonGroupService = {
+  getAllTaxonGroups,
+  getTaxonGroupByName,
+  getTaxonGroupById,
+  createTaxonGroup,
+  deleteTaxonGroupById
+};
+
+export { TaxonGroupService };

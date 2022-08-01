@@ -5,7 +5,12 @@ import {
 
 const ConfirmedSightingRouter = express.Router();
 
+//PUBLIC endpoints
+
 ConfirmedSightingRouter.get("/getAllConfirmedSightings", ConfirmedSightingController.getAllConfirmedSightings);
+
+//PRIVATE endpoints
+
 ConfirmedSightingRouter.get("/getSightingsByOrganismId", ConfirmedSightingController.getSightingsByOrganismId);
 ConfirmedSightingRouter.get("/getSightingsByUserId", ConfirmedSightingController.getSightingsByUserId);
 ConfirmedSightingRouter.post("/createConfirmedSighting", ConfirmedSightingController.createConfirmedSighting);

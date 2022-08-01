@@ -41,16 +41,24 @@ describe("ConfirmedSightingService", () => {
 
     describe("createConfirmedSighting", () => {
 
-        it("should create a new unverified sighting", async () => {
-            const prismaObjectSighting = confirmedSightingsModel;
+        it("should create a new sighting", async () => {
+            const prismaObjectSighting = {
+                organism_id: 1,
+                user_id: 1,
+                picture_url: "test",
+                date: "2000-01-01",
+                lat: 54.0101,
+                long: -7.0101
+            }
 
-            const interfaceObjectSighting : ConfirmedSighting   = {
+            const interfaceObjectSighting : ConfirmedSighting = {
+                sightingId: 6,
                 organismId: 1,
                 userId: 1,
-                pictureURL: "apicture.jpg",
-                date: "2000-10-01",
+                pictureURL: "2000-01-01",
+                date: "2000-01-01",
                 lat: 54.0101,
-                long: -7.2222,
+                long: -7.0101
             }
 
             prismaAsAny.confirmed_sightings = {
@@ -59,9 +67,9 @@ describe("ConfirmedSightingService", () => {
            
             const final = await ConfirmedSightingService.createConfirmedSighting(interfaceObjectSighting);
             
-            expect(final).toEqual("Success");
-        })
+            expect(final.user_id).toEqual(prismaObjectSighting.user_id);
     });
+    })
 
  describe("deleteSightingById", () => {
     it("should delete a sighting using the id", async () => {
