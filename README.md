@@ -63,12 +63,12 @@ createUser
 Unverified Sightings
 These calls GET, POST or modify sightings made by users. These are then confirmed by votes on the correct species ID before confirmed.
 ----------
-getAllUnverifiedSightings
-getSightingsByOrganismId
-getSightingsByUserId
-createUnverifiedSighting
-updateUnverifiedSighting
-deleteSightingById
+getAllUnverifiedSightings 
+getSightingsByOrganismId 
+getSightingsByUserId 
+createUnverifiedSighting 
+updateUnverifiedSighting 
+deleteSightingById 
 
 Confirmed Sightings
 These calls GET and POST sightings that have been confirmed by the app community. 
