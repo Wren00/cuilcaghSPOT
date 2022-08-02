@@ -39,6 +39,7 @@ nodem
 Currently supported API calls to the database are:
 
 Organisms 
+----------
 These calls GET, POST or modify data on the organisms found in the park. 
 ----------
 - getAllOrganisms
@@ -50,6 +51,7 @@ These calls GET, POST or modify data on the organisms found in the park.
 - deleteOrganism
 
 User
+----------
 These calls GET, POST or modify data on users using the app. Deletion of user data will be handled using obfuscation and not removal. 
 ----------
 - getAllUsers
@@ -64,6 +66,7 @@ These calls GET, POST or modify data on users using the app. Deletion of user da
 - createUser
 
 Unverified Sightings
+----------
 These calls GET, POST or modify sightings made by users. These are then confirmed by votes on the correct species ID before confirmed.
 ----------
 - getAllUnverifiedSightings 
@@ -74,6 +77,7 @@ These calls GET, POST or modify sightings made by users. These are then confirme
 - deleteSightingById 
 
 Confirmed Sightings
+----------
 These calls GET and POST sightings that have been confirmed by the app community. 
 ----------
 - getAllConfirmedSightings
@@ -83,6 +87,7 @@ These calls GET and POST sightings that have been confirmed by the app community
 - deleteConfirmedSighting
 
 User Groups
+----------
 These calls GET, POST and modify data on groups of users
 ----------
 - getAllUserGroups
