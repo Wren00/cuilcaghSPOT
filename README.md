@@ -9,10 +9,13 @@ This section of the app has been created using PostgreSQL, Express and TypeScrip
 
 ## Instructions to build and run locally
 
-- Install Prisma and Docker, plus a code and a database viewing IDEs. Visual Studio Code and DataGrip were used for this app.
+- Install Prisma and Docker, plus code and database viewing IDEs. Visual Studio Code and DataGrip were used for this app.
 - Create a local .env file, see below for sample ENV file.
 - In your IDE terminal cd to the directory of the app folder [server]
 - Run npm install.
+
+## How to run tests
+
 
 
 - **Using docker-compose **
@@ -38,56 +41,56 @@ Currently supported API calls to the database are:
 Organisms 
 These calls GET, POST or modify data on the organisms found in the park. 
 ----------
-getAllOrganisms
-getOrganismById
-getOrganismByName
-getOrganismByTaxonGroupId
-createOrganism
-updateOrganism
-deleteOrganism
+- getAllOrganisms
+- getOrganismById
+- getOrganismByName
+- getOrganismByTaxonGroupId
+- createOrganism
+- updateOrganism
+- deleteOrganism
 
 User
 These calls GET, POST or modify data on users using the app. Deletion of user data will be handled using obfuscation and not removal. 
 ----------
-getAllUsers
-getUserById
-getUserByName
-getUserByEmail
-getUserByLevel
-getTrustedUsers
-updateUserDetails
-updateUserPassword
-updateUserProfile
-createUser
+- getAllUsers
+- getUserById
+- getUserByName
+- getUserByEmail
+- getUserByLevel
+- getTrustedUsers
+- updateUserDetails
+- updateUserPassword
+- updateUserProfile
+- createUser
 
 Unverified Sightings
 These calls GET, POST or modify sightings made by users. These are then confirmed by votes on the correct species ID before confirmed.
 ----------
-getAllUnverifiedSightings 
-getSightingsByOrganismId 
-getSightingsByUserId 
-createUnverifiedSighting 
-updateUnverifiedSighting 
-deleteSightingById 
+- getAllUnverifiedSightings 
+- getSightingsByOrganismId 
+- getSightingsByUserId 
+- createUnverifiedSighting 
+- updateUnverifiedSighting 
+- deleteSightingById 
 
 Confirmed Sightings
 These calls GET and POST sightings that have been confirmed by the app community. 
 ----------
-getAllConfirmedSightings
-getSightingsByOrganismId
-getSightingsByUserId
-createConfirmedSighting
-deleteConfirmedSighting
+- getAllConfirmedSightings
+- getSightingsByOrganismId
+- getSightingsByUserId
+- createConfirmedSighting
+- deleteConfirmedSighting
 
 User Groups
 These calls GET, POST and modify data on groups of users
 ----------
-getAllUserGroups
-getUserGroupById
-getUserGroupByName
-updateUserGroup
-createUserGroup
-deleteUserGroupById
+- getAllUserGroups
+- getUserGroupById
+- getUserGroupByName
+- updateUserGroup
+- createUserGroup
+- deleteUserGroupById
 
 
 ## TODO
