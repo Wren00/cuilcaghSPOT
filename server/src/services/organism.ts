@@ -14,13 +14,14 @@ async function getAllOrganisms() {
     console.log(error);
   }
   const organisms: Organism[] = allOrganisms.map((x:
-    { id: any; taxon_name: any; latin_name: any; taxon_group_id: any; picture_url: any; description: any; }) => ({
+    { id: any; taxon_name: any; latin_name: any; taxon_group_id: any; picture_url: any; description: any; is_protected: any; }) => ({
       organismId: x.id,
       taxonName: x.taxon_name,
       latinName: x.latin_name,
       taxonGroupId: x.taxon_group_id,
       pictureURL: x.picture_url,
-      description: x.description
+      description: x.description,
+      isProtected: x.is_protected
     }));
   return organisms;
 }
@@ -36,13 +37,14 @@ async function getOrganismByName(taxonName: string) {
     console.log(error);
   }
   const organisms: Organism[] = organismArray.map((x:
-    { id: any; taxon_name: any; latin_name: any; taxon_group_id: any; picture_url: any; description: any; }) => ({
+    { id: any; taxon_name: any; latin_name: any; taxon_group_id: any; picture_url: any; description: any; is_protected: any; }) => ({
       organismId: x.id,
       taxonName: x.taxon_name,
       latinName: x.latin_name,
       taxonGroupId: x.taxon_group_id,
       pictureURL: x.picture_url,
-      description: x.description
+      description: x.description,
+      isProtected: x.is_protected
     }));
 
   return organisms;
@@ -68,7 +70,8 @@ async function getOrganismById(organismId: number) {
     latinName: organismObject.latin_name,
     taxonGroupId: organismObject.taxon_group_id,
     pictureUrl: organismObject.picture_url,
-    description: organismObject.description
+    description: organismObject.description,
+    isProtected: organismObject.is_protected
   }
   return returnedValue;
 }
@@ -86,13 +89,14 @@ async function getOrganismByTaxonGroupId(taxonId: number) {
     console.log(error);
   }
   organismArray = organismArray.map((x:
-    { id: any; taxon_name: any; latin_name: any; taxon_group_id: any; picture_url: any; description: any; }) => ({
+    { id: any; taxon_name: any; latin_name: any; taxon_group_id: any; picture_url: any; description: any; is_protected: any; }) => ({
       organismId: x.id,
       taxonName: x.taxon_name,
       latinName: x.latin_name,
       taxonGroupId: x.taxon_group_id,
       pictureURL: x.picture_url,
-      description: x.description
+      description: x.description,
+      isProtected: x.is_protected
     }));
   console.log(organismArray);
   return organismArray;
@@ -135,7 +139,8 @@ async function createOrganism(organism: CreateOrganism) {
         latin_name: organism.latinName,
         taxon_group_id: organism.taxonGroupId,
         picture_url: organism.pictureURL,
-        description: organism.description
+        description: organism.description,
+        is_protected: organism.isProtected
       },
     });
   } catch (error) {

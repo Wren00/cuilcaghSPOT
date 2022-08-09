@@ -25,7 +25,7 @@ async function getTaxonGroupByName(req: Request, res: Response) {
 
 async function getTaxonGroupById(req: Request, res: Response) {
   try {
-    const { taxonId: taxonGroupId} = req.body;
+    const taxonGroupId = parseInt(req.params["id"]);
     const taxonGroup = await TaxonGroupService.getTaxonGroupById(taxonGroupId);
     return res.status(200).json(taxonGroup);
     }catch(error) {

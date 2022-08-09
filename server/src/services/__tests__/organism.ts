@@ -76,7 +76,8 @@ describe("OrganismService", () => {
                 latinName: "newentry",
                 taxonGroupId: 2,
                 pictureURL: "apicture",
-                description: "a new organism for testing"
+                description: "a new organism for testing",
+                isProtected: false
             }
 
             prismaAsAny.organisms = {
@@ -107,7 +108,8 @@ describe("OrganismService", () => {
                 latinName: "newentry",
                 taxonGroupId: 2,
                 pictureURL: "apicture.jpg",
-                description: "an updated organism"
+                description: "an updated organism",
+                isProtected: false
             }
 
             prismaAsAny.organisms = {
@@ -141,5 +143,6 @@ const organismModel: organisms = {
     latin_name: "animalia",
     taxon_group_id: 1,
     picture_url: "animal.jpg",
-    description: "about this animal"
+    description: "about this animal",
+    is_protected: true
 }

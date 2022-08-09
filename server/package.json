@@ -5,7 +5,9 @@
   "scripts": {
     "test": "jest",
     "start": "nodemon server.ts",
-    "build": "tsc --build"
+    "build": "tsc --build",
+    "prisma": "npx prisma db pull && npx prisma generate"
+    
   },
   "author": "loren",
   "license": "ISC",

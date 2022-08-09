@@ -12,7 +12,7 @@ UserRouter.get("/getAllUsers", UserController.getAllUsers);
 //PRIVATE endpoints
 
 UserRouter.get("/getUserByName", UserController.getUserByName);
-UserRouter.get("/getUserById", UserController.getUserById);
+UserRouter.get("/getUserById/:id", UserController.getUserById);
 UserRouter.get("/getUserByEmail", UserController.getUserByEmail);
 UserRouter.get("/getUserByLevel", UserController.getUserByLevel);
 UserRouter.get("/getTrustedUsers", UserController.getTrustedUsers);

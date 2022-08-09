@@ -30,11 +30,12 @@ describe("UserController", () => {
 
     describe("getUserById", () => {
         it("should return an user group by the id", async () => {
-            const getUserByIdJsonBody = { userId: 1 }
+            
             const request = httpMocks.createRequest({
                 method: "GET",
-                url: "/getUserById",
-                body: getUserByIdJsonBody
+                url: "/getUserById/",
+                params: {id:1}
+               
             })
             const response: MockResponse<Response> = createResponse();
 

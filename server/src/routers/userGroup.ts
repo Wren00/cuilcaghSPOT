@@ -12,7 +12,7 @@ UserGroupRouter.get("/getUserGroupByName", UserGroupController.getUserGroupByNam
 
 //PRIVATE endpoints
 
-UserGroupRouter.get("/getUserGroupById", UserGroupController.getUserGroupById);
+UserGroupRouter.get("/getUserGroupById/:id", UserGroupController.getUserGroupById);
 UserGroupRouter.put("/updateUserGroup", UserGroupController.updateUserGroup);
 UserGroupRouter.post("/createUserGroup", UserGroupController.createUserGroup);
 UserGroupRouter.delete("/deleteUserGroupById", UserGroupController.deleteUserGroupById);
