@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 /* setup Express Routers */
 
-app.use('/api/organisms/', OrganismRouter);
+app.use('/api/organisms', OrganismRouter);
 app.use('/api/users/', UserRouter);
 app.use('/api/interestgroups/', UserGroupRouter);
 app.use('/api/unverifiedsightings/', UnverifiedSightingRouter);

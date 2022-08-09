@@ -28,11 +28,11 @@ describe("UnverifiedSightingController", () => {
 
     describe("getSightingsByUserId", () => {
         it("should return all unverified sightings made by a user", async () => {
-            const getSightingsByUserIdJsonBody = { userId: 1 }
+           
             const request = httpMocks.createRequest({
                 method: "GET",
-                url: "/getSightingsByUserId",
-                body: getSightingsByUserIdJsonBody
+                url: "/getSightingsByUserId/",
+                params: {id:1}
             })
             const response: MockResponse<Response> = createResponse();
 
@@ -47,11 +47,11 @@ describe("UnverifiedSightingController", () => {
 
     describe("getSightingsByOrganismId", () => {
         it("should return all sightings of an organism by id", async () => {
-            const getSightingsByOrganismIdJsonBody = { organismId: 3 }
+          
             const request = httpMocks.createRequest({
                 method: "GET",
-                url: "/getSightingsByOrganismId",
-                body: getSightingsByOrganismIdJsonBody
+                url: "/getSightingsByOrganismId/",
+                params: {id:3}
             })
             const response: MockResponse<Response> = createResponse();
 

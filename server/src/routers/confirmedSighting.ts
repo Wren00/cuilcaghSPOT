@@ -8,11 +8,11 @@ const ConfirmedSightingRouter = express.Router();
 //PUBLIC endpoints
 
 ConfirmedSightingRouter.get("/getAllConfirmedSightings", ConfirmedSightingController.getAllConfirmedSightings);
+ConfirmedSightingRouter.get("/getSightingsByOrganismId/:id", ConfirmedSightingController.getSightingsByOrganismId);
+ConfirmedSightingRouter.get("/getSightingsByUserId/:id", ConfirmedSightingController.getSightingsByUserId);
 
 //PRIVATE endpoints
 
-ConfirmedSightingRouter.get("/getSightingsByOrganismId", ConfirmedSightingController.getSightingsByOrganismId);
-ConfirmedSightingRouter.get("/getSightingsByUserId", ConfirmedSightingController.getSightingsByUserId);
 ConfirmedSightingRouter.post("/createConfirmedSighting", ConfirmedSightingController.createConfirmedSighting);
 ConfirmedSightingRouter.delete("/deleteSightingById", ConfirmedSightingController.deleteSightingById);
 

@@ -48,6 +48,7 @@ model organisms {
   taxon_group_id       Int
   picture_url          String?                @db.VarChar
   description          String?                @db.VarChar
+  is_protected         Boolean?
   taxon_groups         taxon_groups           @relation(fields: [taxon_group_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   confirmed_sightings  confirmed_sightings[]
   unverified_sightings unverified_sightings[]

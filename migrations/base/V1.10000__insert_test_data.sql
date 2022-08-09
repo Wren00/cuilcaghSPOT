@@ -1,32 +1,33 @@
 INSERT INTO taxon_groups (taxon_group_name)
 VALUES
-    ('Amphibian'),
-    ('Bird'),
-    ('Mammal'),
-    ('Flowering Plant'),
-    ('Moss');
+    ('Amphibians'),
+    ('Birds'),
+    ('Mammals'),
+    ('Plants'),
+    ('Butterflies and Moths'),
+    ('Other Insects');
 
-INSERT INTO organisms (taxon_name, latin_name, taxon_group_id, description)
+INSERT INTO organisms (taxon_name, latin_name, taxon_group_id, picture_url, description)
 VALUES
-    ('Common Frog', 'Rana temporaria', 1, 'Common frogs are amphibians, breeding in ponds during the spring and 
+    ('Common Frog', 'Rana temporaria', 1, 'https://upload.wikimedia.org/wikipedia/commons/1/16/Common_frog.jpg', 'Common frogs are amphibians, breeding in ponds during the spring and 
     spending much of the rest of the year feeding in woodland, gardens,  hedgerows and tussocky grassland. 
     They are familiar inhabitants of garden ponds, where they lay their eggs in big "rafts" of spawn. They feed on a variety of invertebrates and even smaller amphibians.'),
-    ('Meadow Pipit', 'Anthus pratensis', 2, 'A small, brown, streaky bird, the meadow pipit is the most common songbird in 
+    ('Meadow Pipit', 'Anthus pratensis', 2, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Meadow-Pipit.jpg/640px-Meadow-Pipit.jpg', 'A small, brown, streaky bird, the meadow pipit is the most common songbird in 
     upland areas. Its high, piping call is a familiar sound. In flight it shows white outer tail feathers
      and in the breeding season it has a fluttering "parachute" display flight. In winter, they are quite gregarious 
      and gather in small flocks, often invisible among the vegetation, suddenly flying up with typical jerky flight. Meadow pipit numbers in the UK have been 
 declining since the mid-1970s, resulting in this species being included on the amber list of conservation concern.'),
-    ('Red Fox', 'Vulpes vulpes', 3, 'The red fox is our only wild member of the dog family. They are not fussy eaters 
+    ('Red Fox', 'Vulpes vulpes', 3, 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Vulpes_vulpes_1_%28Martin_Mecnarowski%29.jpg/640px-Vulpes_vulpes_1_%28Martin_Mecnarowski%29.jpg', 'The red fox is our only wild member of the dog family. They are not fussy eaters 
     and will happily munch on small mammals, birds, frogs, worms as well as berries and fruit! Foxes that live in towns and
      cities may even scavenge in bins to look for scraps. A male fox, called a dog makes a barking noise whereas the females, 
      called vixens make a spine-chilling scream sound.'),
-    ('Bog Myrtle', 'Myrica gale', 4, 'A real West-of-Ireland shrub, Bog-myrtle loves acid soil, lake shores and bogland. 
+    ('Bog Myrtle', 'Myrica gale', 4, 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Myrica_gale_kz14.jpg/640px-Myrica_gale_kz14.jpg', 'A real West-of-Ireland shrub, Bog-myrtle loves acid soil, lake shores and bogland. 
      In impenetrable little thickets, it grows to about 1 metre tall, having red-brown, twiggy stems.  
      From April to May, little catkins grow – orange and red, on different plants; the male (orange) are each 15mm long with 
      4 stamens, the female (red) only 6mm long.  The oval to lanceolate leaves are downy below, almost hairless, and a 
      distinctive fragrance of resin emanates from them and from small yellow dots which grow on the branches.  
      This is a native plant and it belongs to the Myricaceae family.'),
-    ('Flat topped bog moss', 'Sphagnum recurvum var. mucronatum', 5, 'There are numerous species of sphagnum moss that 
+    ('Flat topped bog moss', 'Sphagnum recurvum var. mucronatum', 5, 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/PR_Vresova_stran_019_Sphagnum_cf_recurvum.jpg/640px-PR_Vresova_stran_019_Sphagnum_cf_recurvum.jpg', 'There are numerous species of sphagnum moss that 
     look very similar, so are usually grouped together as "sphagnum" for easy description. These "bog-mosses" form the 
     amazingly multi-coloured, living carpets found in wet places like peat bogs, marshland, heath and moorland. 
     They grow from spores that are produced in fruiting bodies called capsules. When seen up close, they are very beautiful, 

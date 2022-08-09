@@ -48,11 +48,11 @@ describe("TaxonGroupController", () => {
     
     describe("getTaxonGroupById", () => {
         it("should return a taxon group by the id", async () => {
-            const getTaxonGroupByIdJsonBody = { taxonId: 2 }
+        
             const request = httpMocks.createRequest({
                 method: "GET",
-                url: "/getTaxonGroupById",
-                body: getTaxonGroupByIdJsonBody
+                url: "/getTaxonGroupById/",
+                params: {id:2}
             })
             const response: MockResponse<Response> = createResponse();
 

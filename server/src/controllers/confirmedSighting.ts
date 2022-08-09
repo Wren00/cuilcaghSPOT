@@ -15,7 +15,7 @@ async function getAllConfirmedSightings(req: Request, res: Response) {
 
 async function getSightingsByOrganismId(req: Request, res: Response) {
   try {
-    const { organismId: organismId } = req.body;
+    const organismId = parseInt(req.params["id"]);
     const sightings = await ConfirmedSightingService.getSightingsByOrganismId(organismId);
     return res.status(200).json(sightings);
     } catch(error)  {
@@ -25,7 +25,7 @@ async function getSightingsByOrganismId(req: Request, res: Response) {
 
 async function getSightingsByUserId(req: Request, res: Response) {
   try {
-    const { userId: userId } = req.body;
+    const userId = parseInt(req.params["id"]);
     const sightings = await ConfirmedSightingService.getSightingsByUserId(userId);
     return res.status(200).json(sightings);
     } catch(error)  {

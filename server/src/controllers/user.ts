@@ -26,7 +26,7 @@ async function getUserByName(req: Request, res: Response) {
 
 async function getUserById(req: Request, res: Response) {
   try {
-    const { userId: userId} = req.body;
+    const userId = parseInt(req.params["id"]);
     const user = await UserService.getUserById(userId);
     return res.status(200).json(user);
     }catch(error) {

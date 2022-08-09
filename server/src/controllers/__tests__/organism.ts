@@ -26,12 +26,14 @@ describe("OrganismController", () => {
 
     describe("getOrganismById", () => {
         it("should return an organism by the id", async () => {
-            const getOrganismByIdJsonBody = { organismId: 15 }
+
             const request = httpMocks.createRequest({
                 method: "GET",
-                url: "/getOrganismById",
-                body: getOrganismByIdJsonBody
+                url: "/getOrganismById/",
+                params: {id:15}
+            
             })
+
             const response: MockResponse<Response> = createResponse();
 
             when(OrganismService.getOrganismById).calledWith(15).mockResolvedValueOnce(interfaceObjectOrganism);
@@ -64,12 +66,14 @@ describe("OrganismController", () => {
 
     describe("getOrganismByTaxonGroupId", () => {
         it("should return all organisms with the same taxon group id", async () => {
-            const getOrganismByTaxonGroupIdJsonBody = { taxonGroupId: 2 }
+
             const request = httpMocks.createRequest({
                 method: "GET",
-                url: "/getOrganismByTaxonGroupId",
-                body: getOrganismByTaxonGroupIdJsonBody
+                url: "/getOrganismByTaxonGroupId/",
+                params: {id:2}
+    
             })
+
             const response: MockResponse<Response> = createResponse();
 
             when(OrganismService.getOrganismByTaxonGroupId).calledWith(2).mockResolvedValueOnce([interfaceObjectOrganism]);
@@ -157,7 +161,8 @@ const interfaceObjectOrganism: Organism = {
     latinName: "test",
     taxonGroupId: 2,
     pictureURL: "apicture.jpg",
-    description: "an organism"
+    description: "an organism",
+    isProtected: false
 }
 
 const interfaceCreateOrganism: CreateOrganism = {
@@ -166,5 +171,6 @@ const interfaceCreateOrganism: CreateOrganism = {
     latinName: "test",
     taxonGroupId: 1,
     pictureURL: "test.jpg",
-    description: "testing organism controllers"
+    description: "testing organism controllers",
+    isProtected: false
 }
