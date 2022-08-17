@@ -75,7 +75,7 @@ describe("OrganismService", () => {
                 taxonName: "newentry",
                 latinName: "newentry",
                 taxonGroupId: 2,
-                pictureURL: "apicture",
+                pictureUrl: "apicture",
                 description: "a new organism for testing",
                 isProtected: false
             }
@@ -107,7 +107,7 @@ describe("OrganismService", () => {
                 taxonName: "anupdate",
                 latinName: "newentry",
                 taxonGroupId: 2,
-                pictureURL: "apicture.jpg",
+                pictureUrl: "apicture.jpg",
                 description: "an updated organism",
                 isProtected: false
             }

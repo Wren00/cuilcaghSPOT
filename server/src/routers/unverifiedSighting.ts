@@ -8,6 +8,7 @@ const UnverifiedSightingRouter = express.Router();
 //PUBLIC endpoints
 
 UnverifiedSightingRouter.get("/getAllUnverifiedSightings", UnverifiedSightingController.getAllUnverifiedSightings);
+UnverifiedSightingRouter.get("/getSightingsById/:id", UnverifiedSightingController.getSightingsById);
 UnverifiedSightingRouter.get("/getSightingsByOrganismId/:id", UnverifiedSightingController.getSightingsByOrganismId);
 UnverifiedSightingRouter.get("/getSightingsByUserId/:id", UnverifiedSightingController.getSightingsByUserId);
 

@@ -19,7 +19,7 @@ async function getAllOrganisms() {
       taxonName: x.taxon_name,
       latinName: x.latin_name,
       taxonGroupId: x.taxon_group_id,
-      pictureURL: x.picture_url,
+      pictureUrl: x.picture_url,
       description: x.description,
       isProtected: x.is_protected
     }));
@@ -42,7 +42,7 @@ async function getOrganismByName(taxonName: string) {
       taxonName: x.taxon_name,
       latinName: x.latin_name,
       taxonGroupId: x.taxon_group_id,
-      pictureURL: x.picture_url,
+      pictureUrl: x.picture_url,
       description: x.description,
       isProtected: x.is_protected
     }));
@@ -94,7 +94,7 @@ async function getOrganismByTaxonGroupId(taxonId: number) {
       taxonName: x.taxon_name,
       latinName: x.latin_name,
       taxonGroupId: x.taxon_group_id,
-      pictureURL: x.picture_url,
+      pictureUrl: x.picture_url,
       description: x.description,
       isProtected: x.is_protected
     }));
@@ -117,7 +117,7 @@ async function updateOrganism(organism: Organism) {
       data: {
         taxon_name: organism.taxonName,
         description: organism.description,
-        picture_url: organism.pictureURL
+        picture_url: organism.pictureUrl
       },
     });
   }
@@ -137,8 +137,8 @@ async function createOrganism(organism: CreateOrganism) {
       data: {
         taxon_name: organism.taxonName,
         latin_name: organism.latinName,
-        taxon_group_id: organism.taxonGroupId,
-        picture_url: organism.pictureURL,
+        taxon_group_id: +organism.taxonGroupId,
+        picture_url: organism.pictureUrl,
         description: organism.description,
         is_protected: organism.isProtected
       },

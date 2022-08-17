@@ -61,6 +61,7 @@ async function updateOrganism(req: Request, res: Response) {
 
 async function createOrganism(req: Request, res: Response) {
   try {
+    console.log(req.body.toString() + " create");
     const newOrganism: CreateOrganism = req.body;
     const createdOrganism = await OrganismService.createOrganism(newOrganism);
     return res.status(200).json(createdOrganism);

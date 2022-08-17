@@ -56,7 +56,7 @@ describe("ConfirmedSightingService", () => {
                 sightingId: 6,
                 organismId: 1,
                 userId: 1,
-                pictureURL: "2000-01-01",
+                pictureUrl: "2000-01-01",
                 date: "2000-01-01",
                 lat: 54.0101,
                 long: -7.0101

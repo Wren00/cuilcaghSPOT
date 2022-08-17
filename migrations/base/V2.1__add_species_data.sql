@@ -6,7 +6,7 @@ Order:	Lagomorpha
 Family:	Leporidae
 Genus:	Lepus
 Species:	L. timidus hibernicus', true),
-('Golden Plover','Pluvialis apricaria', 2, 'https://commons.m.wikimedia.org/wiki/File:Ljungpipare_European_Golden_Plover_%2820341896142%29.jpg', 'Kingdom:	Animalia
+('Golden Plover','Pluvialis apricaria', 2, 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Pluvialis_apricaria_photo.jpg/640px-Pluvialis_apricaria_photo.jpg', 'Kingdom:	Animalia
 Phylum:	Chordata
 Class:	Aves
 Order:	Charadriiformes
@@ -44,7 +44,7 @@ Family:	Apidae
 Genus:	Bombus
 Subgenus:	Thoracobombus
 Species:	B. muscorum', true),
-('Common Hawker Dragonfly', 'Aeshna juncea', 6, 'https://commons.wikimedia.org/wiki/Aeshna_juncea#/media/File:Aeshna_juncea_LC0175.jpg', 'Kingdom:	Animalia
+('Common Hawker Dragonfly', 'Aeshna juncea', 6, 'https://upload.wikimedia.org/wikipedia/commons/6/6a/Aeshna_juncea_2.jpg', 'Kingdom:	Animalia
 Phylum:	Arthropoda
 Class:	Insecta
 Order:	Odonata
@@ -52,3 +52,8 @@ Infraorder:	Anisoptera
 Family:	Aeshnidae
 Genus:	Aeshna
 Species:	A. juncea', false);
+
+INSERT INTO unverified_sightings(organism_id, user_id, picture_url, date, lat, long)
+VALUES (3, 2, 'https://upload.wikimedia.org/wikipedia/commons/8/8b/Red_Fox_%28Vulpes_vulpes%29_%284%29.jpg', '1990-10-12T18:25:43.511Z', 54.6677, -7.1332),
+        (6, 2, 'https://upload.wikimedia.org/wikipedia/commons/3/36/Lepus_timidus_ainu.jpg', '2020-09-24T18:25:43.511Z', 54.9900, -7.5656),
+        (11, 2, 'https://upload.wikimedia.org/wikipedia/commons/6/69/Bombus_muscorum1.jpg', '1995-05-18T18:25:43.511Z', 54.9923, -7.6213);

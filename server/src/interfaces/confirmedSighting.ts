@@ -3,7 +3,9 @@ interface ConfirmedSighting {
     sightingId: number;
     organismId: number;
     userId: number;
-    pictureURL: string;
+    organismName: string;
+    userName: string;
+    pictureUrl: string;
     date: string;
     lat: number;
     long: number;

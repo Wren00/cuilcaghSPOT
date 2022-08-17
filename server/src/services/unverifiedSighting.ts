@@ -11,12 +11,13 @@ async function getAllUnverifiedSightings() {
   catch (error) {
     console.log(error);
   }
+  console.log(allSightings[0].date);
   const getAllSightings: UnverifiedSighting[] = allSightings.map((x => ({
     sightingId: x.id,
     organismId: x.organism_id,
     userId: x.user_id,
-    pictureURL: x.picture_url,
-    date: x.date.toString(),
+    pictureUrl: x.picture_url,
+    date: x.date,
     lat: (x.lat).toNumber(),
     long: (x.long).toNumber(),
     userVotes: x.user_vote_id,
@@ -24,8 +25,59 @@ async function getAllUnverifiedSightings() {
 
   })));
 
+  // Old way
+  // for(var i = 0; i < getAllSightings.length; i++){
+  //     console.log(getAllSightings[i])
+  // }
+
+  for(var sighting of getAllSightings){
+      const organism = await prisma.organisms.findUnique({
+        where: {
+          id: sighting.organismId,
+        }
+      });
+      sighting.organismName = organism.taxon_name;
+  }
+
+  for(var sighting of getAllSightings){
+    const user = await prisma.users.findUnique({
+      where: {
+        id: sighting.userId,
+      }
+    });
+    sighting.userName = user.user_name;
+}
+
+  console.log(getAllSightings);
   return getAllSightings;
 
+}
+
+async function getSightingsById(sightingId: number) {
+  let sightingObject;
+  console.log(sightingId);
+
+  try {
+    sightingObject = await prisma.unverified_sightings.findUnique({
+      where: { id: sightingId },
+    });
+  }
+  catch (error) {
+    console.log(error);
+  }
+
+  let returnedValue = {
+    sightingId: sightingObject.id,
+    organismId: +sightingObject.organism_id,
+    userId: +sightingObject.user_id,
+    pictureUrl: sightingObject.picture_url,
+    date: sightingObject.date,
+    lat: sightingObject.lat.toNumber(),
+    long: sightingObject.long.toNumber(),
+    userVotes: sightingObject.user_vote_id,
+    userReactions: sightingObject.reaction_id
+  }
+  return returnedValue;
 }
 
 async function getSightingsByOrganismId(organismId: number) {
@@ -44,7 +96,7 @@ async function getSightingsByOrganismId(organismId: number) {
       sightingId: x.id,
       organismId: x.organism_id,
       userId: x.user_id,
-      pictureURL: x.picture_url,
+      pictureUrl: x.picture_url,
       date: x.date,
       lat: x.lat,
       long: x.long,
@@ -71,7 +123,7 @@ async function getSightingsByUserId(userId: number) {
       sightingId: x.id,
       organismId: x.organism_id,
       userId: x.user_id,
-      pictureURL: x.picture_url,
+      pictureUrl: x.picture_url,
       date: x.date,
       lat: x.lat,
       long: x.long,
@@ -92,14 +144,15 @@ async function createUnverifiedSighting(sighting: UnverifiedSighting) {
       data: {
         organism_id: sighting.organismId,
         user_id: sighting.userId,
-        picture_url: sighting.pictureURL,
-        date: sighting.date,
+        picture_url: sighting.pictureUrl,
+        date: new Date(sighting.date),
         lat: sighting.lat,
         long: sighting.long,
       },
     });
   } catch (error) {
     console.log(error);
+    throw new Error("error");
   }
   return newSighting;
 }
@@ -143,6 +196,7 @@ async function deleteUnverifiedSightingById(sightingId: number) {
 
 const UnverifiedSightingService = {
   getAllUnverifiedSightings,
+  getSightingsById,
   getSightingsByOrganismId,
   getSightingsByUserId,
   createUnverifiedSighting,
