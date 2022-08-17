@@ -70,7 +70,7 @@ describe("ConfirmedSightingController", () => {
             const createSightingJsonBody = {
                 organismId: 3,
                 userId: 1,
-                pictureURL: "testanimal.jpg",
+                pictureUrl: "testanimal.jpg",
                 date: "2000-01-01",
                 lat: 99.9999,
                 long: -7.7777
@@ -116,7 +116,7 @@ const interfaceObjectSighting: ConfirmedSighting = {
     sightingId: 2,
     organismId: 3,
     userId: 1,
-    pictureURL: "testanimal.jpg",
+    pictureUrl: "testanimal.jpg",
     date: "2000-01-01",
     lat: 99.9999,
     long: -7.7777

@@ -50,13 +50,15 @@ describe("UnverifiedSightingService", () => {
             const interfaceObjectSighting: UnverifiedSighting = {
                 organismId: 1,
                 userId: 1,
-                pictureURL: "apicture.jpg",
-                date: "2000-10-01",
+                pictureUrl: "apicture.jpg",
+                date: new Date("2000-10-01"),
                 lat: 54.0101,
                 long: -7.2222,
                 userVotes: 0,
                 userReactions: 0,
-                sightingId: 0
+                sightingId: 0,
+                organismName: "Bird",
+                userName: "test"
             }
 
             prismaAsAny.unverified_sightings = {
@@ -90,12 +92,14 @@ describe("UnverifiedSightingService", () => {
                 sightingId: 15,
                 organismId: 2,
                 userId: 0,
-                pictureURL: "test.jpg",
-                date: "2000-01-01",
+                pictureUrl: "test.jpg",
+                date: new Date("2000-01-01"),
                 lat: 54.0002,
                 long: -7.0101,
                 userVotes: 1,
-                userReactions: 1
+                userReactions: 1,
+                organismName: "Bird",
+                userName: "test"
             }
 
             console.log(interfaceObjectSighting);

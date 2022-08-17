@@ -16,6 +16,17 @@ async function getAllUnverifiedSightings(req: Request, res: Response) {
   }
 }
 
+async function getSightingsById(req: Request, res: Response) {
+  try {
+    const sightingId = parseInt(req.params["id"]);
+    const {id} = req.params;
+    const sighting = await UnverifiedSightingService.getSightingsById(sightingId);
+    return res.status(200).json(sighting);
+  } catch (error) {
+    res.status(401).json("Cannot find id");
+  }
+}
+
 async function getSightingsByOrganismId(req: Request, res: Response) {
   try {
     const organismId = parseInt(req.params["id"]);
@@ -43,8 +54,9 @@ async function getSightingsByUserId(req: Request, res: Response) {
 async function createUnverifiedSighting(req: Request, res: Response) {
   try {
     const newSighting: UnverifiedSighting = req.body;
+    console.log(newSighting);
     const createdSighting = await UnverifiedSightingService.createUnverifiedSighting(newSighting);
-    return res.status(200).json(createdSighting);
+    return res.status(201).json(createdSighting);
   } catch (error) {
     res.status(500).json("Could not create sighting.");
   }
@@ -76,6 +88,7 @@ async function deleteUnverifiedSightingById(req: Request, res: Response) {
 
 const UnverifiedSightingController = {
   getAllUnverifiedSightings,
+  getSightingsById,
   getSightingsByOrganismId,
   getSightingsByUserId,
   createUnverifiedSighting,

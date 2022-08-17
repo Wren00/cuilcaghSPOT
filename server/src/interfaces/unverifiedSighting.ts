@@ -1,13 +1,12 @@
-import { Prisma } from "@prisma/client";
-import { StringLiteral } from "typescript";
-
 interface UnverifiedSighting {
     
     sightingId: number;
     organismId: number;
+    organismName: string;
+    userName: string;
     userId: number;
-    pictureURL: string;
-    date: string;
+    pictureUrl: string;
+    date: Date;
     lat: number;
     long: number;
     userVotes: number;

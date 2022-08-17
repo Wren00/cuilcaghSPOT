@@ -4,7 +4,7 @@ interface Organism {
     taxonName: string;
     latinName: string;
     taxonGroupId: number;
-    pictureURL: string;
+    pictureUrl: string;
     description: string;
     isProtected: boolean;
 
@@ -15,7 +15,7 @@ interface CreateOrganism {
     taxonName: string;
     latinName: string;
     taxonGroupId: number;
-    pictureURL: string;
+    pictureUrl: string;
     description: string;
     isProtected: boolean;
 }

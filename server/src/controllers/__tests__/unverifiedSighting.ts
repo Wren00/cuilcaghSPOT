@@ -70,12 +70,12 @@ describe("UnverifiedSightingController", () => {
                 sightingId: 1,
                 organismId: 3,
                 userId: 1,
-                pictureURL: "testanimal.jpg",
+                pictureUrl: "testanimal.jpg",
                 date: "2000-01-01",
                 lat: 99.9999,
                 long: -7.7777,
                 userVotes: 2,
-                userReactions: 2
+                userReactions: 2,
             }
             const request = httpMocks.createRequest({
                 method: "POST",
@@ -99,7 +99,7 @@ describe("UnverifiedSightingController", () => {
                 sightingId: 1,
                 organismId: 4,
                 userId: 1,
-                pictureURL: "testanimal.jpg",
+                pictureUrl: "testanimal.jpg",
                 date: "2000-01-01",
                 lat: 99.9999,
                 long: -7.7777,
@@ -146,14 +146,15 @@ describe("UnverifiedSightingController", () => {
 })
 
 const interfaceObjectSighting: UnverifiedSighting = {
-
     sightingId: 1,
     organismId: 3,
     userId: 1,
-    pictureURL: "testanimal.jpg",
-    date: "2000-01-01",
+    pictureUrl: "testanimal.jpg",
+    date: new Date("2000-01-01"),
     lat: 99.9999,
     long: -7.7777,
     userVotes: 2,
-    userReactions: 2
+    userReactions: 2,
+    organismName: "Red Fox",
+    userName: "test"
 }

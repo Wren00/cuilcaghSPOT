@@ -91,7 +91,7 @@ describe("OrganismController", () => {
                 taxonName: "test",
                 latinName: "test",
                 taxonGroupId: 1,
-                pictureURL: "test.jpg",
+                pictureUrl: "test.jpg",
                 description: "testing organism controllers"
             }
             const request = httpMocks.createRequest({
@@ -116,7 +116,7 @@ describe("OrganismController", () => {
                 organismId: 15,
                 taxonName: "updated organism",
                 description: "updated",
-                pictureURL: "updatedorganism.jpg"
+                pictureUrl: "updatedorganism.jpg"
             }
             const request = httpMocks.createRequest({
                 method: "PUT",
@@ -160,7 +160,7 @@ const interfaceObjectOrganism: Organism = {
     taxonName: "test",
     latinName: "test",
     taxonGroupId: 2,
-    pictureURL: "apicture.jpg",
+    pictureUrl: "apicture.jpg",
     description: "an organism",
     isProtected: false
 }
@@ -170,7 +170,7 @@ const interfaceCreateOrganism: CreateOrganism = {
     taxonName: "test",
     latinName: "test",
     taxonGroupId: 1,
-    pictureURL: "test.jpg",
+    pictureUrl: "test.jpg",
     description: "testing organism controllers",
     isProtected: false
 }
