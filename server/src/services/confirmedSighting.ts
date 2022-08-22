@@ -11,7 +11,7 @@ async function getAllConfirmedSightings() {
     console.log(error);
   }
   const sightings: ConfirmedSighting[] = allSightings.map((x:
-    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_vote_id: any; reaction_id: any; }) => ({
+    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_votes: any; reaction_id: any; }) => ({
       sightingId: x.id,
       organismId: x.organism_id,
       userId: x.user_id,
@@ -34,7 +34,7 @@ async function getSightingsByOrganismId(organismId: number) {
     console.log(error);
   }
   const allSightings: ConfirmedSighting[] = sightingsArray.map((x:
-    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_vote_id: any; reaction_id: any; }) => ({
+    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_votes: any; reaction_id: any; }) => ({
       sightingId: x.id,
       organismId: x.organism_id,
       userId: x.user_id,
@@ -58,7 +58,7 @@ async function getSightingsByUserId(userId: number) {
     console.log(error);
   }
   const allSightings: ConfirmedSighting[] = sightingsArray.map((x:
-    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_vote_id: any; reaction_id: any; }) => ({
+    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_votes: any; reaction_id: any; }) => ({
       sightingId: x.id,
       organismId: x.organism_id,
       userId: x.user_id,

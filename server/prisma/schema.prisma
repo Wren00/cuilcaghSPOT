@@ -69,19 +69,18 @@ model taxon_groups {
 }
 
 model unverified_sightings {
-  id           Int         @id @default(autoincrement())
-  organism_id  Int
-  user_id      Int
-  picture_url  String      @db.VarChar
-  date         DateTime    @db.Date
-  lat          Decimal     @db.Decimal
-  long         Decimal     @db.Decimal
-  user_vote_id Int?
-  reaction_id  Int?
-  organisms    organisms   @relation(fields: [organism_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  reactions    reactions?  @relation(fields: [reaction_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users        users       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user_votes   user_votes? @relation(fields: [user_vote_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id          Int        @id @default(autoincrement())
+  organism_id Int
+  user_id     Int
+  picture_url String     @db.VarChar
+  date        DateTime   @db.Date
+  lat         Decimal    @db.Decimal
+  long        Decimal    @db.Decimal
+  user_votes  Int?
+  reaction_id Int?
+  organisms   organisms  @relation(fields: [organism_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  reactions   reactions? @relation(fields: [reaction_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users       users      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model user_levels {
@@ -105,14 +104,6 @@ model user_to_reaction {
   users       users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model user_votes {
-  id                   Int                    @id @default(autoincrement())
-  user_id              Int
-  user_vote            Int
-  users                users                  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  unverified_sightings unverified_sightings[]
-}
-
 model users {
   id                   Int                    @id @default(autoincrement())
   user_name            String                 @unique @db.VarChar
@@ -126,7 +117,6 @@ model users {
   confirmed_sightings  confirmed_sightings[]
   unverified_sightings unverified_sightings[]
   user_to_reaction     user_to_reaction[]
-  user_votes           user_votes[]
   users_to_groups      users_to_groups[]
 }
 

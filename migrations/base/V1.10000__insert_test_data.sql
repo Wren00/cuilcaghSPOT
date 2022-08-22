@@ -5,7 +5,7 @@ VALUES
     ('Mammals'),
     ('Plants'),
     ('Butterflies and Moths'),
-    ('Other Insects');
+    ('Other Insects and Arthropods');
 
 INSERT INTO organisms (taxon_name, latin_name, taxon_group_id, picture_url, description)
 VALUES
@@ -63,9 +63,9 @@ VALUES  (1,1),
         (2,2),
         (1,2);
 
-INSERT INTO unverified_sightings(organism_id, user_id, picture_url, date, lat, long)
-VALUES (1, 1, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/European_Common_Frog_Rana_temporaria_2.jpg/640px-European_Common_Frog_Rana_temporaria_2.jpg', '2022-05-10T18:25:43.511Z', 54.6688, -7.1111),
-        (2, 2, 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Anthus_pratensis_-_Meadow_Pipit_2021-03-27_01.jpg/640px-Anthus_pratensis_-_Meadow_Pipit_2021-03-27_01.jpg', '2010-10-06T18:25:43.511Z', 54.9999, -7.3333);
+INSERT INTO unverified_sightings(organism_id, user_id, picture_url, date, lat, long, user_votes)
+VALUES (1, 1, 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/European_Common_Frog_Rana_temporaria_2.jpg/640px-European_Common_Frog_Rana_temporaria_2.jpg', '2022-05-10T18:25:43.511Z', 54.6688, -7.1111, 0),
+        (2, 2, 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Anthus_pratensis_-_Meadow_Pipit_2021-03-27_01.jpg/640px-Anthus_pratensis_-_Meadow_Pipit_2021-03-27_01.jpg', '2010-10-06T18:25:43.511Z', 54.9999, -7.3333, 0);
 
 INSERT INTO confirmed_sightings(organism_id, user_id, picture_url, date, lat, long)
 VALUES (3, 3, 'https://upload.wikimedia.org/wikipedia/commons/8/8b/Red_Fox_%28Vulpes_vulpes%29_%284%29.jpg', '2018-09-11T18:25:43.511Z', 54.6666, -7.2222),
