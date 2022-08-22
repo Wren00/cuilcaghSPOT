@@ -10,17 +10,36 @@ async function getAllConfirmedSightings() {
   catch (error) {
     console.log(error);
   }
-  const sightings: ConfirmedSighting[] = allSightings.map((x:
-    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_votes: any; reaction_id: any; }) => ({
-      sightingId: x.id,
-      organismId: x.organism_id,
-      userId: x.user_id,
-      pictureUrl: x.picture_url,
-      date: x.date,
-      lat: x.lat,
-      long: x.long,
-    }));
-  return sightings;
+  console.log(allSightings[0].date);
+  const getAllSightings: ConfirmedSighting[] = allSightings.map((x => ({
+    sightingId: x.id,
+    organismId: x.organism_id,
+    userId: x.user_id,
+    pictureUrl: x.picture_url,
+    date: x.date,
+    lat: (x.lat).toNumber(),
+    long: (x.long).toNumber(),
+
+  })));
+
+  for(var sighting of getAllSightings){
+      const organism = await prisma.organisms.findUnique({
+        where: {
+          id: sighting.organismId,
+        }
+      });
+      sighting.organismName = organism.taxon_name;
+  }
+
+  for(var sighting of getAllSightings){
+    const user = await prisma.users.findUnique({
+      where: {
+        id: sighting.userId,
+      }
+    });
+    sighting.userName = user.user_name;
+}
+  return getAllSightings;
 }
 
 async function getSightingsByOrganismId(organismId: number) {
