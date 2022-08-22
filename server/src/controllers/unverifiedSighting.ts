@@ -74,6 +74,18 @@ async function updateSighting(req: Request, res: Response) {
     }
   }
 
+  async function updateUserVote(req: Request, res: Response) {
+    try{
+      const updateDetails: UnverifiedSighting = req.body;
+      
+      const updatedSighting = await UnverifiedSightingService.updateUserVote(updateDetails);
+      return res.status(200).json(updatedSighting);
+      }catch(error) {
+        res.status(500).json("Could not update sighting.");
+      }
+    }
+
+
 //DELETE function
 
 async function deleteUnverifiedSightingById(req: Request, res: Response) {
@@ -93,6 +105,7 @@ const UnverifiedSightingController = {
   getSightingsByUserId,
   createUnverifiedSighting,
   updateSighting,
+  updateUserVote,
   deleteUnverifiedSightingById
 };
 

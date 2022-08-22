@@ -20,7 +20,7 @@ async function getAllUnverifiedSightings() {
     date: x.date,
     lat: (x.lat).toNumber(),
     long: (x.long).toNumber(),
-    userVotes: x.user_vote_id,
+    userVotes: x.user_votes,
     userReactions: x.reaction_id
 
   })));
@@ -74,7 +74,7 @@ async function getSightingsById(sightingId: number) {
     date: sightingObject.date,
     lat: sightingObject.lat.toNumber(),
     long: sightingObject.long.toNumber(),
-    userVotes: sightingObject.user_vote_id,
+    userVotes: sightingObject.user_votes,
     userReactions: sightingObject.reaction_id
   }
   return returnedValue;
@@ -92,7 +92,7 @@ async function getSightingsByOrganismId(organismId: number) {
     console.log(error);
   }
   const allSightings: UnverifiedSighting[] = sightingsArray.map((x:
-    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_vote_id: any; reaction_id: any; }) => ({
+    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_votes: any; reaction_id: any; }) => ({
       sightingId: x.id,
       organismId: x.organism_id,
       userId: x.user_id,
@@ -100,7 +100,7 @@ async function getSightingsByOrganismId(organismId: number) {
       date: x.date,
       lat: x.lat,
       long: x.long,
-      userVotes: x.user_vote_id,
+      userVotes: x.user_votes,
       userReactions: x.reaction_id
     }));
   return allSightings;
@@ -119,7 +119,7 @@ async function getSightingsByUserId(userId: number) {
     console.log(error);
   }
   const allSightings: UnverifiedSighting[] = sightingsArray.map((x:
-    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_vote_id: any; reaction_id: any; }) => ({
+    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_votes: any; reaction_id: any; }) => ({
       sightingId: x.id,
       organismId: x.organism_id,
       userId: x.user_id,
@@ -127,7 +127,7 @@ async function getSightingsByUserId(userId: number) {
       date: x.date,
       lat: x.lat,
       long: x.long,
-      userVotes: x.user_vote_id,
+      userVotes: x.user_votes,
       userReactions: x.reaction_id
     }));
   return allSightings;
@@ -157,7 +157,7 @@ async function createUnverifiedSighting(sighting: UnverifiedSighting) {
   return newSighting;
 }
 
-//UPDATE function
+//UPDATE function - will work for adding reactions and user votes. 
 
 async function updateSighting(sighting: UnverifiedSighting) {
 
@@ -177,6 +177,30 @@ async function updateSighting(sighting: UnverifiedSighting) {
   }
   return updatedSighting;
 }
+
+// PRISMA does not let you perform arithmetic on column values??
+
+async function updateUserVote(sighting: UnverifiedSighting) {
+
+  let updatedVote;
+  try {
+    updatedVote = await prisma.unverified_sightings.update({
+      where: {
+        id: sighting.sightingId
+      },
+      data: {
+        user_votes: {
+          increment: 1,
+        },
+      },
+    });
+  }
+  catch (error) {
+    console.log(error);
+  }
+  return updatedVote;
+}
+
 
 //DELETE function
 
@@ -201,6 +225,7 @@ const UnverifiedSightingService = {
   getSightingsByUserId,
   createUnverifiedSighting,
   updateSighting,
+  updateUserVote,
   deleteUnverifiedSightingById
 };
 

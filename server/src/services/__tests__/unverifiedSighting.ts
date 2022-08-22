@@ -82,7 +82,7 @@ describe("UnverifiedSightingService", () => {
                 date: "2000-01-01",
                 lat: 54.0002,
                 long: -7.0101,
-                user_vote_id: 1,
+                user_votes: 1,
                 reaction_id: 1
             }
 
@@ -137,7 +137,7 @@ const unverifiedSightingsModel: unverified_sightings = {
     date: new Date("2000-10-01"),
     lat: new Decimal(54.0101),
     long: new Decimal(-7.2222),
-    user_vote_id: 1,
+    user_votes: 1,
     reaction_id: 1
 
 }
