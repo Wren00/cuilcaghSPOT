@@ -19,7 +19,6 @@ async function getAllUnverifiedSightings(req: Request, res: Response) {
 async function getSightingsById(req: Request, res: Response) {
   try {
     const sightingId = parseInt(req.params["id"]);
-    const {id} = req.params;
     const sighting = await UnverifiedSightingService.getSightingsById(sightingId);
     return res.status(200).json(sighting);
   } catch (error) {
@@ -46,6 +45,8 @@ async function getSightingsByUserId(req: Request, res: Response) {
     res.status(401).json("Cannot find user Id");
   }
 }
+
+
 
 //admin users can access these functions
 
@@ -74,11 +75,10 @@ async function updateSighting(req: Request, res: Response) {
     }
   }
 
-  async function updateUserVote(req: Request, res: Response) {
+  async function incrementUserVote(req: Request, res: Response) {
     try{
-      const updateDetails: UnverifiedSighting = req.body;
-      
-      const updatedSighting = await UnverifiedSightingService.updateUserVote(updateDetails);
+      const sightingId = parseInt(req.params["id"]);
+      const updatedSighting = await UnverifiedSightingService.incrementUserVote(sightingId);
       return res.status(200).json(updatedSighting);
       }catch(error) {
         res.status(500).json("Could not update sighting.");
@@ -105,7 +105,7 @@ const UnverifiedSightingController = {
   getSightingsByUserId,
   createUnverifiedSighting,
   updateSighting,
-  updateUserVote,
+  incrementUserVote,
   deleteUnverifiedSightingById
 };
 

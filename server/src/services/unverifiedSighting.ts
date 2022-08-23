@@ -171,13 +171,13 @@ async function updateSighting(sighting: UnverifiedSighting) {
   return updatedSighting;
 }
 
-async function updateUserVote(sighting: UnverifiedSighting) {
+async function incrementUserVote(sightingId : number) {
 
   let updatedVote;
   try {
     updatedVote = await prisma.unverified_sightings.update({
       where: {
-        id: sighting.sightingId
+        id: sightingId
       },
       data: {
         user_votes: {
@@ -216,7 +216,7 @@ const UnverifiedSightingService = {
   getSightingsByUserId,
   createUnverifiedSighting,
   updateSighting,
-  updateUserVote,
+  incrementUserVote,
   deleteUnverifiedSightingById
 };
 

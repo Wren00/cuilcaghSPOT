@@ -236,7 +236,7 @@ async function createUser(user: CreateUser) {
     trustedUser: newUser.trusted_user,
     userLevelId: newUser.user_level_id
   } 
-  return createdUser;
+  return createdUser.userName;
 }
 
 //DELETE function -- USER DETAILS TO BE OBFUSCATED RATHER THAN DELETED
