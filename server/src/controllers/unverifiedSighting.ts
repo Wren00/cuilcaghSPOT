@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { UnverifiedSightingService } from "../services/unverifiedSighting";
 import { UnverifiedSighting } from "../interfaces/unverifiedSighting";
 
@@ -85,6 +85,16 @@ async function updateSighting(req: Request, res: Response) {
       }
     }
 
+async function decrementUserVote(req: Request, res: Response) {
+  try{
+    const sightingId = parseInt(req.params["id"]);
+    const updatedSighting = await UnverifiedSightingService.decrementUserVote(sightingId);
+    return res.status(200).json(updatedSighting);
+  }catch(error) {
+    res.status(500).json("Could not update sighting.");
+  }
+}
+
 
 //DELETE function
 
@@ -106,6 +116,7 @@ const UnverifiedSightingController = {
   createUnverifiedSighting,
   updateSighting,
   incrementUserVote,
+  decrementUserVote,
   deleteUnverifiedSightingById
 };
 

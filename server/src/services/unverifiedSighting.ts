@@ -192,6 +192,27 @@ async function incrementUserVote(sightingId : number) {
   return updatedVote;
 }
 
+async function decrementUserVote(sightingId : number) {
+
+  let updatedVote;
+  try {
+    updatedVote = await prisma.unverified_sightings.update({
+      where: {
+        id: sightingId
+      },
+      data: {
+        user_votes: {
+          decrement: 1,
+        },
+      },
+    });
+  }
+  catch (error) {
+    console.log(error);
+  }
+  return updatedVote;
+}
+
 
 //DELETE function
 
@@ -217,6 +238,7 @@ const UnverifiedSightingService = {
   createUnverifiedSighting,
   updateSighting,
   incrementUserVote,
+  decrementUserVote,
   deleteUnverifiedSightingById
 };
 
