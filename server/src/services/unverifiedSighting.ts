@@ -25,11 +25,6 @@ async function getAllUnverifiedSightings() {
 
   })));
 
-  // Old way
-  // for(var i = 0; i < getAllSightings.length; i++){
-  //     console.log(getAllSightings[i])
-  // }
-
   for(var sighting of getAllSightings){
       const organism = await prisma.organisms.findUnique({
         where: {
@@ -47,8 +42,6 @@ async function getAllUnverifiedSightings() {
     });
     sighting.userName = user.user_name;
 }
-
-  console.log(getAllSightings);
   return getAllSightings;
 
 }
@@ -178,15 +171,13 @@ async function updateSighting(sighting: UnverifiedSighting) {
   return updatedSighting;
 }
 
-// PRISMA does not let you perform arithmetic on column values??
-
-async function updateUserVote(sighting: UnverifiedSighting) {
+async function incrementUserVote(sightingId : number) {
 
   let updatedVote;
   try {
     updatedVote = await prisma.unverified_sightings.update({
       where: {
-        id: sighting.sightingId
+        id: sightingId
       },
       data: {
         user_votes: {
@@ -225,7 +216,7 @@ const UnverifiedSightingService = {
   getSightingsByUserId,
   createUnverifiedSighting,
   updateSighting,
-  updateUserVote,
+  incrementUserVote,
   deleteUnverifiedSightingById
 };
 

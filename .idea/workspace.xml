@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a9411c41-d55c-4868-90bd-c6b494f07845" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9fbf61f8-5acb-4223-9f75-3d151f4eba2e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9fbf61f8-5acb-4223-9f75-3d151f4eba2e.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/base/V1.0__initial_schema_setup.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/base/V1.0__initial_schema_setup.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/base/V1.10000__insert_test_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/base/V1.10000__insert_test_data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/base/V2.1__add_species_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/base/V2.1__add_species_data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/server/prisma/schema.prisma" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/controllers/unverifiedSighting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/controllers/unverifiedSighting.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/routers/unverifiedSighting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/routers/unverifiedSighting.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/__tests__/unverifiedSighting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/__tests__/unverifiedSighting.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/confirmedSighting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/confirmedSighting.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/services/unverifiedSighting.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/unverifiedSighting.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/services/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/user.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
