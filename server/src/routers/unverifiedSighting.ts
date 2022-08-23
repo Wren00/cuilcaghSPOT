@@ -17,6 +17,7 @@ UnverifiedSightingRouter.get("/getSightingsByUserId/:id", UnverifiedSightingCont
 UnverifiedSightingRouter.post("/createUnverifiedSighting", UnverifiedSightingController.createUnverifiedSighting);
 UnverifiedSightingRouter.put("/updateSighting", UnverifiedSightingController.updateSighting);
 UnverifiedSightingRouter.put("/incrementUserVote/:id", UnverifiedSightingController.incrementUserVote);
+UnverifiedSightingRouter.put("/decrementUserVote/:id", UnverifiedSightingController.decrementUserVote);
 UnverifiedSightingRouter.delete("/deleteUnverifiedSightingById", UnverifiedSightingController.deleteUnverifiedSightingById);
 
 export { UnverifiedSightingRouter };

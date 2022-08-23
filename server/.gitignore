@@ -4,7 +4,6 @@ node_modules
 /node_modules/
 ./server/node_modules
 .idea
-package_lock.json
 dist
 coverage
 tests
@@ -12,3 +11,4 @@ build
 
 
 
+/package-lock.json

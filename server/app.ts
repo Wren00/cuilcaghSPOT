@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express from 'express';
 import cors from 'cors';
 import { OrganismRouter } from './src/routers/organism';
 import { UserRouter } from './src/routers/user';
@@ -7,7 +7,6 @@ import{ UnverifiedSightingRouter } from './src/routers/unverifiedSighting';
 import { ConfirmedSightingRouter } from './src/routers/confirmedSighting';
 import { TaxonGroupRouter } from './src/routers/taxonGroup';
 import { AuthenticationRouter } from './src/routers/authentication';
-import { Authenticate } from "./src/middlewares/authentication";
 
 /* initialise Express app */
 const app = express();
