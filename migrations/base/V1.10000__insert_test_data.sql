@@ -77,9 +77,8 @@ VALUES (3, 3, 'https://upload.wikimedia.org/wikipedia/commons/8/8b/Red_Fox_%28Vu
         54.6655, -7.1122);
 
 INSERT INTO reactions(reaction_name)
-VALUES ('thumbsup'),
-       ('love'),
-       ('bird'),
-       ('laugh'),
-       ('fox'),
-       ('flower');
+VALUES ('ThumbUpRounded'),
+       ('FavoriteRounded'),
+       ('YardRounded'),
+       ('PetsRounded'),
+       ('SentimentVerySatisfiedRounded');
