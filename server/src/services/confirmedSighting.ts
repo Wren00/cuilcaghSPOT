@@ -1,138 +1,156 @@
-import { prisma } from "../utils";
-import { ConfirmedSighting } from "../interfaces/confirmedSighting";
+import {prisma} from "../utils";
+import {ConfirmedSighting} from "../interfaces/confirmedSighting";
 
 //GET functions
 async function getAllConfirmedSightings() {
-  let allSightings;
-  try {
-    allSightings = await prisma.confirmed_sightings.findMany();
-  }
-  catch (error) {
-    console.log(error);
-  }
-  console.log(allSightings[0].date);
-  const getAllSightings: ConfirmedSighting[] = allSightings.map((x => ({
-    sightingId: x.id,
-    organismId: x.organism_id,
-    userId: x.user_id,
-    pictureUrl: x.picture_url,
-    date: x.date,
-    lat: (x.lat).toNumber(),
-    long: (x.long).toNumber(),
+    let sighting;
+    let allSightings;
+    try {
+        allSightings = await prisma.confirmed_sightings.findMany();
+    } catch (error) {
+        console.log(error);
+    }
+    console.log(allSightings[0].date);
+    const getAllSightings: ConfirmedSighting[] = allSightings.map((x) => ({
+        sightingId: x.id,
+        organismId: x.organism_id,
+        userId: x.user_id,
+        pictureUrl: x.picture_url,
+        date: x.date,
+        lat: x.lat.toNumber(),
+        long: x.long.toNumber(),
+    }));
 
-  })));
+    for (sighting of getAllSightings) {
+        const organism = await prisma.organisms.findUnique({
+            where: {
+                id: sighting.organismId,
+            },
+        });
+        sighting.organismName = organism.taxon_name;
+    }
 
-  for(var sighting of getAllSightings){
-      const organism = await prisma.organisms.findUnique({
-        where: {
-          id: sighting.organismId,
-        }
-      });
-      sighting.organismName = organism.taxon_name;
-  }
-
-  for(var sighting of getAllSightings){
-    const user = await prisma.users.findUnique({
-      where: {
-        id: sighting.userId,
-      }
-    });
-    sighting.userName = user.user_name;
-}
-  return getAllSightings;
+    for (sighting of getAllSightings) {
+        const user = await prisma.users.findUnique({
+            where: {
+                id: sighting.userId,
+            },
+        });
+        sighting.userName = user.user_name;
+    }
+    return getAllSightings;
 }
 
 async function getSightingsByOrganismId(organismId: number) {
-  let sightingsArray;
-  try {
-    sightingsArray = await prisma.confirmed_sightings.findMany({
-      where: { organism_id: organismId },
-    });
-  }
-  catch (error) {
-    console.log(error);
-  }
-  const allSightings: ConfirmedSighting[] = sightingsArray.map((x:
-    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_votes: any; reaction_id: any; }) => ({
-      sightingId: x.id,
-      organismId: x.organism_id,
-      userId: x.user_id,
-      pictureUrl: x.picture_url,
-      date: x.date,
-      lat: x.lat,
-      long: x.long,
-
-    }));
-  return allSightings;
+    let sightingsArray;
+    try {
+        sightingsArray = await prisma.confirmed_sightings.findMany({
+            where: {organism_id: organismId},
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    const allSightings: ConfirmedSighting[] = sightingsArray.map(
+        (x: {
+            id: any;
+            organism_id: any;
+            user_id: any;
+            picture_url: any;
+            date: any;
+            lat: any;
+            long: any;
+            user_votes: any;
+            reaction_id: any;
+        }) => ({
+            sightingId: x.id,
+            organismId: x.organism_id,
+            userId: x.user_id,
+            pictureUrl: x.picture_url,
+            date: x.date,
+            lat: x.lat,
+            long: x.long,
+        })
+    );
+    return allSightings;
 }
 
 async function getSightingsByUserId(userId: number) {
-  let sightingsArray;
-  try {
-    sightingsArray = await prisma.confirmed_sightings.findMany({
-      where: { user_id: userId },
-    });
-  }
-  catch (error) {
-    console.log(error);
-  }
-  const allSightings: ConfirmedSighting[] = sightingsArray.map((x:
-    { id: any; organism_id: any; user_id: any; picture_url: any; date: any; lat: any; long: any; user_votes: any; reaction_id: any; }) => ({
-      sightingId: x.id,
-      organismId: x.organism_id,
-      userId: x.user_id,
-      pictureUrl: x.picture_url,
-      date: x.date,
-      lat: x.lat,
-      long: x.long,
-    }));
-  return allSightings;
+    let sightingsArray;
+    try {
+        sightingsArray = await prisma.confirmed_sightings.findMany({
+            where: {user_id: userId},
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    const allSightings: ConfirmedSighting[] = sightingsArray.map(
+        (x: {
+            id: any;
+            organism_id: any;
+            user_id: any;
+            picture_url: any;
+            date: any;
+            lat: any;
+            long: any;
+            user_votes: any;
+            reaction_id: any;
+        }) => ({
+            sightingId: x.id,
+            organismId: x.organism_id,
+            userId: x.user_id,
+            pictureUrl: x.picture_url,
+            date: x.date,
+            lat: x.lat,
+            long: x.long,
+        })
+    );
+    return allSightings;
 }
 
 //CREATE functions
 
 async function createConfirmedSighting(sighting: ConfirmedSighting) {
-  let newSighting;
-  try {
-    newSighting = await prisma.confirmed_sightings.create({
-      data: {
-        organism_id: sighting.organismId,
-        user_id: sighting.userId,
-        picture_url: sighting.pictureUrl,
-        date: sighting.date,
-        lat: sighting.lat,
-        long: sighting.long,
-      },
-    });
-  } catch (error) {
-    console.log(error);
-  }
-  console.log(newSighting);
-  return newSighting;
+    let newSighting;
+    try {
+        newSighting = await prisma.confirmed_sightings.create({
+            data: {
+                organism_id: sighting.organismId,
+                user_id: sighting.userId,
+                picture_url: sighting.pictureUrl,
+                date: sighting.date,
+                lat: sighting.lat,
+                long: sighting.long,
+            },
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    console.log(newSighting);
+    return newSighting;
 }
 
 //DELETE function
 
 async function deleteConfirmedSightingById(sightingId: number) {
-  let deletedSighting;
-  try {
-    deletedSighting = await prisma.confirmed_sightings.delete({
-      where: {
-        id: sightingId
-      },
-    });
-  } catch (error) {
-    console.log(error);
-  }
-  return deletedSighting;
+    let deletedSighting;
+    try {
+        deletedSighting = await prisma.confirmed_sightings.delete({
+            where: {
+                id: sightingId,
+            },
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    return deletedSighting;
 }
 
 const ConfirmedSightingService = {
-  getAllConfirmedSightings,
-  getSightingsByOrganismId,
-  getSightingsByUserId,
-  createConfirmedSighting,
-  deleteConfirmedSightingById
+    getAllConfirmedSightings,
+    getSightingsByOrganismId,
+    getSightingsByUserId,
+    createConfirmedSighting,
+    deleteConfirmedSightingById,
 };
 
-export { ConfirmedSightingService };
+export {ConfirmedSightingService};

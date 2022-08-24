@@ -6,7 +6,10 @@
     "test": "jest",
     "start": "nodemon server.ts",
     "build": "tsc --build",
-    "prisma": "npx prisma db pull && npx prisma generate"
+    "prisma": "npx prisma db pull && npx prisma generate",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
+    "lint": "eslint --ext .ts .",
+    "fix": "eslint --ext .ts . --fix"
   },
   "author": "loren",
   "license": "ISC",
@@ -17,7 +20,6 @@
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
-    "npm-check-updates": "^16.0.4",
     "prisma": "^4.1.1"
   },
   "devDependencies": {
@@ -34,7 +36,14 @@
     "ts-jest": "^28.0.7",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "@typescript-eslint/eslint-plugin": "^5.33.0",
+    "@typescript-eslint/parser": "^5.33.0",
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.4.0",
+    "eslint-plugin-jest": "^26.8.2",
+    "eslint-plugin-prettier": "^4.2.1"
   },
   "description": ""
 }

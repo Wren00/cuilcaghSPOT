@@ -1,9 +1,7 @@
-interface UserGroup {   
-    
-    groupId : number;
-    groupName: string;
-    description: string;
-
+interface UserGroup {
+  groupId: number;
+  groupName: string;
+  description: string;
 }
 
 export { UserGroup };

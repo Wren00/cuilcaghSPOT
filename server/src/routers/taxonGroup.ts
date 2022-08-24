@@ -1,7 +1,5 @@
 import express from "express";
-import {
-    TaxonGroupController
-} from "../controllers/taxonGroup"
+import { TaxonGroupController } from "../controllers/taxonGroup";
 
 const TaxonGroupRouter = express.Router();
 
@@ -15,6 +13,5 @@ TaxonGroupRouter.get("/getTaxonGroupById/:id", TaxonGroupController.getTaxonGrou
 
 TaxonGroupRouter.post("/createTaxonGroup", TaxonGroupController.createTaxonGroup);
 TaxonGroupRouter.delete("/deleteTaxonGroupById", TaxonGroupController.deleteTaxonGroupById);
-
 
 export { TaxonGroupRouter };
