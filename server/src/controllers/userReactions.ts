@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
 import { UserReactionService } from "../services/userReactions";
+import {UserReactions} from "../interfaces/userReactions";
+
+//GET functions
 
 async function getAllUserReactions(req: Request, res: Response) {
     try {
@@ -31,11 +34,37 @@ async function getSightingReactionCountById(req: Request, res: Response) {
     }
 }
 
+//CREATE function
+
+async function createUserReaction(req: Request, res: Response) {
+    try {
+        const newReaction: UserReactions = req.body;
+        const createdReaction = await UserReactionService.createUserReaction(newReaction)
+        return res.status(200).json(createdReaction);
+    } catch (error) {
+        res.status(500).json("Could not create reaction.");
+    }
+}
+
+//DELETE function
+
+async function deleteUserReactionById(req: Request, res: Response) {
+    const { reactionId: reactionId } = req.body;
+
+    const deletedReaction = await UserReactionService.deleteUserReactionById(reactionId);
+    if (!deletedReaction) {
+        return res.status(500).json("Cannot delete reaction");
+    }
+    return res.status(200).json(deletedReaction);
+}
+
 
 const UserReactionController = {
     getAllUserReactions,
     getUserReactionById,
-    getSightingReactionCountById
+    getSightingReactionCountById,
+    createUserReaction,
+    deleteUserReactionById
 };
 
 export { UserReactionController };

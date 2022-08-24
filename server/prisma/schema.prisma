@@ -118,10 +118,11 @@ model users_to_groups {
 }
 
 model sighting_to_reactions {
-  id                  Int                 @id @default(autoincrement())
   sighting_id         Int
   reaction_id         Int
   reaction_count      Int?                @default(0)
   reactions           reactions           @relation(fields: [reaction_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   confirmed_sightings confirmed_sightings @relation(fields: [sighting_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([sighting_id, reaction_id])
 }

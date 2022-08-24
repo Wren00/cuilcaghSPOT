@@ -54,12 +54,63 @@ async function getSightingReactionCountById(sightingId: number) {
     return returnedValue;
 }
 
+//UPDATE functions
+
+// async function incrementUserReaction(sightingId: number, reactionId: number) {
+//     let updatedReaction;
+//     try {
+//         updatedReaction = await prisma.sighting_to_reactions.update({
+//             where: {
+//                 sighting_id: sightingId,
+//                 reaction_id: reactionId
+//             }
+//         });
+//     } catch (error) {
+//         console.log(error);
+//     }
+//     return updatedReaction;
+// }
+
+//CREATE function
+
+async function createUserReaction(reaction: UserReactions) {
+    let newReaction;
+    try {
+        newReaction = await prisma.reactions.create({
+            data: {
+                reaction_name: reaction.reactionName
+            },
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    return newReaction;
+}
+
+
+//DELETE function
+
+async function deleteUserReactionById(reactionId: number) {
+    let deletedReaction;
+    try {
+        deletedReaction = await prisma.reactions.delete({
+            where: {
+                id: reactionId,
+            },
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    return deletedReaction;
+}
 
 
 const UserReactionService = {
     getAllUserReactions,
     getUserReactionById,
-    getSightingReactionCountById
+    getSightingReactionCountById,
+    createUserReaction,
+    deleteUserReactionById
 };
 
 export { UserReactionService };

@@ -11,6 +11,8 @@ UserReactionRouter.get("/getSightingReactionCountById/:id", UserReactionControll
 
 //PRIVATE endpoints
 
+UserReactionRouter.post("/createUserReaction", UserReactionController.createUserReaction);
+UserReactionRouter.delete("/deleteUserReactionById", UserReactionController.deleteUserReactionById);
 
 
 
