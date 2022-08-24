@@ -9,20 +9,28 @@ async function getAllOrganisms() {
   let allOrganisms;
   try {
     allOrganisms = await prisma.organisms.findMany();
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
-  const organisms: Organism[] = allOrganisms.map((x:
-    { id: any; taxon_name: any; latin_name: any; taxon_group_id: any; picture_url: any; description: any; is_protected: any; }) => ({
+  const organisms: Organism[] = allOrganisms.map(
+    (x: {
+      id: any;
+      taxon_name: any;
+      latin_name: any;
+      taxon_group_id: any;
+      picture_url: any;
+      description: any;
+      is_protected: any;
+    }) => ({
       organismId: x.id,
       taxonName: x.taxon_name,
       latinName: x.latin_name,
       taxonGroupId: x.taxon_group_id,
       pictureUrl: x.picture_url,
       description: x.description,
-      isProtected: x.is_protected
-    }));
+      isProtected: x.is_protected,
+    })
+  );
   return organisms;
 }
 
@@ -32,20 +40,28 @@ async function getOrganismByName(taxonName: string) {
     organismArray = await prisma.organisms.findMany({
       where: { taxon_name: { contains: taxonName, mode: "insensitive" } },
     });
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
-  const organisms: Organism[] = organismArray.map((x:
-    { id: any; taxon_name: any; latin_name: any; taxon_group_id: any; picture_url: any; description: any; is_protected: any; }) => ({
+  const organisms: Organism[] = organismArray.map(
+    (x: {
+      id: any;
+      taxon_name: any;
+      latin_name: any;
+      taxon_group_id: any;
+      picture_url: any;
+      description: any;
+      is_protected: any;
+    }) => ({
       organismId: x.id,
       taxonName: x.taxon_name,
       latinName: x.latin_name,
       taxonGroupId: x.taxon_group_id,
       pictureUrl: x.picture_url,
       description: x.description,
-      isProtected: x.is_protected
-    }));
+      isProtected: x.is_protected,
+    })
+  );
 
   return organisms;
 }
@@ -59,45 +75,51 @@ async function getOrganismById(organismId: number) {
     organismObject = await prisma.organisms.findUnique({
       where: { id: organismId },
     });
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
 
-  let returnedValue = {
+  const returnedValue = {
     organismId: organismObject.id,
     taxonName: organismObject.taxon_name,
     latinName: organismObject.latin_name,
     taxonGroupId: organismObject.taxon_group_id,
     pictureUrl: organismObject.picture_url,
     description: organismObject.description,
-    isProtected: organismObject.is_protected
-  }
+    isProtected: organismObject.is_protected,
+  };
   return returnedValue;
 }
 
 async function getOrganismByTaxonGroupId(taxonId: number) {
-
   let organismArray;
 
   try {
     organismArray = await prisma.organisms.findMany({
       where: { taxon_group_id: taxonId },
     });
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
-  organismArray = organismArray.map((x:
-    { id: any; taxon_name: any; latin_name: any; taxon_group_id: any; picture_url: any; description: any; is_protected: any; }) => ({
+  organismArray = organismArray.map(
+    (x: {
+      id: any;
+      taxon_name: any;
+      latin_name: any;
+      taxon_group_id: any;
+      picture_url: any;
+      description: any;
+      is_protected: any;
+    }) => ({
       organismId: x.id,
       taxonName: x.taxon_name,
       latinName: x.latin_name,
       taxonGroupId: x.taxon_group_id,
       pictureUrl: x.picture_url,
       description: x.description,
-      isProtected: x.is_protected
-    }));
+      isProtected: x.is_protected,
+    })
+  );
   console.log(organismArray);
   return organismArray;
 }
@@ -107,26 +129,23 @@ async function getOrganismByTaxonGroupId(taxonId: number) {
 //UPDATE function
 
 async function updateOrganism(organism: Organism) {
-
   let updatedOrganism;
   try {
     updatedOrganism = await prisma.organisms.update({
       where: {
-        id: organism.organismId
+        id: organism.organismId,
       },
       data: {
         taxon_name: organism.taxonName,
         description: organism.description,
-        picture_url: organism.pictureUrl
+        picture_url: organism.pictureUrl,
       },
     });
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
   return updatedOrganism;
 }
-
 
 //CREATE function
 
@@ -140,7 +159,7 @@ async function createOrganism(organism: CreateOrganism) {
         taxon_group_id: +organism.taxonGroupId,
         picture_url: organism.pictureUrl,
         description: organism.description,
-        is_protected: organism.isProtected
+        is_protected: organism.isProtected,
       },
     });
   } catch (error) {
@@ -149,7 +168,6 @@ async function createOrganism(organism: CreateOrganism) {
   return newOrganism;
 }
 
-
 //DELETE function
 
 async function deleteOrganismById(organismId: number) {
@@ -157,7 +175,7 @@ async function deleteOrganismById(organismId: number) {
   try {
     deletedOrganism = await prisma.organisms.delete({
       where: {
-        id: organismId
+        id: organismId,
       },
     });
   } catch (error) {
@@ -173,11 +191,7 @@ const OrganismService = {
   getOrganismByTaxonGroupId,
   deleteOrganismById,
   createOrganism,
-  updateOrganism
+  updateOrganism,
 };
 
 export { OrganismService };
-
-
-
-

@@ -1,7 +1,5 @@
 import express from "express";
-import {
-    UnverifiedSightingController
-} from "../controllers/unverifiedSighting";
+import { UnverifiedSightingController } from "../controllers/unverifiedSighting";
 
 const UnverifiedSightingRouter = express.Router();
 
@@ -18,6 +16,9 @@ UnverifiedSightingRouter.post("/createUnverifiedSighting", UnverifiedSightingCon
 UnverifiedSightingRouter.put("/updateSighting", UnverifiedSightingController.updateSighting);
 UnverifiedSightingRouter.put("/incrementUserVote/:id", UnverifiedSightingController.incrementUserVote);
 UnverifiedSightingRouter.put("/decrementUserVote/:id", UnverifiedSightingController.decrementUserVote);
-UnverifiedSightingRouter.delete("/deleteUnverifiedSightingById", UnverifiedSightingController.deleteUnverifiedSightingById);
+UnverifiedSightingRouter.delete(
+  "/deleteUnverifiedSightingById",
+  UnverifiedSightingController.deleteUnverifiedSightingById
+);
 
 export { UnverifiedSightingRouter };

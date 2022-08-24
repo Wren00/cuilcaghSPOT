@@ -1,7 +1,5 @@
 import express from "express";
-import {
-    UserGroupController
-} from "../controllers/userGroup";
+import { UserGroupController } from "../controllers/userGroup";
 
 const UserGroupRouter = express.Router();
 
@@ -16,7 +14,5 @@ UserGroupRouter.get("/getUserGroupById/:id", UserGroupController.getUserGroupByI
 UserGroupRouter.put("/updateUserGroup", UserGroupController.updateUserGroup);
 UserGroupRouter.post("/createUserGroup", UserGroupController.createUserGroup);
 UserGroupRouter.delete("/deleteUserGroupById", UserGroupController.deleteUserGroupById);
-
-
 
 export { UserGroupRouter };

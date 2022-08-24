@@ -1,8 +1,6 @@
-import express, { Request, Response } from 'express';
+import { Request, Response } from "express";
 import { OrganismService } from "../services/organism";
 import { CreateOrganism, Organism } from "../interfaces/organism";
-
-
 
 async function getAllOrganisms(req: Request, res: Response) {
   try {
@@ -26,7 +24,6 @@ async function getOrganismByName(req: Request, res: Response) {
 async function getOrganismById(req: Request, res: Response) {
   try {
     const organismId = parseInt(req.params["id"]);
-    const {id} = req.params;
     console.log(req.params);
     const organism = await OrganismService.getOrganismById(organismId);
     return res.status(200).json(organism);
@@ -85,7 +82,11 @@ async function deleteOrganismById(req: Request, res: Response) {
 const OrganismController = {
   getAllOrganisms,
   getOrganismByName,
-  getOrganismById, getOrganismByTaxonGroupId, updateOrganism, createOrganism, deleteOrganismById
+  getOrganismById,
+  getOrganismByTaxonGroupId,
+  updateOrganism,
+  createOrganism,
+  deleteOrganismById,
 };
 
 export { OrganismController };

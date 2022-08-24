@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import { Request, Response } from "express";
 import { UserGroupService } from "../services/userGroup";
 import { UserGroup } from "../interfaces/userGroup";
 
@@ -31,7 +31,6 @@ async function getUserGroupById(req: Request, res: Response) {
   }
 }
 
-
 //UPDATE function
 
 async function updateUserGroup(req: Request, res: Response) {
@@ -44,7 +43,7 @@ async function updateUserGroup(req: Request, res: Response) {
   }
 }
 
-//CREATE function 
+//CREATE function
 
 async function createUserGroup(req: Request, res: Response) {
   try {
@@ -69,8 +68,12 @@ async function deleteUserGroupById(req: Request, res: Response) {
 }
 
 const UserGroupController = {
-  getAllUserGroups, getUserGroupByName, getUserGroupById,
-  updateUserGroup, createUserGroup, deleteUserGroupById
+  getAllUserGroups,
+  getUserGroupByName,
+  getUserGroupById,
+  updateUserGroup,
+  createUserGroup,
+  deleteUserGroupById,
 };
 
 export { UserGroupController };

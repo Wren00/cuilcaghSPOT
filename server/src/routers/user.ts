@@ -1,7 +1,5 @@
 import express from "express";
-import {
-    UserController
-} from "../controllers/user";
+import { UserController } from "../controllers/user";
 
 const UserRouter = express.Router();
 
@@ -20,6 +18,5 @@ UserRouter.put("/updateUserDetails", UserController.updateUserDetails);
 UserRouter.put("/updateUserPassword", UserController.updateUserPassword);
 UserRouter.put("/updateUserProfile", UserController.updateUserProfile);
 UserRouter.post("/createUser", UserController.createUser);
-
 
 export { UserRouter };

@@ -1,7 +1,6 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 import { UnverifiedSightingService } from "../services/unverifiedSighting";
 import { UnverifiedSighting } from "../interfaces/unverifiedSighting";
-
 
 //GET functions
 
@@ -46,8 +45,6 @@ async function getSightingsByUserId(req: Request, res: Response) {
   }
 }
 
-
-
 //admin users can access these functions
 
 //CREATE function
@@ -66,35 +63,34 @@ async function createUnverifiedSighting(req: Request, res: Response) {
 //UPDATE function
 
 async function updateSighting(req: Request, res: Response) {
-  try{
+  try {
     const updateDetails: UnverifiedSighting = req.body;
     const updatedSighting = await UnverifiedSightingService.updateSighting(updateDetails);
     return res.status(200).json(updatedSighting);
-    }catch(error) {
-      res.status(500).json("Could not update sighting.");
-    }
-  }
-
-  async function incrementUserVote(req: Request, res: Response) {
-    try{
-      const sightingId = parseInt(req.params["id"]);
-      const updatedSighting = await UnverifiedSightingService.incrementUserVote(sightingId);
-      return res.status(200).json(updatedSighting);
-      }catch(error) {
-        res.status(500).json("Could not update sighting.");
-      }
-    }
-
-async function decrementUserVote(req: Request, res: Response) {
-  try{
-    const sightingId = parseInt(req.params["id"]);
-    const updatedSighting = await UnverifiedSightingService.decrementUserVote(sightingId);
-    return res.status(200).json(updatedSighting);
-  }catch(error) {
+  } catch (error) {
     res.status(500).json("Could not update sighting.");
   }
 }
 
+async function incrementUserVote(req: Request, res: Response) {
+  try {
+    const sightingId = parseInt(req.params["id"]);
+    const updatedSighting = await UnverifiedSightingService.incrementUserVote(sightingId);
+    return res.status(200).json(updatedSighting);
+  } catch (error) {
+    res.status(500).json("Could not update sighting.");
+  }
+}
+
+async function decrementUserVote(req: Request, res: Response) {
+  try {
+    const sightingId = parseInt(req.params["id"]);
+    const updatedSighting = await UnverifiedSightingService.decrementUserVote(sightingId);
+    return res.status(200).json(updatedSighting);
+  } catch (error) {
+    res.status(500).json("Could not update sighting.");
+  }
+}
 
 //DELETE function
 
@@ -117,7 +113,7 @@ const UnverifiedSightingController = {
   updateSighting,
   incrementUserVote,
   decrementUserVote,
-  deleteUnverifiedSightingById
+  deleteUnverifiedSightingById,
 };
 
 export { UnverifiedSightingController };

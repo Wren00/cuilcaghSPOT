@@ -7,16 +7,14 @@ async function getAllUserGroups() {
   let allGroups;
   try {
     allGroups = await prisma.interest_groups.findMany();
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
-  const groups: UserGroup[] = allGroups.map((x:
-    { id: any; group_name: any; description: any; }) => ({
-      groupId: x.id,
-      groupName: x.group_name,
-      description: x.description
-    }));
+  const groups: UserGroup[] = allGroups.map((x: { id: any; group_name: any; description: any }) => ({
+    groupId: x.id,
+    groupName: x.group_name,
+    description: x.description,
+  }));
   return groups;
 }
 
@@ -26,62 +24,58 @@ async function getUserGroupByName(groupName: string) {
     groupArray = await prisma.interest_groups.findMany({
       where: { group_name: { contains: groupName, mode: "insensitive" } },
     });
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
-  const groups : UserGroup[] = groupArray.map((x:
-    { id: any; group_name: any; description: any; }) => ({
-      groupId: x.id,
-      groupName: x.group_name,
-      description: x.description
-    }));
+  const groups: UserGroup[] = groupArray.map((x: { id: any; group_name: any; description: any }) => ({
+    groupId: x.id,
+    groupName: x.group_name,
+    description: x.description,
+  }));
 
   return groups;
 }
 
-  async function getUserGroupById(groupId: number) {
-    let groupsObject;
+async function getUserGroupById(groupId: number) {
+  let groupsObject;
 
-    try {
-      groupsObject = await prisma.interest_groups.findUnique({
-        where: { id: groupId },
-      });
-    }
-    catch (error) {
-      console.log(error);
-    }
-  
-    let returnedValue = {
-      groupId: groupsObject.id,
-      groupName: groupsObject.group_name,
-      description: groupsObject.description
-    }
-    return returnedValue;
+  try {
+    groupsObject = await prisma.interest_groups.findUnique({
+      where: { id: groupId },
+    });
+  } catch (error) {
+    console.log(error);
   }
+
+  const returnedValue = {
+    groupId: groupsObject.id,
+    groupName: groupsObject.group_name,
+    description: groupsObject.description,
+  };
+  return returnedValue;
+}
 
 //UPDATE function
 
-async function updateUserGroup(group : UserGroup) {
+async function updateUserGroup(group: UserGroup) {
   let updatedGroup;
   try {
     updatedGroup = await prisma.interest_groups.update({
       where: {
-        id: group.groupId
+        id: group.groupId,
       },
       data: {
         group_name: group.groupName,
-        description: group.description
+        description: group.description,
       },
     });
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
   return updatedGroup;
 }
 
-//CREATE function 
+//CREATE function
 
 async function createUserGroup(group: UserGroup) {
   let newGroup;
@@ -89,7 +83,7 @@ async function createUserGroup(group: UserGroup) {
     newGroup = await prisma.interest_groups.create({
       data: {
         group_name: group.groupName,
-        description: group.description
+        description: group.description,
       },
     });
   } catch (error) {
@@ -105,7 +99,7 @@ async function deleteUserGroupById(groupId: number) {
   try {
     deletedGroup = await prisma.interest_groups.delete({
       where: {
-        id: groupId
+        id: groupId,
       },
     });
   } catch (error) {
@@ -114,14 +108,13 @@ async function deleteUserGroupById(groupId: number) {
   return deletedGroup;
 }
 
-
 const UserGroupService = {
-    getAllUserGroups,
-    getUserGroupByName,
-    getUserGroupById,
-    updateUserGroup,
-    createUserGroup,
-    deleteUserGroupById
-  };
-  
-  export { UserGroupService };
+  getAllUserGroups,
+  getUserGroupByName,
+  getUserGroupById,
+  updateUserGroup,
+  createUserGroup,
+  deleteUserGroupById,
+};
+
+export { UserGroupService };

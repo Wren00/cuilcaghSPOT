@@ -1,7 +1,5 @@
 import express from "express";
-import {
-    ConfirmedSightingController
-} from "../controllers/confirmedSighting";
+import { ConfirmedSightingController } from "../controllers/confirmedSighting";
 
 const ConfirmedSightingRouter = express.Router();
 
@@ -15,7 +13,5 @@ ConfirmedSightingRouter.get("/getSightingsByUserId/:id", ConfirmedSightingContro
 
 ConfirmedSightingRouter.post("/createConfirmedSighting", ConfirmedSightingController.createConfirmedSighting);
 ConfirmedSightingRouter.delete("/deleteSightingById", ConfirmedSightingController.deleteSightingById);
-
-
 
 export { ConfirmedSightingRouter };

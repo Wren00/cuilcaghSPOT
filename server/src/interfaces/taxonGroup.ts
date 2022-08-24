@@ -1,9 +1,7 @@
 interface TaxonGroup {
+  taxonId: number;
+  taxonGroupName: string;
+  description: string;
+}
 
-    taxonId: number;
-    taxonGroupName: string;
-    description: string;
-    
-    }
-    
-    export { TaxonGroup };
+export { TaxonGroup };
