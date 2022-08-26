@@ -6,6 +6,7 @@ const ConfirmedSightingRouter = express.Router();
 //PUBLIC endpoints
 
 ConfirmedSightingRouter.get("/getAllConfirmedSightings", ConfirmedSightingController.getAllConfirmedSightings);
+ConfirmedSightingRouter.get("/getConfirmedSightingById/:id", ConfirmedSightingController.getConfirmedSightingById);
 ConfirmedSightingRouter.get("/getSightingsByOrganismId/:id", ConfirmedSightingController.getSightingsByOrganismId);
 ConfirmedSightingRouter.get("/getSightingsByUserId/:id", ConfirmedSightingController.getSightingsByUserId);
 

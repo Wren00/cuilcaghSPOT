@@ -1,5 +1,7 @@
 import { prisma } from "../utils";
 import { UnverifiedSighting } from "../interfaces/unverifiedSighting";
+import {User} from "../interfaces/user";
+import {ConfirmedSighting} from "../interfaces/confirmedSighting";
 
 //GET functions
 
@@ -20,8 +22,7 @@ async function getAllUnverifiedSightings() {
     date: x.date,
     lat: x.lat.toNumber(),
     long: x.long.toNumber(),
-    userVotes: x.user_votes,
-    userReactions: x.reaction_id,
+    userVotes: x.user_votes
   }));
 
   for (sighting of getAllSightings) {
@@ -46,17 +47,35 @@ async function getAllUnverifiedSightings() {
 
 async function getSightingsById(sightingId: number) {
   let sightingObject;
-  console.log(sightingId);
+  let user;
+  let organism;
 
   try {
     sightingObject = await prisma.unverified_sightings.findUnique({
       where: { id: sightingId },
     });
+
+    console.log(sightingObject);
+
+    user = await prisma.users.findUnique({
+      where: {
+        id: sightingObject.user_id
+      },
+    });
+    sightingObject.userName = user.user_name;
+
+    organism = await prisma.organisms.findUnique({
+      where: {
+        id: sightingObject.organism_id
+      },
+    });
+    sightingObject.organismName = organism.taxon_name;
+
   } catch (error) {
     console.log(error);
   }
 
-  const returnedValue = {
+  const returnedValue : UnverifiedSighting = {
     sightingId: sightingObject.id,
     organismId: +sightingObject.organism_id,
     userId: +sightingObject.user_id,
@@ -65,8 +84,11 @@ async function getSightingsById(sightingId: number) {
     lat: sightingObject.lat.toNumber(),
     long: sightingObject.long.toNumber(),
     userVotes: sightingObject.user_votes,
-    userReactions: sightingObject.reaction_id,
+    organismName: sightingObject.organismName,
+    userName: sightingObject.userName
+
   };
+
   return returnedValue;
 }
 
@@ -90,7 +112,6 @@ async function getSightingsByOrganismId(organismId: number) {
       lat: any;
       long: any;
       user_votes: any;
-      reaction_id: any;
     }) => ({
       sightingId: x.id,
       organismId: x.organism_id,
@@ -99,8 +120,7 @@ async function getSightingsByOrganismId(organismId: number) {
       date: x.date,
       lat: x.lat,
       long: x.long,
-      userVotes: x.user_votes,
-      userReactions: x.reaction_id,
+      userVotes: x.user_votes
     })
   );
   return allSightings;
@@ -126,7 +146,6 @@ async function getSightingsByUserId(userId: number) {
       lat: any;
       long: any;
       user_votes: any;
-      reaction_id: any;
     }) => ({
       sightingId: x.id,
       organismId: x.organism_id,
@@ -135,8 +154,7 @@ async function getSightingsByUserId(userId: number) {
       date: x.date,
       lat: x.lat,
       long: x.long,
-      userVotes: x.user_votes,
-      userReactions: x.reaction_id,
+      userVotes: x.user_votes
     })
   );
   return allSightings;

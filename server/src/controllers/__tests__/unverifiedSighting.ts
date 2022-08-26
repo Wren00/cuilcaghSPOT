@@ -77,8 +77,7 @@ describe("UnverifiedSightingController", () => {
         date: "2000-01-01",
         lat: 99.9999,
         long: -7.7777,
-        userVotes: 2,
-        userReactions: 2,
+        userVotes: 2
       };
       const request = httpMocks.createRequest({
         method: "POST",
@@ -100,16 +99,17 @@ describe("UnverifiedSightingController", () => {
 
   describe("updateUnverifiedSighting", () => {
     it("should return an updated unverified sighting", async () => {
-      const updateSightingJsonBody = {
+      const updateSightingJsonBody : UnverifiedSighting = {
         sightingId: 1,
         organismId: 4,
         userId: 1,
         pictureUrl: "testAnimal.jpg",
-        date: "2000-01-01",
+        date: new Date("2000-01-01"),
         lat: 99.9999,
         long: -7.7777,
         userVotes: 2,
-        userReactions: 2,
+        organismName: "Red Fox",
+        userName: "test"
       };
       const request = httpMocks.createRequest({
         method: "PUT",
@@ -160,7 +160,6 @@ const interfaceObjectSighting: UnverifiedSighting = {
   lat: 99.9999,
   long: -7.7777,
   userVotes: 2,
-  userReactions: 2,
   organismName: "Red Fox",
   userName: "test",
 };

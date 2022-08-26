@@ -7,10 +7,11 @@ const UserReactionRouter = express.Router();
 
 UserReactionRouter.get("/getAllUserReactions", UserReactionController.getAllUserReactions);
 UserReactionRouter.get("/getUserReactionById", UserReactionController.getUserReactionById);
-UserReactionRouter.get("/getSightingReactionCountById/:id", UserReactionController.getSightingReactionCountById);
+UserReactionRouter.get("/getSightingReactionCountById", UserReactionController.getSightingReactionCountById);
 
 //PRIVATE endpoints
 
+UserReactionRouter.put("/incrementUserReaction", UserReactionController.incrementUserReaction);
 UserReactionRouter.post("/createUserReaction", UserReactionController.createUserReaction);
 UserReactionRouter.delete("/deleteUserReactionById", UserReactionController.deleteUserReactionById);
 

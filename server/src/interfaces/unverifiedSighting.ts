@@ -9,7 +9,6 @@ interface UnverifiedSighting {
   lat: number;
   long: number;
   userVotes: number;
-  userReactions: number;
 }
 
 export { UnverifiedSighting };

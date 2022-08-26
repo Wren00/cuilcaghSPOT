@@ -100,11 +100,10 @@ CREATE TABLE IF NOT EXISTS confirmed_sightings
 
 CREATE TABLE IF NOT EXISTS sighting_to_reactions
 (
-
+    id          SERIAL PRIMARY KEY NOT NULL,
     sighting_id INT NOT NULL,
     reaction_id INT NOT NULL,
-    reaction_count INT DEFAULT 0,
-    CONSTRAINT id PRIMARY KEY (sighting_id, reaction_id),
+    reaction_count INT NOT NULL DEFAULT 0,
 
     FOREIGN KEY (sighting_id) REFERENCES confirmed_sightings (id),
     FOREIGN KEY (reaction_id) REFERENCES reactions (id)

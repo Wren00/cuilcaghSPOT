@@ -1,16 +1,17 @@
 import { prisma } from "../utils";
-import { UserReactions } from "../interfaces/userReactions";
+import {SightingReactions, UserReactions} from "../interfaces/userReactions";
+import {promisify} from "util";
 
 //GET functions
 
 async function getAllUserReactions() {
-    let allGroups;
+    let allReactions;
     try {
-        allGroups = await prisma.reactions.findMany();
+        allReactions = await prisma.reactions.findMany();
     } catch (error) {
         console.log(error);
     }
-    const reactions: UserReactions[] = allGroups.map((x: { id: any; reaction_name: any; }) => ({
+    const reactions: UserReactions[] = allReactions.map((x: { id: any; reaction_name: any; }) => ({
         reactionId: x.id,
         reactionName: x.reaction_name
     }));
@@ -35,41 +36,82 @@ async function getUserReactionById(reactionId: number) {
     return returnedValue;
 }
 
-async function getSightingReactionCountById(sightingId: number) {
+async function getAllSightingReactions() {
     let sightingReactionCount;
 
-    try {
+    sightingReactionCount = await prisma.sighting_to_reactions.findMany({
+    });
+//map
+    const reactions: SightingReactions[] = sightingReactionCount.map((x: { sighting_id: number; reaction_id: number; reaction_count: number; }) => ({
+        sightingId: x.sighting_id,
+        reactionId: x.reaction_id,
+        reactionCount: x.reaction_count
+    }));
+    return reactions;
+}
+
+
+async function getSightingReactionCountById(sightingId: number) {
+    let sightingReactionCount;
+    console.log(sightingId);
+
         sightingReactionCount = await prisma.sighting_to_reactions.findMany({
             where: {
                 sighting_id : sightingId
             },
                 });
-    } catch (error) {
-        console.log(error);
-    }
-
-    const returnedValue = {
-        reactionCount : sightingReactionCount.reaction_count
-    };
-    return returnedValue;
+//map
+    const reactions: SightingReactions[] = sightingReactionCount.map((x: { sighting_id: number; reaction_id: number; reaction_count: number; }) => ({
+        sightingId: x.sighting_id,
+        reactionId: x.reaction_id,
+        reactionCount: x.reaction_count
+    }));
+    return reactions;
 }
 
 //UPDATE functions
 
-// async function incrementUserReaction(sightingId: number, reactionId: number) {
-//     let updatedReaction;
-//     try {
-//         updatedReaction = await prisma.sighting_to_reactions.update({
-//             where: {
-//                 sighting_id: sightingId,
-//                 reaction_id: reactionId
-//             }
-//         });
-//     } catch (error) {
-//         console.log(error);
-//     }
-//     return updatedReaction;
-// }
+async function incrementUserReaction(sightingId: number, reactionId: number) {
+    let updatedReaction;
+
+    try {
+        const sightingToReactionId = await prisma.sighting_to_reactions.findFirst({
+            where: {
+                sighting_id: sightingId,
+                reaction_id: reactionId
+            },
+        });
+
+        console.log(sightingToReactionId);
+
+        if(sightingToReactionId)    {
+            //update sighting_to_reaction with sightingToReactionId.id
+            updatedReaction = await prisma.sighting_to_reactions.update({
+                where: {
+                    id: sightingToReactionId.id
+                },
+                    data: {
+                        reaction_count: {
+                            increment: 1,
+                        },
+                    },
+        });
+            return updatedReaction;
+        }
+        else {
+            const createdReaction = await prisma.sighting_to_reactions.create({
+                data: {
+                    sighting_id: sightingId,
+                    reaction_id: reactionId,
+                    reaction_count: 1,
+                },
+            });
+            return createdReaction;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 //CREATE function
 
@@ -109,6 +151,7 @@ const UserReactionService = {
     getAllUserReactions,
     getUserReactionById,
     getSightingReactionCountById,
+    incrementUserReaction,
     createUserReaction,
     deleteUserReactionById
 };

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserReactionService } from "../services/userReactions";
-import {UserReactions} from "../interfaces/userReactions";
+import {UserReactions, SightingReactions} from "../interfaces/userReactions";
 
 //GET functions
 
@@ -25,7 +25,7 @@ async function getUserReactionById(req: Request, res: Response) {
 
 async function getSightingReactionCountById(req: Request, res: Response) {
     try {
-        const sightingId = parseInt(req.params["id"]);
+        const sightingId = req.body.sightingId;
 
         const reactionCount = await UserReactionService.getSightingReactionCountById(sightingId);
         return res.status(200).json(reactionCount);
@@ -33,6 +33,21 @@ async function getSightingReactionCountById(req: Request, res: Response) {
         res.status(401).json("Cannot find sighting id");
     }
 }
+
+async function incrementUserReaction(req: Request, res: Response) {
+    try {
+
+        const reactionUpvote : SightingReactions = req.body;
+
+        console.log(reactionUpvote);
+
+        const reactionCount = await UserReactionService.incrementUserReaction(reactionUpvote.sightingId, reactionUpvote.reactionId);
+        return res.status(200).json(reactionCount);
+    } catch (error) {
+        res.status(401).json("Cannot find id");
+    }
+}
+
 
 //CREATE function
 
@@ -63,6 +78,7 @@ const UserReactionController = {
     getAllUserReactions,
     getUserReactionById,
     getSightingReactionCountById,
+    incrementUserReaction,
     createUserReaction,
     deleteUserReactionById
 };

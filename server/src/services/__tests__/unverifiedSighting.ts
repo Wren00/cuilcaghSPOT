@@ -56,7 +56,6 @@ describe("UnverifiedSightingService", () => {
         lat: 54.0101,
         long: -7.2222,
         userVotes: 0,
-        userReactions: 0,
         sightingId: 0,
         organismName: "Bird",
         userName: "test",
@@ -83,7 +82,6 @@ describe("UnverifiedSightingService", () => {
         lat: 54.0002,
         long: -7.0101,
         user_votes: 1,
-        reaction_id: 1,
       };
 
       console.log(prismaObjectSighting);
@@ -97,7 +95,6 @@ describe("UnverifiedSightingService", () => {
         lat: 54.0002,
         long: -7.0101,
         userVotes: 1,
-        userReactions: 1,
         organismName: "Bird",
         userName: "test",
       };
@@ -135,8 +132,7 @@ const unverifiedSightingsModel: unverified_sightings = {
   date: new Date("2000-10-01"),
   lat: new Decimal(54.0101),
   long: new Decimal(-7.2222),
-  user_votes: 1,
-  reaction_id: 1,
+  user_votes: 1
 };
 
 const organismModel: organisms = {

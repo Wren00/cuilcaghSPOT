@@ -11,6 +11,16 @@ async function getAllConfirmedSightings(req: Request, res: Response) {
   }
 }
 
+async function getConfirmedSightingById(req: Request, res: Response) {
+  try {
+    const sightingId = parseInt(req.params["id"]);
+    const sighting = await ConfirmedSightingService.getConfirmedSightingById(sightingId);
+    return res.status(200).json(sighting);
+  } catch (error) {
+    res.status(401).json("Cannot find sighting Id");
+  }
+}
+
 async function getSightingsByOrganismId(req: Request, res: Response) {
   try {
     const organismId = parseInt(req.params["id"]);
@@ -57,6 +67,7 @@ async function deleteSightingById(req: Request, res: Response) {
 
 const ConfirmedSightingController = {
   getAllConfirmedSightings,
+  getConfirmedSightingById,
   getSightingsByOrganismId,
   getSightingsByUserId,
   createConfirmedSighting,

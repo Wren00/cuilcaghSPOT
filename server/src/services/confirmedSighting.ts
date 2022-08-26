@@ -41,6 +41,49 @@ async function getAllConfirmedSightings() {
     return getAllSightings;
 }
 
+async function getConfirmedSightingById(sightingId: number) {
+    let sightingObject;
+    let user;
+    let organism;
+
+    try {
+        sightingObject = await prisma.confirmed_sightings.findUnique({
+            where: { id: sightingId },
+        });
+
+        user = await prisma.users.findUnique({
+            where: {
+                id: sightingObject.user_id
+            },
+        });
+        sightingObject.userName = user.user_name;
+
+        organism = await prisma.organisms.findUnique({
+            where: {
+                id: sightingObject.organism_id
+            },
+        });
+        sightingObject.organismName = organism.taxon_name;
+
+    } catch (error) {
+        console.log(error);
+    }
+
+    const returnedValue : ConfirmedSighting = {
+        sightingId: sightingObject.id,
+        organismId: +sightingObject.organism_id,
+        userId: +sightingObject.user_id,
+        pictureUrl: sightingObject.picture_url,
+        date: sightingObject.date,
+        lat: sightingObject.lat,
+        long: sightingObject.long,
+        organismName: sightingObject.organismName,
+        userName: sightingObject.userName
+    };
+
+    return returnedValue;
+}
+
 async function getSightingsByOrganismId(organismId: number) {
     let sightingsArray;
     try {
@@ -147,6 +190,7 @@ async function deleteConfirmedSightingById(sightingId: number) {
 
 const ConfirmedSightingService = {
     getAllConfirmedSightings,
+    getConfirmedSightingById,
     getSightingsByOrganismId,
     getSightingsByUserId,
     createConfirmedSighting,
