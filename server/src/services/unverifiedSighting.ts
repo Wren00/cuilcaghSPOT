@@ -196,6 +196,20 @@ async function incrementUserVote(sightingId: number) {
         },
       },
     });
+
+    if (updatedVote.user_votes >= 5) {
+      await prisma.confirmed_sightings.create({
+        data: {
+          picture_url: updatedVote.picture_url,
+          date: updatedVote.date,
+          lat: updatedVote.lat,
+          long: updatedVote.long,
+          organism_id: updatedVote.organism_id,
+          user_id: updatedVote.user_id,
+        },
+      });
+      deleteUnverifiedSightingById(sightingId);
+    }
   } catch (error) {
     console.log(error);
   }
