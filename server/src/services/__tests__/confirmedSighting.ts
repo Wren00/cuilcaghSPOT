@@ -24,6 +24,23 @@ describe("ConfirmedSightingService", () => {
     });
   });
 
+  describe("getConfirmedSightingById", () => {
+    it("should return a confirmed sighting by id", async () => {
+      prismaAsAny.confirmed_sightings = {
+        findUnique: jest.fn().mockReturnValueOnce(confirmedSightingsModel),
+      };
+      prismaAsAny.organisms = {
+        findUnique: jest.fn().mockReturnValue(organismModel),
+      };
+      prismaAsAny.users = {
+        findUnique: jest.fn().mockReturnValue(userModel),
+      };
+
+      const result = await ConfirmedSightingService.getConfirmedSightingById(1);
+      expect(result.organismId).toEqual(confirmedSightingsModel.organism_id);
+    });
+  });
+
   describe("getSightingsByOrganismId", () => {
     it("should return all sightings of an organism by id", async () => {
       prismaAsAny.confirmed_sightings = {

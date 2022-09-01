@@ -49,16 +49,6 @@ CREATE TABLE IF NOT EXISTS reactions
     reaction_name VARCHAR            NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS user_to_reaction
-(
-    id          SERIAL PRIMARY KEY NOT NULL,
-    user_id     INT                NOT NULL,
-
-    reaction_id INT                NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (reaction_id) REFERENCES reactions (id)
-);
-
 
 CREATE TABLE IF NOT EXISTS interest_groups
 (
@@ -86,12 +76,12 @@ CREATE TABLE IF NOT EXISTS unverified_sightings
     lat         NUMERIC            NOT NULL,
     long        NUMERIC            NOT NULL,
     user_votes  INT,
-    reaction_id INT,
 
     FOREIGN KEY (organism_id) REFERENCES organisms (id),
-    FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (reaction_id) REFERENCES reactions (id)
+    FOREIGN KEY (user_id) REFERENCES users (id)
+
 );
+
 CREATE TABLE IF NOT EXISTS confirmed_sightings
 (
 
@@ -105,4 +95,16 @@ CREATE TABLE IF NOT EXISTS confirmed_sightings
 
     FOREIGN KEY (organism_id) REFERENCES organisms (id),
     FOREIGN KEY (user_id) REFERENCES users (id)
+
 );
+
+CREATE TABLE IF NOT EXISTS sighting_to_reactions
+(
+    id          SERIAL PRIMARY KEY NOT NULL,
+    sighting_id INT NOT NULL,
+    reaction_id INT NOT NULL,
+    reaction_count INT NOT NULL DEFAULT 0,
+
+    FOREIGN KEY (sighting_id) REFERENCES confirmed_sightings (id),
+    FOREIGN KEY (reaction_id) REFERENCES reactions (id)
+    );
