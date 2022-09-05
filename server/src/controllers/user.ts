@@ -55,7 +55,7 @@ async function getUserByEmail(req: Request, res: Response) {
 
 async function getUserByLevel(req: Request, res: Response) {
   try {
-    const { userLevelId: userLevelId } = req.body;
+    const userLevelId = parseInt(req.params["id"]);
     const users = await UserService.getUserByLevel(userLevelId);
     return res.status(200).json(users);
   } catch (error) {

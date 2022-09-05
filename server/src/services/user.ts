@@ -90,6 +90,7 @@ async function getProfileByUserId(userId: number) {
     userObject = await prisma.users.findUnique({
       where: { id: userId },
     });
+    console.log(userId);
   } catch (error) {
     console.log(error);
   }
@@ -107,6 +108,7 @@ async function getProfileByUserId(userId: number) {
     profileMessage: profileObject.profile_message,
     profilePicture: profileObject.profile_picture
   };
+  console.log(returnedValue);
   return returnedValue;
 }
 
