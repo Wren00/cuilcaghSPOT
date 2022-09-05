@@ -32,6 +32,17 @@ async function getUserById(req: Request, res: Response) {
     res.status(401).json("Cannot find user id");
   }
 }
+
+async function getProfileByUserId(req: Request, res: Response) {
+  try {
+    const userId = parseInt(req.params["id"]);
+    const profile = await UserService.getProfileByUserId(userId);
+    return res.status(200).json(profile);
+  } catch (error) {
+    res.status(401).json("Cannot find id");
+  }
+}
+
 async function getUserByEmail(req: Request, res: Response) {
   try {
     const { emailAddress: emailAddress } = req.body;
@@ -44,7 +55,7 @@ async function getUserByEmail(req: Request, res: Response) {
 
 async function getUserByLevel(req: Request, res: Response) {
   try {
-    const { userLevelId: userLevelId } = req.body;
+    const userLevelId = parseInt(req.params["id"]);
     const users = await UserService.getUserByLevel(userLevelId);
     return res.status(200).json(users);
   } catch (error) {
@@ -122,6 +133,7 @@ const UserController = {
   getAllUsers,
   getUserByName,
   getUserById,
+  getProfileByUserId,
   getUserByEmail,
   getUserByLevel,
   getTrustedUsers,

@@ -82,6 +82,38 @@ async function getUserById(userId: number) {
   return returnedValue;
 }
 
+async function getProfileByUserId(userId: number) {
+  let userObject;
+  let profileObject;
+
+  try {
+    userObject = await prisma.users.findUnique({
+      where: { id: userId },
+    });
+    console.log(userId);
+  } catch (error) {
+    console.log(error);
+  }
+
+  try {
+    profileObject = await prisma.user_profiles.findUnique({
+      where: { id: userObject.user_profile_id },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
+  const returnedValue = {
+    profileId: profileObject.id,
+    profileMessage: profileObject.profile_message,
+    profilePicture: profileObject.profile_picture
+  };
+  console.log(returnedValue);
+  return returnedValue;
+}
+
+
+
 async function getUserByEmail(userEmail: string) {
   let userObject;
   try {
@@ -228,15 +260,17 @@ async function updateUserProfile(updateProfile: UserProfile) {
 //CREATE function
 
 async function createUser(user: CreateUser) {
-  const newProfile = await prisma.user_profiles.create({
-    data: {
-      profile_message: "New User",
-    },
-  });
+  try {
+    const newProfile = await prisma.user_profiles.create({
+      data: {
+        profile_message: "New User",
+      },
+    });
 
   const salt = await bcrypt.genSalt();
 
   const hashedPassword = await bcrypt.hash(user.userPassword, salt);
+
   const newUser = await prisma.users.create({
     data: {
       user_name: user.userName,
@@ -255,7 +289,10 @@ async function createUser(user: CreateUser) {
     trustedUser: newUser.trusted_user,
     userLevelId: newUser.user_level_id,
   };
-  return createdUser.userName;
+    return createdUser.userName;
+  }catch(error) {
+    throw Error("Cannot create user");
+  }
 }
 
 //DELETE function -- USER DETAILS TO BE OBFUSCATED RATHER THAN DELETED
@@ -274,6 +311,7 @@ const UserService = {
   getAllUsers,
   getUserByName,
   getUserById,
+  getProfileByUserId,
   getUserByEmail,
   getUserByLevel,
   getTrustedUsers,

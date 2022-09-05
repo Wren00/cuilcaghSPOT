@@ -11,6 +11,7 @@ UserRouter.get("/getAllUsers", UserController.getAllUsers);
 
 UserRouter.get("/getUserByName", UserController.getUserByName);
 UserRouter.get("/getUserById/:id", UserController.getUserById);
+UserRouter.get("/getProfileByUserId/:id", UserController.getProfileByUserId);
 UserRouter.get("/getUserByEmail", UserController.getUserByEmail);
 UserRouter.get("/getUserByLevel", UserController.getUserByLevel);
 UserRouter.get("/getTrustedUsers", UserController.getTrustedUsers);
