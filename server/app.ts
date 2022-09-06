@@ -8,6 +8,7 @@ import { ConfirmedSightingRouter } from "./src/routers/confirmedSighting";
 import { TaxonGroupRouter } from "./src/routers/taxonGroup";
 import { AuthenticationRouter } from "./src/routers/authentication";
 import { UserReactionRouter} from "./src/routers/userReactions";
+import { UserPostRouter } from "./src/routers/userPosts";
 
 /* initialise Express app */
 const app = express();
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/organisms", OrganismRouter);
 app.use("/api/users/", UserRouter);
+app.use("/api/posts/", UserPostRouter);
 app.use("/api/interestgroups/", UserGroupRouter);
 app.use("/api/unverifiedsightings/", UnverifiedSightingRouter);
 app.use("/api/confirmedsightings/", ConfirmedSightingRouter);
