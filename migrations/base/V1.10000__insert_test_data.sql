@@ -82,3 +82,7 @@ VALUES ('ThumbUpRounded'),
        ('YardRounded'),
        ('PetsRounded'),
        ('SentimentVerySatisfiedRounded');
+
+INSERT INTO user_posts(user_id, post_title, post_content)
+VALUES (3, 'The Beauty of Butterflies', 'Here are some wonderful butterflies to see in Cuilcagh...map winged swift, peacock, green-veined White, even the small Heath!'),
+   (2, 'Bird Hunting(in a good way)', 'Woke up early to find golden plovers. Confirmed sighting of a male, check my sightings for proof!');

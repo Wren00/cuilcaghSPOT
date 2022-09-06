@@ -107,4 +107,14 @@ CREATE TABLE IF NOT EXISTS sighting_to_reactions
 
     FOREIGN KEY (sighting_id) REFERENCES confirmed_sightings (id),
     FOREIGN KEY (reaction_id) REFERENCES reactions (id)
-    );
+);
+
+CREATE TABLE IF NOT EXISTS user_posts
+(
+    id           SERIAL PRIMARY KEY NOT NULL,
+    user_id      INT NOT NULL,
+    post_title   VARCHAR(255),
+    post_content VARCHAR(8000),
+
+    FOREIGN KEY (user_id) REFERENCES users (id)
+);
