@@ -96,7 +96,6 @@ async function decrementUserVote(req: Request, res: Response) {
 
 async function deleteUnverifiedSightingById(req: Request, res: Response) {
   const { sightingId: sightingId } = req.body;
-
   const deletedSighting = await UnverifiedSightingService.deleteUnverifiedSightingById(sightingId);
   if (!deletedSighting) {
     return res.status(500).json("Cannot delete sighting");
