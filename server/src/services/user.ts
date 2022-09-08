@@ -297,15 +297,25 @@ async function createUser(user: CreateUser) {
 
 //DELETE function -- USER DETAILS TO BE OBFUSCATED RATHER THAN DELETED
 
-// async function deleteUserById(userId: number) {
-
-//   let deletedUser;
-//   deletedUser = await prisma.users.delete({
-//     where: { id: userId },
-//   });
-
-//   return deletedUser;
-// }
+async function deleteUserById(userId: number) {
+  let deletedUser;
+  try {
+    deletedUser = await prisma.users.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        user_name: "DELETEDUSER",
+        email_address: "DELETED",
+        user_password: "DELETEDUSERPASS",
+        user_level_id: 1
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  return deletedUser;
+}
 
 const UserService = {
   getAllUsers,
@@ -319,6 +329,7 @@ const UserService = {
   updateUserDetails,
   updateUserPassword,
   updateUserProfile,
+  deleteUserById
 };
 
 export { UserService };

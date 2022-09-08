@@ -119,15 +119,15 @@ async function createUser(req: Request, res: Response) {
 
 //USER DETAILS TO BE OBFUSCATED RATHER THAN DELETED
 
-// async function deleteUserById(req: Request, res: Response)    {
-//   const { id: userId } = req.body;
+async function deleteUserById(req: Request, res: Response)    {
+  const { userId: userId } = req.body;
 
-//   const deletedUser = await UserService.deleteUserById(userId);
-//   if(!deletedUser)  {
-//     return res.status(500).json("Cannot delete id");
-//   }
-//   return res.status(200).json(deletedUser);
-// }
+  const deletedUser = await UserService.deleteUserById(userId);
+  if(!deletedUser)  {
+    return res.status(500).json("Cannot delete id");
+  }
+  return res.status(200).json(deletedUser);
+}
 
 const UserController = {
   getAllUsers,
@@ -141,6 +141,7 @@ const UserController = {
   updateUserDetails,
   updateUserPassword,
   updateUserProfile,
+  deleteUserById
 };
 
 export { UserController };

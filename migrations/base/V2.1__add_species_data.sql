@@ -62,8 +62,8 @@ Species:	A. juncea', false);
 
 INSERT INTO unverified_sightings(organism_id, user_id, picture_url, date, lat, long, user_votes)
 VALUES (3, 2, 'https://upload.wikimedia.org/wikipedia/commons/8/8b/Red_Fox_%28Vulpes_vulpes%29_%284%29.jpg',
-        '1990-10-12T18:25:43.511Z', 54.6677, -7.1332, 0),
+        '1990-10-12T18:25:43.511Z', 54.2244, -7.8087, 0),
        (6, 2, 'https://upload.wikimedia.org/wikipedia/commons/3/36/Lepus_timidus_ainu.jpg', '2020-09-24T18:25:43.511Z',
-        54.9900, -7.5656, 0),
+        54.2345, -7.8100, 0),
        (11, 2, 'https://upload.wikimedia.org/wikipedia/commons/6/69/Bombus_muscorum1.jpg', '1995-05-18T18:25:43.511Z',
-        54.9923, -7.6213, 0);
+        54.2112, -7.8501, 0);

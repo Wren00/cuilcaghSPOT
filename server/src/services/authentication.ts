@@ -11,15 +11,20 @@ async function userLogin(userName: string, userPassword: string) {
   });
 
   if (user) {
-    // check user password with hashed password stored in the database
-    const validPassword = await bcrypt.compare(userPassword, user.user_password);
-    console.log(validPassword);
-    if (validPassword) {
-      return await generateTokens(user.id);
+    //check that user has a level of 2 or above to avoid deleted users logging in.
+    if (user.user_level_id >= 2) {
+      const validPassword = await bcrypt.compare(userPassword, user.user_password);
+      console.log(validPassword);
+      if (validPassword) {
+        return await generateTokens(user.id);
+      } else {
+        throw Error("Cannot login");
+      }
     } else {
-      throw Error("Cannot login");
+      throw Error("Invalid credentials.");
     }
-  } else {
+  }
+  else {
     throw Error("Invalid credentials.");
   }
 }

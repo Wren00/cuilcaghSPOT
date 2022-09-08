@@ -65,16 +65,16 @@ VALUES (1, 1),
 INSERT INTO unverified_sightings(organism_id, user_id, picture_url, date, lat, long, user_votes)
 VALUES (1, 1,
         'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/European_Common_Frog_Rana_temporaria_2.jpg/640px-European_Common_Frog_Rana_temporaria_2.jpg',
-        '2022-05-10T18:25:43.511Z', 54.6688, -7.1111, 0),
+        '2022-05-10T18:25:43.511Z', 54.212, -7.816, 0),
        (2, 2,
         'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Anthus_pratensis_-_Meadow_Pipit_2021-03-27_01.jpg/640px-Anthus_pratensis_-_Meadow_Pipit_2021-03-27_01.jpg',
-        '2010-10-06T18:25:43.511Z', 54.9999, -7.3333, 0);
+        '2010-10-06T18:25:43.511Z', 54.213, -7.799, 0);
 
 INSERT INTO confirmed_sightings(organism_id, user_id, picture_url, date, lat, long)
 VALUES (3, 3, 'https://upload.wikimedia.org/wikipedia/commons/8/8b/Red_Fox_%28Vulpes_vulpes%29_%284%29.jpg',
-        '2018-09-11T18:25:43.511Z', 54.6666, -7.2222),
+        '2018-09-11T18:25:43.511Z', 54.2501, -7.8158),
        (5, 3, 'https://upload.wikimedia.org/wikipedia/commons/2/22/Sphagnum.flexuosum.jpg', '2021-06-23T18:25:43.511Z',
-        54.6655, -7.1122);
+        54.2623, -7.8125);
 
 INSERT INTO reactions(reaction_name)
 VALUES ('ThumbUpRounded'),

@@ -19,5 +19,6 @@ UserRouter.put("/updateUserDetails", UserController.updateUserDetails);
 UserRouter.put("/updateUserPassword", UserController.updateUserPassword);
 UserRouter.put("/updateUserProfile", UserController.updateUserProfile);
 UserRouter.post("/createUser", UserController.createUser);
+UserRouter.put("/deleteUserById", UserController.deleteUserById);
 
 export { UserRouter };
