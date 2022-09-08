@@ -1,64 +1,46 @@
 INSERT INTO organisms (taxon_name, latin_name, taxon_group_id, picture_url, description, is_protected)
 VALUES ('Irish Hare', 'Lepus timidus hibernicus', 3,
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Mountain_Hare_-_geograph.org.uk_-_373125.jpg/640px-Mountain_Hare_-_geograph.org.uk_-_373125.jpg', 'Kingdom:	Animalia
-Phylum:	Chordata
-Class:	Mammalia
-Order:	Lagomorpha
-Family:	Leporidae
-Genus:	Lepus
-Species:	L. timidus hibernicus', true),
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Mountain_Hare_-_geograph.org.uk_-_373125.jpg/640px-Mountain_Hare_-_geograph.org.uk_-_373125.jpg', 'Species:	L. timidus hibernicus', true),
        ('Golden Plover', 'Pluvialis apricaria', 2,
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Pluvialis_apricaria_photo.jpg/640px-Pluvialis_apricaria_photo.jpg', 'Kingdom:	Animalia
-Phylum:	Chordata
-Class:	Aves
-Order:	Charadriiformes
-Family:	Charadriidae
-Genus:	Pluvialis
-Species:	P. apricaria', true),
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Pluvialis_apricaria_photo.jpg/640px-Pluvialis_apricaria_photo.jpg', 'Species:	P. apricaria', true),
        ('Marsh Fritillary', 'Euphydryas aurinia', 5,
-        'https://upload.wikimedia.org/wikipedia/commons/5/55/Marsh_fritillary_%28Euphydryas_aurinia%29_male.jpg', 'Kingdom:	Animalia
-Phylum:	Arthropoda
-Class:	Insecta
-Order:	Lepidoptera
-Family:	Nymphalidae
-Genus:	Euphydryas
-Species:	E. aurinia', true),
+        'https://upload.wikimedia.org/wikipedia/commons/5/55/Marsh_fritillary_%28Euphydryas_aurinia%29_male.jpg', 'Species:	E. aurinia', true),
        ('Drinker Moth', 'Euthrix potatoria', 5,
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Drinker_Moth._Euthrix_potatoria._Lasiocampidae_%2810904043426%29.jpg/640px-Drinker_Moth._Euthrix_potatoria._Lasiocampidae_%2810904043426%29.jpg', 'Kingdom:	Animalia
-Phylum:	Arthropoda
-Class:	Insecta
-Order:	Lepidoptera
-Family:	Lasiocampidae
-Genus:	Euthrix
-Species:	E. potatoria', false),
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Drinker_Moth._Euthrix_potatoria._Lasiocampidae_%2810904043426%29.jpg/640px-Drinker_Moth._Euthrix_potatoria._Lasiocampidae_%2810904043426%29.jpg', 'Species:	E. potatoria', false),
        ('Polypody Fern', 'Polypodium vulgare', 4,
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Polypodium_vulgare_Paprotka_zwyczajna_2020-06-29_01.jpg/640px-Polypodium_vulgare_Paprotka_zwyczajna_2020-06-29_01.jpg', 'Kingdom:	Plantae
-Clade:	Tracheophytes
-Division:	Polypodiophyta
-Class:	Polypodiopsida
-Order:	Polypodiales
-Suborder:	Polypodiineae
-Family:	Polypodiaceae
-Genus:	Polypodium
-Species:	P. vulgare', false),
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Polypodium_vulgare_Paprotka_zwyczajna_2020-06-29_01.jpg/640px-Polypodium_vulgare_Paprotka_zwyczajna_2020-06-29_01.jpg', 'Species:	P. vulgare', false),
        ('Moss Carder Bee', 'Bombus muscorum', 6,
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Bombus_muscorum.jpg/640px-Bombus_muscorum.jpg', 'Kingdom:	Animalia
-Phylum:	Arthropoda
-Class:	Insecta
-Order:	Hymenoptera
-Family:	Apidae
-Genus:	Bombus
-Subgenus:	Thoracobombus
-Species:	B. muscorum', true),
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Bombus_muscorum.jpg/640px-Bombus_muscorum.jpg', 'Species:	B. muscorum', true),
        ('Common Hawker Dragonfly', 'Aeshna juncea', 6,
-        'https://upload.wikimedia.org/wikipedia/commons/6/6a/Aeshna_juncea_2.jpg', 'Kingdom:	Animalia
-Phylum:	Arthropoda
-Class:	Insecta
-Order:	Odonata
-Infraorder:	Anisoptera
-Family:	Aeshnidae
-Genus:	Aeshna
-Species:	A. juncea', false);
+        'https://upload.wikimedia.org/wikipedia/commons/6/6a/Aeshna_juncea_2.jpg', 'Species:	A. juncea', false),
+       ('Cuckoo', 'Cuculus canorus', 2,
+        'https://upload.wikimedia.org/wikipedia/commons/8/82/G%C3%B6k_Common_Cuckoo_%2820163877259%29.jpg', 'Species:	C. canorus', true),
+       ('Blackcap', 'Sylvia atricapilla', 2,
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Sylvia_atricapilla_JdP_20190405_t1125.jpg/640px-Sylvia_atricapilla_JdP_20190405_t1125.jpg', 'Species:	S. atricapilla', false),
+       ('Wheatear', 'Oenanthe oenanthe', 2,
+        'https://upload.wikimedia.org/wikipedia/commons/5/52/Oenanthe_oenanthe_-_Northern_Wheatear_-_Kuyrukkakan_04.jpg', 'Species: O. oenanthe', false),
+       ('Buzzard', 'Buteo buteo', 2,
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Buteo_buteo_-_Common_Buzzard_05.jpg/640px-Buteo_buteo_-_Common_Buzzard_05.jpg', 'Species:	B. buteo', false),
+       ('Stonechat', 'Saxicola rubicola', 2,
+        'https://upload.wikimedia.org/wikipedia/commons/6/6f/Saxicola_rubicola.006_-_A_Coru%C3%B1a.jpg', 'Species:	S. rubicola', false),
+       ('Fir Clubmoss', 'Huperzia selago', 4,
+        'https://upload.wikimedia.org/wikipedia/commons/c/c0/Huperzia_selago_001.jpg', 'Species:	H. selago', false),
+       ('Juniper', 'Juniperus communis', 4,
+        'https://upload.wikimedia.org/wikipedia/commons/f/fc/Juniperus_communis_kz10.jpg', 'Species:	J. communis', true),
+       ('Yew', 'Taxus baccata', 4,
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Taxus_baccata_95509861.jpg/640px-Taxus_baccata_95509861.jpg', 'Species:	T. baccata', false),
+       ('Common Shiny Woodlouse', 'Oniscus asellus', 6,
+        'https://upload.wikimedia.org/wikipedia/commons/a/ad/Oniscus_asellus_Furlbachtal01.jpg', 'Species:	O. asellus', false),
+       ('Bracken', 'Pteridium aquilinum', 4,
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Pteridium_aquilinum_%28subsp._aquilinum%29_sl48.jpg/640px-Pteridium_aquilinum_%28subsp._aquilinum%29_sl48.jpg', 'Species:	P. aquilinum', false),
+       ('Hard Fern', 'Blechnum spicant', 4,
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Blechnum_spicant_%28fertile_and_sterile_fronts%29.jpg/640px-Blechnum_spicant_%28fertile_and_sterile_fronts%29.jpg', 'Species:	B. spicant', false),
+       ('Early-purple orchid', 'Orchis mascula', 4,
+        'https://upload.wikimedia.org/wikipedia/commons/1/12/Orchis_m%C3%A2le_%28Orchis_mascula%29_02.jpg', 'Species:	O. mascula', false),
+       ('Bell Heather', 'Erica cinerea', 4,
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Erica_cinerea_Bell_Heather.jpg/640px-Erica_cinerea_Bell_Heather.jpg', 'Species:	E. cinerea', false),
+       ('Bog Asphodel', 'Narthecium ossifragum', 4,
+        'https://upload.wikimedia.org/wikipedia/commons/2/2a/Bog_Asphodel._Narthecium_ossifragum_%2838188351645%29.jpg', 'Species:	N. ossifragum', false);
 
 INSERT INTO unverified_sightings(organism_id, user_id, picture_url, date, lat, long, user_votes)
 VALUES (3, 2, 'https://upload.wikimedia.org/wikipedia/commons/8/8b/Red_Fox_%28Vulpes_vulpes%29_%284%29.jpg',

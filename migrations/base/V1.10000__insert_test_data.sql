@@ -28,7 +28,7 @@ declining since the mid-1970s, resulting in this species being included on the a
      4 stamens, the female (red) only 6mm long.  The oval to lanceolate leaves are downy below, almost hairless, and a
      distinctive fragrance of resin emanates from them and from small yellow dots which grow on the branches.
      This is a native plant and it belongs to the Myricaceae family.'),
-       ('Flat topped bog moss', 'Sphagnum recurvum var. mucronatum', 5,
+       ('Flat topped bog moss', 'Sphagnum recurvum var. mucronatum', 4,
         'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/PR_Vresova_stran_019_Sphagnum_cf_recurvum.jpg/640px-PR_Vresova_stran_019_Sphagnum_cf_recurvum.jpg', 'There are numerous species of sphagnum moss that
     look very similar, so are usually grouped together as "sphagnum" for easy description. These "bog-mosses" form the
     amazingly multi-coloured, living carpets found in wet places like peat bogs, marshland, heath and moorland.
