@@ -264,6 +264,7 @@ async function createUser(user: CreateUser) {
     const newProfile = await prisma.user_profiles.create({
       data: {
         profile_message: "New User",
+        profile_picture: 'https://cuilcaghspot.s3.eu-west-1.amazonaws.com/514-5147366_default-avatar-comments-avatar.jpg',
       },
     });
 
