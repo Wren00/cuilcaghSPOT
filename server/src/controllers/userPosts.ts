@@ -13,6 +13,16 @@ async function getAllUserPosts(req: Request, res: Response) {
     }
 }
 
+async function getPostById(req: Request, res: Response) {
+    try {
+        const postId = parseInt(req.params["id"]);
+        const post = await UserPostService.getPostById(postId);
+        return res.status(200).json(post);
+    } catch (error) {
+        res.status(401).json("Cannot find post id");
+    }
+}
+
 async function getPostsByUserId(req: Request, res: Response) {
     try {
         const userId = parseInt(req.params["id"]);
@@ -50,6 +60,7 @@ async function deletePostById(req: Request, res: Response) {
 
 const UserPostController = {
     getAllUserPosts,
+    getPostById,
     getPostsByUserId,
     createUserPost,
     deletePostById

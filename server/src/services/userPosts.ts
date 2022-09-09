@@ -19,6 +19,23 @@ async function getAllUserPosts() {
     return posts;
 }
 
+async function getPostById(postId: number) {
+    let post;
+    try {
+        post = await prisma.user_posts.findUnique({
+            where: {id: postId },
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    const returnedValue = {
+        postId: post.id,
+        postTitle: post.post_title,
+        postContent: post.post_content,
+    };
+    return returnedValue;
+}
+
 async function getPostsByUserId(userId: number) {
     let postsArray;
     try {
@@ -74,6 +91,7 @@ async function deletePostById(postId: number) {
 
 const UserPostService = {
     getAllUserPosts,
+    getPostById,
     getPostsByUserId,
     createUserPost,
     deletePostById
