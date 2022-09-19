@@ -168,7 +168,6 @@ async function createConfirmedSighting(sighting: ConfirmedSighting) {
     } catch (error) {
         console.log(error);
     }
-    console.log(newSighting);
     return newSighting;
 }
 

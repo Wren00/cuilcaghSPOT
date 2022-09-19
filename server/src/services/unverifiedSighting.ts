@@ -170,6 +170,7 @@ async function createUnverifiedSighting(sighting: UnverifiedSighting) {
         date: new Date(sighting.date),
         lat: sighting.lat,
         long: sighting.long,
+        user_votes: 0
       },
     });
   } catch (error) {
