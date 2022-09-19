@@ -24,15 +24,6 @@ async function getPostById(req: Request, res: Response) {
     }
 }
 
-async function getPostsByUserId(req: Request, res: Response) {
-    try {
-        const userId = parseInt(req.params["id"]);
-        const posts = await UserPostService.getPostsByUserId(userId);
-        return res.status(200).json(posts);
-    } catch (error) {
-        res.status(401).json("Cannot find user id");
-    }
-}
 //CREATE function
 
 async function createUserPost(req: Request, res: Response) {
@@ -60,7 +51,6 @@ async function deletePostById(req: Request, res: Response) {
 
 const UserPostController = {
     getAllUserPosts,
-    getPostsByUserId,
     getPostById,
     createUserPost,
     deletePostById
