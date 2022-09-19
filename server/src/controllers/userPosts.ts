@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserPostService } from "../services/userPosts";
-import { UserPost } from "../interfaces/userPosts"
+import { UserPost } from "../interfaces/userPosts";
 
 //GET functions
 
@@ -13,6 +13,17 @@ async function getAllUserPosts(req: Request, res: Response) {
     }
 }
 
+async function getPostById(req: Request, res: Response) {
+    try {
+        const postId = parseInt(req.params["id"]);
+        console.log(postId);
+        const post = await UserPostService.getPostById(postId);
+        return res.status(200).json(post);
+    } catch (error) {
+        res.status(401).json("Cannot find post id");
+    }
+}
+
 async function getPostsByUserId(req: Request, res: Response) {
     try {
         const userId = parseInt(req.params["id"]);
@@ -22,7 +33,6 @@ async function getPostsByUserId(req: Request, res: Response) {
         res.status(401).json("Cannot find user id");
     }
 }
-
 //CREATE function
 
 async function createUserPost(req: Request, res: Response) {
@@ -51,6 +61,7 @@ async function deletePostById(req: Request, res: Response) {
 const UserPostController = {
     getAllUserPosts,
     getPostsByUserId,
+    getPostById,
     createUserPost,
     deletePostById
 };

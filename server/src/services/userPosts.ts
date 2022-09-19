@@ -4,37 +4,49 @@ import { UserPost } from "../interfaces/userPosts";
 //GET functions
 
 async function getAllUserPosts() {
+    let post;
     let allPosts;
     try {
         allPosts = await prisma.user_posts.findMany();
     } catch (error) {
         console.log(error);
     }
-    const posts: UserPost[] = allPosts.map((x: { id: any; user_id: any; post_title: any; post_content: any }) => ({
+    const getAllPosts: UserPost[] = allPosts.map((x) => ({
         postId: x.id,
-        userId: x.user_id,
         postTitle: x.post_title,
-        postContent: x.post_content
+        postContent: x.post_content,
+        userId: x.user_id
     }));
-    return posts;
+
+    for (post of getAllPosts) {
+        const author = await prisma.users.findUnique({
+            where: {
+                id: post.userId,
+            },
+        });
+        post.authorName = author.user_name;
+    }
+
+    return getAllPosts;
 }
 
-async function getPostsByUserId(userId: number) {
-    let postsArray;
+async function getPostById(postId: number) {
+    let postDetails;
+    console.log(postId);
     try {
-        postsArray = await prisma.user_posts.findMany({
-            where: { user_id: userId },
+        postDetails = await prisma.user_posts.findUnique({
+            where: { id: postId },
         });
     } catch (error) {
         console.log(error);
     }
-    const posts: UserPost[] = postsArray.map((x: { id: any; user_id: any; post_title: any; post_content: any }) => ({
-        postId: x.id,
-        userId: x.user_id,
-        postTitle: x.post_title,
-        postContent: x.post_content
-    }));
-    return posts;
+    const returnedValue = {
+        postId: postDetails.id,
+        userId: postDetails.user_id,
+        postTitle: postDetails.post_title,
+        postContent: postDetails.post_content
+    };
+    return returnedValue;
 }
 
 //CREATE function
@@ -74,7 +86,7 @@ async function deletePostById(postId: number) {
 
 const UserPostService = {
     getAllUserPosts,
-    getPostsByUserId,
+    getPostById,
     createUserPost,
     deletePostById
 };

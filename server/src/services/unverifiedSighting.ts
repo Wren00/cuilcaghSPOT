@@ -1,7 +1,5 @@
 import { prisma } from "../utils";
 import { UnverifiedSighting } from "../interfaces/unverifiedSighting";
-import {User} from "../interfaces/user";
-import {ConfirmedSighting} from "../interfaces/confirmedSighting";
 
 //GET functions
 
@@ -13,7 +11,6 @@ async function getAllUnverifiedSightings() {
   } catch (error) {
     console.log(error);
   }
-  console.log(allSightings[0].date);
   const getAllSightings: UnverifiedSighting[] = allSightings.map((x) => ({
     sightingId: x.id,
     organismId: x.organism_id,

@@ -121,9 +121,9 @@ async function createUser(req: Request, res: Response) {
 
 async function deleteUserById(req: Request, res: Response)    {
   const { userId: userId } = req.body;
-
+  console.log(userId);
   const deletedUser = await UserService.deleteUserById(userId);
-  if(!deletedUser)  {
+  if (!deletedUser)  {
     return res.status(500).json("Cannot delete id");
   }
   return res.status(200).json(deletedUser);

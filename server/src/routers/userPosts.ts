@@ -6,6 +6,7 @@ const UserPostRouter = express.Router();
 //PUBLIC endpoints
 
 UserPostRouter.get("/getAllUserPosts", UserPostController.getAllUserPosts);
+UserPostRouter.get("/getPostById/:id", UserPostController.getPostById);
 UserPostRouter.get("/getPostsByUserId/:id", UserPostController.getPostsByUserId);
 
 //PRIVATE endpoints

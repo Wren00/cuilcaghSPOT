@@ -1,0 +1,2 @@
+UPDATE organisms SET description = 'The Latin name of bog asphodel, ossifragum, literally translates as ''bone-breaker''. This unassuming plant acquired this violent name because it was believed that the livestock that grazed on it got brittle bones. However, it was actually the calcium-poor pastures that caused the problem.'
+WHERE id = 26;
