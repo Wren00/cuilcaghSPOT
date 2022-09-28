@@ -9,6 +9,7 @@ import { TaxonGroupRouter } from "./src/routers/taxonGroup";
 import { AuthenticationRouter } from "./src/routers/authentication";
 import { UserReactionRouter} from "./src/routers/userReactions";
 import { UserPostRouter } from "./src/routers/userPosts";
+import {ImageRouter} from "./src/routers/imageUpload";
 
 /* initialise Express app */
 const app = express();
@@ -30,5 +31,8 @@ app.use("/api/confirmedsightings/", ConfirmedSightingRouter);
 app.use("/api/taxongroups/", TaxonGroupRouter);
 app.use("/api/reactions/", UserReactionRouter);
 app.use("/api/auth/", AuthenticationRouter);
+app.use("/api/images/", ImageRouter);
+
+
 
 export { app };
