@@ -41,16 +41,6 @@ export async function uploadImage (file : File) {
     const imageFileName = file.filename;
 
     console.log(imageFileName);
-
-    // const uploadedImage = await s3.upload({
-    //     Bucket: process.env.AWS_BUCKET_NAME,
-    //     Key: imageFileName,
-    //     Body: file
-    // }).promise();
-    // console.log("hanging");
-    // console.log(`https://test-bucket-cuilcagh.s3.eu-west-3.amazonaws.com/${imageFileName}`);
-    // console.log(uploadedImage);
-    // return uploadedImage;
 }
 
 export function generatePreSignedPutUrl( fileName , fileType) {
